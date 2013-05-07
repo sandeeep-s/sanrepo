@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" total="4" passed="4">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="3214" started-at="2013-05-02T07:24:07Z" finished-at="2013-05-02T07:24:10Z">
+    <groups>
+    </groups>
+    <test name="Default test" duration-ms="3214" started-at="2013-05-02T07:24:07Z" finished-at="2013-05-02T07:24:10Z">
+      <class name="com.etyre.vehicle.service.VehicleMakeServiceTest">
+        <test-method status="PASS" signature="springTestContextBeforeTestClass()[pri:0, instance:com.etyre.vehicle.service.VehicleMakeServiceTest@217431b9]" name="springTestContextBeforeTestClass" is-config="true" duration-ms="5" started-at="2013-05-02T12:54:07Z" finished-at="2013-05-02T12:54:07Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestClass -->
+        <test-method status="PASS" signature="springTestContextPrepareTestInstance()[pri:0, instance:com.etyre.vehicle.service.VehicleMakeServiceTest@217431b9]" name="springTestContextPrepareTestInstance" is-config="true" duration-ms="2999" started-at="2013-05-02T12:54:07Z" depends-on-methods="org.springframework.test.context.testng.AbstractTestNGSpringContextTests.springTestContextBeforeTestClass" finished-at="2013-05-02T12:54:10Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextPrepareTestInstance -->
+        <test-method status="PASS" signature="testAddVehicleMake(java.lang.String, com.etyre.common.model.Media)[pri:0, instance:com.etyre.vehicle.service.VehicleMakeServiceTest@217431b9]" name="testAddVehicleMake" duration-ms="140" started-at="2013-05-02T12:54:10Z" data-provider="createVehicleMakeDataProvider" finished-at="2013-05-02T12:54:10Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[BMW]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[com.etyre.common.model.Media@539ff66f]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testAddVehicleMake -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.etyre.vehicle.service.VehicleMakeServiceTest@217431b9]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="0" started-at="2013-05-02T12:54:10Z" finished-at="2013-05-02T12:54:10Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.etyre.vehicle.service.VehicleMakeServiceTest.testAddVehicleMake(java.lang.String,com.etyre.common.model.Media)]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.etyre.vehicle.service.VehicleMakeServiceTest@217431b9]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="0" started-at="2013-05-02T12:54:10Z" finished-at="2013-05-02T12:54:10Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.etyre.vehicle.service.VehicleMakeServiceTest.testCreateVehicleMake(java.lang.String,com.etyre.common.model.Media)]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testCreateVehicleMake(java.lang.String, com.etyre.common.model.Media)[pri:0, instance:com.etyre.vehicle.service.VehicleMakeServiceTest@217431b9]" name="testCreateVehicleMake" duration-ms="5" started-at="2013-05-02T12:54:10Z" data-provider="createVehicleMakeDataProvider" finished-at="2013-05-02T12:54:10Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[BMW]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[com.etyre.common.model.Media@4d30c132]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testCreateVehicleMake -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.etyre.vehicle.service.VehicleMakeServiceTest@217431b9]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="0" started-at="2013-05-02T12:54:10Z" finished-at="2013-05-02T12:54:10Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.etyre.vehicle.service.VehicleMakeServiceTest.testAddVehicleMake(java.lang.String,com.etyre.common.model.Media)]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.etyre.vehicle.service.VehicleMakeServiceTest@217431b9]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="0" started-at="2013-05-02T12:54:10Z" finished-at="2013-05-02T12:54:10Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.etyre.vehicle.service.VehicleMakeServiceTest.testUpdateVehicleMake(java.lang.String,com.etyre.common.model.Media)]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testUpdateVehicleMake(java.lang.String, com.etyre.common.model.Media)[pri:0, instance:com.etyre.vehicle.service.VehicleMakeServiceTest@217431b9]" name="testUpdateVehicleMake" duration-ms="40" started-at="2013-05-02T12:54:10Z" data-provider="updateVehicleMakeDataProvider" finished-at="2013-05-02T12:54:10Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[PORSCHE]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[com.etyre.common.model.Media@2d83e895]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testUpdateVehicleMake -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.etyre.vehicle.service.VehicleMakeServiceTest@217431b9]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="0" started-at="2013-05-02T12:54:10Z" finished-at="2013-05-02T12:54:10Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.etyre.vehicle.service.VehicleMakeServiceTest.testCreateVehicleMake(java.lang.String,com.etyre.common.model.Media)]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.etyre.vehicle.service.VehicleMakeServiceTest@217431b9]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="0" started-at="2013-05-02T12:54:10Z" finished-at="2013-05-02T12:54:10Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.etyre.vehicle.service.VehicleMakeServiceTest.testUpdateVehicleMake(java.lang.String,com.etyre.common.model.Media)]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.etyre.vehicle.service.VehicleMakeServiceTest@217431b9]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="0" started-at="2013-05-02T12:54:10Z" finished-at="2013-05-02T12:54:10Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.etyre.vehicle.service.VehicleMakeServiceTest.testgetVehicleMake(java.lang.String,com.etyre.common.model.Media)]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testgetVehicleMake(java.lang.String, com.etyre.common.model.Media)[pri:0, instance:com.etyre.vehicle.service.VehicleMakeServiceTest@217431b9]" name="testgetVehicleMake" duration-ms="5" started-at="2013-05-02T12:54:10Z" data-provider="getVehicleMakeDataProvider" finished-at="2013-05-02T12:54:10Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[AUDI]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[com.etyre.common.model.Media@3ea4be02]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testgetVehicleMake -->
+        <test-method status="PASS" signature="springTestContextAfterTestClass()[pri:0, instance:com.etyre.vehicle.service.VehicleMakeServiceTest@217431b9]" name="springTestContextAfterTestClass" is-config="true" duration-ms="0" started-at="2013-05-02T12:54:10Z" finished-at="2013-05-02T12:54:10Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestClass -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.etyre.vehicle.service.VehicleMakeServiceTest@217431b9]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="0" started-at="2013-05-02T12:54:10Z" finished-at="2013-05-02T12:54:10Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.etyre.vehicle.service.VehicleMakeServiceTest.testgetVehicleMake(java.lang.String,com.etyre.common.model.Media)]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+      </class> <!-- com.etyre.vehicle.service.VehicleMakeServiceTest -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>

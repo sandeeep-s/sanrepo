@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-3.1.xsd 
+		http://www.springframework.org/schema/aop  
+		http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+	<bean id="loggingAspect" class="com.etyre.base.common.LoggingAspect"></bean>
+	
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	
+<!-- 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="add*" propagation="REQUIRED" />
+			<tx:method name="get*" propagation="REQUIRED" />
+			<tx:method name="update*" propagation="REQUIRED" />
+			<tx:method name="delete*" propagation="REQUIRED" />
+			<tx:method name="*" propagation="SUPPORTS" read-only="true"/>
+		</tx:attributes>
+	</tx:advice>
+ -->
+	<aop:config>
+		<aop:pointcut id="serviceMethods"
+			expression="execution(* com.etyre.vehicle.service.*.*(..))" />
+		<aop:pointcut id="daoMethods"
+			expression="execution(* com.etyre.vehicle.persistence.*.*(..))" />
+		<aop:pointcut id="validatorMethods"
+			expression="execution(* com.etyre.vehicle.validator.*.*(..))" />
+		<aop:pointcut id="converterMethods"
+			expression="execution(* com.etyre.vehicle.converter.*.*(..))" />
+			
+<!-- 		<aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethods" />
+ -->
+ 		<aop:aspect ref="loggingAspect">
+			<aop:around pointcut-ref="serviceMethods" method="logAroundMethod"/>
+			<aop:around pointcut-ref="daoMethods" method="logAroundMethod"/>
+			<aop:around pointcut-ref="validatorMethods" method="logAroundMethod"/>
+			<aop:around pointcut-ref="converterMethods" method="logAroundMethod"/>
+			<aop:before pointcut-ref="serviceMethods" method="logDebugBeforeMethod"/>
+			<aop:before pointcut-ref="daoMethods" method="logDebugBeforeMethod"/>
+			<aop:around pointcut-ref="validatorMethods" method="logDebugBeforeMethod"/>
+			<aop:around pointcut-ref="converterMethods" method="logDebugBeforeMethod"/>
+		</aop:aspect>
+	</aop:config>
+
+</beans>

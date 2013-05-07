@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Default suite]">
+  <test name="Default test(failed)">
+    <classes>
+      <class name="com.etyre.vehicle.service.VehicleMakeServiceTest">
+        <methods>
+          <include name="testgetVehicleMake"/>
+          <include name="springTestContextAfterTestClass"/>
+          <include name="springTestContextBeforeTestClass"/>
+          <include name="testUpdateVehicleMake"/>
+          <include name="testAddVehicleMake"/>
+          <include name="springTestContextPrepareTestInstance"/>
+          <include name="testCreateVehicleMake"/>
+        </methods>
+      </class> <!-- com.etyre.vehicle.service.VehicleMakeServiceTest -->
+    </classes>
+  </test> <!-- Default test(failed) -->
+</suite> <!-- Failed suite [Default suite] -->
