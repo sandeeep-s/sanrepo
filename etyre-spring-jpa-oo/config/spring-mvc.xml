@@ -8,14 +8,7 @@
 						http://www.springframework.org/schema/context 
 				        http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
-	<mvc:resources location="/resources/*" mapping="/resources/**" />
-
 	<mvc:annotation-driven/>
-
-	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-		<property name="basename" value="classpath:Messages" />
-		<property name="defaultEncoding" value="UTF-8" />
-	</bean>
 
 	<bean class="org.springframework.web.servlet.view.tiles2.TilesViewResolver" />
 
@@ -26,4 +19,5 @@
 			</list>
 		</property>
 	</bean>
+	
 </beans>

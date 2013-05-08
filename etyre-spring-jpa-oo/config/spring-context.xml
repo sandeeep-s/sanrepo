@@ -13,10 +13,5 @@
 	<context:property-placeholder location="classpath:database.properties,classpath:c3p0.properties" />
 
  	<import resource="classpath:spring-jpa.xml" />
-	<import resource="classpath:spring-aop.xml" />
-<!-- 	<import resource="classpath:spring-security.xml" />
- -->	
-	
-
 		
  </beans>
