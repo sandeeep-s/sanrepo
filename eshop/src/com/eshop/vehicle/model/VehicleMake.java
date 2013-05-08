@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Version;
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -49,7 +48,7 @@ public class VehicleMake implements Serializable {
 		return id;
 	}
 
-	private void setId(Long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -58,7 +57,7 @@ public class VehicleMake implements Serializable {
 		return version;
 	}
 
-	private void setVersion(int version) {
+	public void setVersion(int version) {
 		this.version = version;
 	}
 

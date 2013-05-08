@@ -102,8 +102,7 @@ public class VehicleMakeController {
 		return "viewVehicleMake";
 	}
 
-
-	@RequestMapping(value = "/{id}", method = RequestMethod.POST)
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public String updateVehicleMake(@Valid VehicleMake vehicleMake, BindingResult result, Model model, HttpServletRequest request) {
 
 		if (result.hasErrors()) {

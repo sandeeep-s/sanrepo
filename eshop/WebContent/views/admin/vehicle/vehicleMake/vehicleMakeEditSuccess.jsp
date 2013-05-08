@@ -8,5 +8,3 @@
 ${requestScope.vehicleMake.name}
 <br />
 <br />
-<label><s:message code="vehicle.make.logo" /> : </label>
-${requestScope.vehicleMake.logoURL}
