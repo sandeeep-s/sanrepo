@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans.xsd
+				        http://www.springframework.org/schema/mvc 
+				        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+						http://www.springframework.org/schema/context 
+				        http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+	<mvc:resources location="/resources/*" mapping="/resources/**" />
+	<mvc:annotation-driven validator="compositeValidator" conversion-service="conversionService" />
+
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	</bean>
+
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basename" value="classpath:Messages" />
+		<property name="defaultEncoding" value="UTF-8" />
+	</bean>
+
+	<bean id="vehicleMakeValidator" class="com.etyre.validator.VehicleMakeValidator"></bean>
+	<bean id="vehicleValidator" class="com.etyre.validator.VehicleValidator"></bean>
+	<bean id="compositeValidator" class="com.etyre.validator.CompositeValidator">
+		<property name="validators">
+			<list>
+				<ref bean="vehicleMakeValidator" />
+				<ref bean="vehicleValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+		<property name="converters">
+			<set>
+				<bean class="com.etyre.vehicle.converter.VehicleMakeConverter" />
+			</set>
+		</property>
+	</bean>
+
+
+	<bean class="org.springframework.web.servlet.view.tiles2.TilesViewResolver" />
+
+	<bean class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+		<property name="definitions">
+			<list>
+				<value>/WEB-INF/tiles-config.xml</value>
+			</list>
+		</property>
+	</bean>
+</beans>

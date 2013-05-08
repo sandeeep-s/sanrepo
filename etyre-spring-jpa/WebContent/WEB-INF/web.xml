@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>etyre-spring1</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  
+  <!-- The front controller of this Spring Web application, responsible for handling all application requests -->
+	<servlet>
+		<servlet-name>springDispatcherServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:spring-mvc.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<!-- Map all requests to the DispatcherServlet for handling -->
+	<servlet-mapping>
+		<servlet-name>springDispatcherServlet</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	
+	<!-- needed for ContextLoaderListener -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:spring-context.xml</param-value>
+	</context-param>
+
+	<!-- Bootstraps the root web application context before servlet initialization -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+  
+ 
+	 <filter>
+	    <filter-name>MultipartFilter</filter-name>
+	    <filter-class>org.springframework.web.multipart.support.MultipartFilter</filter-class>
+	    <init-param>
+	        <param-name>multipartResolverBeanName</param-name>
+	        <param-value>filterMultipartResolver</param-value>
+	    </init-param>
+	</filter>
+	<filter-mapping>
+	    <filter-name>MultipartFilter</filter-name>
+	    <servlet-name>/*</servlet-name>
+	</filter-mapping>
+   	<filter>
+  		<filter-name>httpMethodFilter</filter-name>
+  		<filter-class>
+  			org.springframework.web.filter.HiddenHttpMethodFilter
+  		</filter-class>
+  	</filter>
+
+	<filter-mapping>
+	  <filter-name>httpMethodFilter</filter-name>
+	  <url-pattern>/*</url-pattern>
+	</filter-mapping>  	
+
+<!--   	<filter>
+  		<filter-name>springSecurityFilterChain</filter-name>
+  		<filter-class>
+  			org.springframework.web.filter.DelegatingFilterProxy
+  		</filter-class>
+  	</filter>
+
+	<filter-mapping>
+	  <filter-name>springSecurityFilterChain</filter-name>
+	  <url-pattern>/*</url-pattern>
+	</filter-mapping>  	
+ -->
+
+<!--   	<security-role><role-name>guest</role-name></security-role>
+  	<security-role><role-name>member</role-name></security-role>
+  	<security-role><role-name>admin</role-name></security-role>
+  	
+  	<security-constraint>
+  		<web-resource-collection>
+  			<web-resource-name>
+  				Admin Resources
+  			</web-resource-name>
+  			<url-pattern>/*</url-pattern>
+  			
+  			<http-method>GET</http-method>
+  			<http-method>POST</http-method>
+  			
+  		</web-resource-collection>
+  		
+  		<auth-constraint>
+  			<role-name>admin</role-name>
+  		</auth-constraint>
+  	</security-constraint>
+  	
+  	<login-config>
+  		<auth-method>BASIC</auth-method>
+  	</login-config>
+
+  	<login-config>
+  		<auth-method>FORM</auth-method>
+  		<form-login-config>
+  			<form-login-page>/views/admin/login.jsp</form-login-page>
+  			<form-error-page>/views/admin/loginError.jsp</form-error-page>
+  		</form-login-config>
+  	</login-config>
+ -->  
+
+ </web-app>

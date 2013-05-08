@@ -21,6 +21,41 @@
 		<put-attribute name="body" value="/views/admin/loginError.jsp" />
 	</definition>
 
+	<definition name="addVehicleMake" extends="hometemplate">
+		<put-attribute name="title" value="Add Vehicle Make" />
+		<put-attribute name="body" value="/views/admin/vehicle/vehicleMake/vehicleMakeAdd.jsp" />
+	</definition>
+
+	<definition name="addVehicleMakeSuccess" extends="hometemplate">
+		<put-attribute name="title" value="Add Vehicle Make Success" />
+		<put-attribute name="body" value="/views/admin/vehicle/vehicleMake/vehicleMakeAddSuccess.jsp" />
+	</definition>
+
+	<definition name="editVehicleMake" extends="hometemplate">
+		<put-attribute name="title" value="Edit Vehicle Make" />
+		<put-attribute name="body" value="/views/admin/vehicle/vehicleMake/vehicleMakeEdit.jsp" />
+	</definition>
+
+	<definition name="editVehicleMakeSuccess" extends="hometemplate">
+		<put-attribute name="title" value="Edit Vehicle Make Success" />
+		<put-attribute name="body" value="/views/admin/vehicle/vehicleMake/vehicleMakeEditSuccess.jsp" />
+	</definition>
+
+	<definition name="viewVehicleMake" extends="hometemplate">
+		<put-attribute name="title" value="View Vehicle Make" />
+		<put-attribute name="body" value="/views/admin/vehicle/vehicleMake/vehicleMakeView.jsp" />
+	</definition>
+
+	<definition name="deleteVehicleMakeSuccess" extends="hometemplate">
+		<put-attribute name="title" value="Vehicle Make Deleted" />
+		<put-attribute name="body" value="/views/admin/vehicle/vehicleMake/vehicleMakeDeleteSuccess.jsp" />
+	</definition>
+
+	<definition name="vehicleMakeList" extends="hometemplate">
+		<put-attribute name="title" value="Vehicle Make List" />
+		<put-attribute name="body" value="/views/admin/vehicle/vehicleMake/vehicleMakeList.jsp" />
+	</definition>
+
 	<definition name="addVehicle" extends="hometemplate">
 		<put-attribute name="title" value="Add Vehicle" />
 		<put-attribute name="body" value="/views/admin/vehicle/vehicleAdd.jsp" />
@@ -57,40 +92,6 @@
 	</definition>
 
 
-	<definition name="addVehicleMake" extends="hometemplate">
-		<put-attribute name="title" value="Add Vehicle Make" />
-		<put-attribute name="body" value="/views/admin/vehicle/vehicleMake/vehicleMakeAdd.jsp" />
-	</definition>
-
-	<definition name="addVehicleMakeSuccess" extends="hometemplate">
-		<put-attribute name="title" value="Add Vehicle Make Success" />
-		<put-attribute name="body" value="/views/admin/vehicleMake/vehicleMakeAddSuccess.jsp" />
-	</definition>
-
-	<definition name="editVehicleMake" extends="hometemplate">
-		<put-attribute name="title" value="Edit Vehicle Make" />
-		<put-attribute name="body" value="/views/admin/vehicleMake/vehicleMakeEdit.jsp" />
-	</definition>
-
-	<definition name="editVehicleMakeSuccess" extends="hometemplate">
-		<put-attribute name="title" value="Edit Vehicle Make Success" />
-		<put-attribute name="body" value="/views/admin/vehicleMake/vehicleMakeEditSuccess.jsp" />
-	</definition>
-
-	<definition name="viewVehicleMake" extends="hometemplate">
-		<put-attribute name="title" value="View Vehicle Make" />
-		<put-attribute name="body" value="/views/admin/vehicleMake/vehicleMakeView.jsp" />
-	</definition>
-
-	<definition name="deleteVehicleMakeSuccess" extends="hometemplate">
-		<put-attribute name="title" value="Vehicle Make Deleted" />
-		<put-attribute name="body" value="/views/admin/vehicleMake/vehicleMakeDeleteSuccess.jsp" />
-	</definition>
-
-	<definition name="vehicleMakeList" extends="hometemplate">
-		<put-attribute name="title" value="Vehicle Make List" />
-		<put-attribute name="body" value="/views/admin/vehicleMake/vehicleMakeList.jsp" />
-	</definition>
 
 </tiles-definitions>       
        

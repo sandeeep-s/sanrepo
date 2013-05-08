@@ -10,6 +10,9 @@ import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
+
 /**
  * @author ssd1kor
  *
@@ -45,6 +48,7 @@ public class Media implements Serializable {
 		this.mediaType = mediaType;
 	}
 
+	@NotBlank
 	@Column(length = 750, nullable=false)
 	public String getMediaFileName() {
 		return mediaFileName;
@@ -54,6 +58,7 @@ public class Media implements Serializable {
 		this.mediaFileName = mediaFileName;
 	}
 
+	@NotBlank
 	@Column(length = 250, nullable=false)
 	public String getMediaName() {
 		return mediaName;
@@ -63,6 +68,7 @@ public class Media implements Serializable {
 		this.mediaName = mediaName;
 	}
 
+	@NotBlank
 	@Column(length = 750, nullable=false)
 	public String getMediaThumbnailFileName() {
 		return mediaThumbnailFileName;

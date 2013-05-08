@@ -68,6 +68,18 @@ public class VehicleMakeController {
 		return "addVehicleMake";
 	}
 
+	@RequestMapping(method = RequestMethod.POST)
+	public String addVehicleMake(@Valid VehicleMake vehicleMake, BindingResult result, Model model, HttpServletRequest request) {
+		if (result.hasErrors()) {
+			return "addVehicleMake";
+		}
+
+		vehicleMake = vehicleMakeService.addVehicleMake(vehicleMake);
+		model.addAttribute("vehicleMake", vehicleMake);
+		return "addVehicleMakeSuccess";
+	}
+
+
 	@RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
 	public String displayEditVehicleMakeForm(@PathVariable Long id, Model model, HttpServletRequest request) {
 		VehicleMake vehicleMake = vehicleMakeService.getVehicleMakeById(id);
@@ -90,16 +102,6 @@ public class VehicleMakeController {
 		return "viewVehicleMake";
 	}
 
-	@RequestMapping(method = RequestMethod.POST)
-	public String addVehicleMake(@Valid VehicleMake vehicleMake, BindingResult result, Model model, HttpServletRequest request) {
-		if (result.hasErrors()) {
-			return "addVehicleMake";
-		}
-
-		vehicleMake = vehicleMakeService.addVehicleMake(vehicleMake);
-		model.addAttribute("vehicleMake", vehicleMake);
-		return "addVehicleMakeSuccess";
-	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.POST)
 	public String updateVehicleMake(@Valid VehicleMake vehicleMake, BindingResult result, Model model, HttpServletRequest request) {

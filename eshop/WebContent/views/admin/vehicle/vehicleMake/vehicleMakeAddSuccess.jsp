@@ -8,4 +8,4 @@ ${requestScope.vehicleMake.name}
 <br />
 <br />
 <label><s:message code="vehicle.make.logo" /> : </label>
-<img src="<c:url value='/resources/images/${requestScope.vehicleMake.logoURL}'/>" title="${requestScope.vehicleMake.name}">
+<img src="<c:url value='/resources/images/${requestScope.vehicleMake.logoImage.mediaFileName}'/>" title="${requestScope.vehicleMake.name}">

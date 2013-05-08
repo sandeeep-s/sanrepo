@@ -2,8 +2,7 @@
 <h1 align="center">
 	<s:message code="vehicle.make.edit" />
 </h1>
-<sf:form action="/etyre-spring-rest/vehiclemake/${vehicleMake.id}" method="PUT" enctype="multipart/form-data"
-	modelAttribute="vehicleMake">
+<sf:form action="/eshop/vehiclemake/${vehicleMake.id}" method="PUT" modelAttribute="vehicleMake">
 	<label><s:message code="vehicle.make.name" /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: </label>
 	<sf:input type="text" path="name" value="${vehicleMake.name}" disabled="true" />
 	<br />

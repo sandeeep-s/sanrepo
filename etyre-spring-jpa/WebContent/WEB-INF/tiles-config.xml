@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+	<definition name="hometemplate" template="/views/layouts/home_layout.jsp">
+		<put-attribute name="header" value="/views/layouts/header.jsp" />
+		<put-attribute name="footer" value="/views/layouts/footer.jsp" />
+	</definition>
+
+	<definition name="home" extends="hometemplate">
+		<put-attribute name="title" value="Home" />
+		<put-attribute name="body" value="/views/admin/home.jsp" />
+	</definition>
+
+	<definition name="login" extends="hometemplate">
+		<put-attribute name="title" value="Vehicle Make List" />
+		<put-attribute name="body" value="/views/admin/login.jsp" />
+	</definition>
+
+	<definition name="loginError" extends="hometemplate">
+		<put-attribute name="title" value="Vehicle Make List" />
+		<put-attribute name="body" value="/views/admin/loginError.jsp" />
+	</definition>
+
+	<definition name="addVehicle" extends="hometemplate">
+		<put-attribute name="title" value="Add Vehicle" />
+		<put-attribute name="body" value="/views/admin/vehicle/vehicleAdd.jsp" />
+	</definition>
+
+	<definition name="addVehicleSuccess" extends="hometemplate">
+		<put-attribute name="title" value="Add Vehicle Success" />
+		<put-attribute name="body" value="/views/admin/vehicle/vehicleAddSuccess.jsp" />
+	</definition>
+
+	<definition name="editVehicle" extends="hometemplate">
+		<put-attribute name="title" value="Edit Vehicle" />
+		<put-attribute name="body" value="/views/admin/vehicle/vehicleEdit.jsp" />
+	</definition>
+
+	<definition name="editVehicleSuccess" extends="hometemplate">
+		<put-attribute name="title" value="Edit Vehicle Success" />
+		<put-attribute name="body" value="/views/admin/vehicle/vehicleEditSuccess.jsp" />
+	</definition>
+
+	<definition name="viewVehicle" extends="hometemplate">
+		<put-attribute name="title" value="View Vehicle" />
+		<put-attribute name="body" value="/views/admin/vehicle/vehicleView.jsp" />
+	</definition>
+
+	<definition name="deleteVehicleSuccess" extends="hometemplate">
+		<put-attribute name="title" value="Vehicle Deleted" />
+		<put-attribute name="body" value="/views/admin/vehicle/vehicleDeleteSuccess.jsp" />
+	</definition>
+
+	<definition name="vehicleList" extends="hometemplate">
+		<put-attribute name="title" value="Vehicle List" />
+		<put-attribute name="body" value="/views/admin/vehicle/vehicleList.jsp" />
+	</definition>
+
+
+	<definition name="addVehicleMake" extends="hometemplate">
+		<put-attribute name="title" value="Add Vehicle Make" />
+		<put-attribute name="body" value="/views/admin/vehicleMake/vehicleMakeAdd.jsp" />
+	</definition>
+
+	<definition name="addVehicleMakeSuccess" extends="hometemplate">
+		<put-attribute name="title" value="Add Vehicle Make Success" />
+		<put-attribute name="body" value="/views/admin/vehicleMake/vehicleMakeAddSuccess.jsp" />
+	</definition>
+
+	<definition name="editVehicleMake" extends="hometemplate">
+		<put-attribute name="title" value="Edit Vehicle Make" />
+		<put-attribute name="body" value="/views/admin/vehicleMake/vehicleMakeEdit.jsp" />
+	</definition>
+
+	<definition name="editVehicleMakeSuccess" extends="hometemplate">
+		<put-attribute name="title" value="Edit Vehicle Make Success" />
+		<put-attribute name="body" value="/views/admin/vehicleMake/vehicleMakeEditSuccess.jsp" />
+	</definition>
+
+	<definition name="viewVehicleMake" extends="hometemplate">
+		<put-attribute name="title" value="View Vehicle Make" />
+		<put-attribute name="body" value="/views/admin/vehicleMake/vehicleMakeView.jsp" />
+	</definition>
+
+	<definition name="deleteVehicleMakeSuccess" extends="hometemplate">
+		<put-attribute name="title" value="Vehicle Make Deleted" />
+		<put-attribute name="body" value="/views/admin/vehicleMake/vehicleMakeDeleteSuccess.jsp" />
+	</definition>
+
+	<definition name="vehicleMakeList" extends="hometemplate">
+		<put-attribute name="title" value="Vehicle Make List" />
+		<put-attribute name="body" value="/views/admin/vehicleMake/vehicleMakeList.jsp" />
+	</definition>
+
+</tiles-definitions>       
+       
+       

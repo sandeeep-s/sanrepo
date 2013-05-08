@@ -10,6 +10,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Version;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 import com.eshop.common.model.Media;
 
@@ -58,16 +62,18 @@ public class VehicleMake implements Serializable {
 		this.version = version;
 	}
 
+	@NotBlank
 	@Column( unique = true, length = 250, nullable=false)
 	public String getName() {
 		return name;
 	}
 
 	//Name should be immutable. Hence private.
-	private void setName(String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 
+	@Valid
 	@Embedded
 	public Media getLogoImage() {
 		return logoImage;
