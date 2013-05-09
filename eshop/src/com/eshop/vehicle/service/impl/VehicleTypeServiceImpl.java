@@ -49,7 +49,7 @@ public class VehicleTypeServiceImpl implements VehicleTypeService {
 	}
 
 	@Override
-	public Set<VehicleType> getAllVehilceTypes() {
+	public Set<VehicleType> getAllVehicleTypes() {
 		return vehicleTypeDAO.findAllUnique();
 	}
 

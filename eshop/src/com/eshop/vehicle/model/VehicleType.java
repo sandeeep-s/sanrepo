@@ -10,6 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Version;
+import javax.validation.Valid;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 import com.eshop.common.model.Media;
 
@@ -45,7 +48,7 @@ public class VehicleType implements Serializable {
 		return id;
 	}
 
-	private void setId(Long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -54,19 +57,21 @@ public class VehicleType implements Serializable {
 		return version;
 	}
 
-	private void setVersion(int version) {
+	public void setVersion(int version) {
 		this.version = version;
 	}
 
+	@NotEmpty
 	@Column(nullable = false, unique = true, length = 250)
 	public String getName() {
 		return name;
 	}
 
-	private void setName(String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 
+	@Valid
 	@Embedded
 	public Media getImage() {
 		return image;

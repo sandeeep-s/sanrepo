@@ -8,7 +8,6 @@ import java.util.Set;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
@@ -17,8 +16,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.multipart.MultipartFile;
-
 import com.eshop.common.service.MediaService;
 import com.eshop.vehicle.model.VehicleMake;
 import com.eshop.vehicle.service.VehicleMakeService;
@@ -57,8 +54,8 @@ public class VehicleMakeController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String listVehicleMakes(Model model) {
-		Set<VehicleMake> vehicleMakeSet = vehicleMakeService.getAllVehicleMakes();
-		model.addAttribute("vehicleMakeSet", vehicleMakeSet);
+		Set<VehicleMake> vehicleMakes = vehicleMakeService.getAllVehicleMakes();
+		model.addAttribute("vehicleMakes", vehicleMakes);
 		return "vehicleMakeList";
 	}
 
@@ -66,6 +63,14 @@ public class VehicleMakeController {
 	public String displayAddVehicleMakeForm(Model model) {
 		model.addAttribute("vehicleMake", new VehicleMake());
 		return "addVehicleMake";
+	}
+
+	@RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
+	public String displayEditVehicleMakeForm(@PathVariable Long id, Model model, HttpServletRequest request) {
+		VehicleMake vehicleMake = vehicleMakeService.getVehicleMakeById(id);
+		model.addAttribute("vehicleMake", vehicleMake);
+
+		return "editVehicleMake";
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
@@ -77,22 +82,6 @@ public class VehicleMakeController {
 		vehicleMake = vehicleMakeService.addVehicleMake(vehicleMake);
 		model.addAttribute("vehicleMake", vehicleMake);
 		return "addVehicleMakeSuccess";
-	}
-
-
-	@RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
-	public String displayEditVehicleMakeForm(@PathVariable Long id, Model model, HttpServletRequest request) {
-		VehicleMake vehicleMake = vehicleMakeService.getVehicleMakeById(id);
-		model.addAttribute("vehicleMake", vehicleMake);
-
-		return "editVehicleMake";
-	}
-
-	@RequestMapping(value = "/{id}/view", method = RequestMethod.GET)
-	public String displayVehicleMake(@PathVariable Long id, Model model) {
-		VehicleMake vehicleMake = vehicleMakeService.getVehicleMakeById(id);
-		model.addAttribute("vehicleMake", vehicleMake);
-		return "viewVehicleMake";
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)

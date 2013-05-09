@@ -21,6 +21,13 @@
 		<put-attribute name="body" value="/views/admin/loginError.jsp" />
 	</definition>
 
+	<!-- Vehicle Make Start  -->
+
+	<definition name="vehicleMakeList" extends="hometemplate">
+		<put-attribute name="title" value="Vehicle Make List" />
+		<put-attribute name="body" value="/views/admin/vehicle/vehicleMake/vehicleMakeList.jsp" />
+	</definition>
+
 	<definition name="addVehicleMake" extends="hometemplate">
 		<put-attribute name="title" value="Add Vehicle Make" />
 		<put-attribute name="body" value="/views/admin/vehicle/vehicleMake/vehicleMakeAdd.jsp" />
@@ -29,6 +36,11 @@
 	<definition name="addVehicleMakeSuccess" extends="hometemplate">
 		<put-attribute name="title" value="Add Vehicle Make Success" />
 		<put-attribute name="body" value="/views/admin/vehicle/vehicleMake/vehicleMakeAddSuccess.jsp" />
+	</definition>
+
+	<definition name="viewVehicleMake" extends="hometemplate">
+		<put-attribute name="title" value="View Vehicle Make" />
+		<put-attribute name="body" value="/views/admin/vehicle/vehicleMake/vehicleMakeView.jsp" />
 	</definition>
 
 	<definition name="editVehicleMake" extends="hometemplate">
@@ -41,54 +53,85 @@
 		<put-attribute name="body" value="/views/admin/vehicle/vehicleMake/vehicleMakeEditSuccess.jsp" />
 	</definition>
 
-	<definition name="viewVehicleMake" extends="hometemplate">
-		<put-attribute name="title" value="View Vehicle Make" />
-		<put-attribute name="body" value="/views/admin/vehicle/vehicleMake/vehicleMakeView.jsp" />
-	</definition>
-
 	<definition name="deleteVehicleMakeSuccess" extends="hometemplate">
 		<put-attribute name="title" value="Vehicle Make Deleted" />
 		<put-attribute name="body" value="/views/admin/vehicle/vehicleMake/vehicleMakeDeleteSuccess.jsp" />
 	</definition>
 
-	<definition name="vehicleMakeList" extends="hometemplate">
-		<put-attribute name="title" value="Vehicle Make List" />
-		<put-attribute name="body" value="/views/admin/vehicle/vehicleMake/vehicleMakeList.jsp" />
+	<!-- Vehicle Make End  -->
+
+	<!-- Vehicle Type Start  -->
+
+	<definition name="vehicleTypeList" extends="hometemplate">
+		<put-attribute name="title" value="Vehicle Type List" />
+		<put-attribute name="body" value="/views/admin/vehicle/vehicleType/vehicleTypeList.jsp" />
 	</definition>
 
-	<definition name="addVehicle" extends="hometemplate">
+	<definition name="addVehicleType" extends="hometemplate">
+		<put-attribute name="title" value="Add Vehicle Type" />
+		<put-attribute name="body" value="/views/admin/vehicle/vehicleType/vehicleTypeAdd.jsp" />
+	</definition>
+
+	<definition name="addVehicleTypeSuccess" extends="hometemplate">
+		<put-attribute name="title" value="Add Vehicle Type Success" />
+		<put-attribute name="body" value="/views/admin/vehicle/vehicleType/vehicleTypeAddSuccess.jsp" />
+	</definition>
+
+	<definition name="viewVehicleType" extends="hometemplate">
+		<put-attribute name="title" value="View Vehicle Type" />
+		<put-attribute name="body" value="/views/admin/vehicle/vehicleType/vehicleTypeView.jsp" />
+	</definition>
+
+	<definition name="editVehicleType" extends="hometemplate">
+		<put-attribute name="title" value="Edit Vehicle Type" />
+		<put-attribute name="body" value="/views/admin/vehicle/vehicleType/vehicleTypeEdit.jsp" />
+	</definition>
+
+	<definition name="editVehicleTypeSuccess" extends="hometemplate">
+		<put-attribute name="title" value="Edit Vehicle Type Success" />
+		<put-attribute name="body" value="/views/admin/vehicle/vehicleType/vehicleTypeEditSuccess.jsp" />
+	</definition>
+
+	<definition name="deleteVehicleTypeSuccess" extends="hometemplate">
+		<put-attribute name="title" value="Vehicle Type Deleted" />
+		<put-attribute name="body" value="/views/admin/vehicle/vehicleType/vehicleTypeDeleteSuccess.jsp" />
+	</definition>
+
+	<!-- Vehicle Type End  -->
+
+	<definition name="addVehicleModel" extends="hometemplate">
 		<put-attribute name="title" value="Add Vehicle" />
-		<put-attribute name="body" value="/views/admin/vehicle/vehicleAdd.jsp" />
+		<put-attribute name="body" value="/views/admin/vehicle/vehicleModel/vehicleModelAdd.jsp" />
 	</definition>
 
-	<definition name="addVehicleSuccess" extends="hometemplate">
+	<definition name="addVehicleModelSuccess" extends="hometemplate">
 		<put-attribute name="title" value="Add Vehicle Success" />
-		<put-attribute name="body" value="/views/admin/vehicle/vehicleAddSuccess.jsp" />
+		<put-attribute name="body" value="/views/admin/vehicle/vehicleModel/vehicleModelAddSuccess.jsp" />
 	</definition>
 
-	<definition name="editVehicle" extends="hometemplate">
+	<definition name="editVehicleModel" extends="hometemplate">
 		<put-attribute name="title" value="Edit Vehicle" />
-		<put-attribute name="body" value="/views/admin/vehicle/vehicleEdit.jsp" />
+		<put-attribute name="body" value="/views/admin/vehicle/vehicleModel/vehicleModelEdit.jsp" />
 	</definition>
 
-	<definition name="editVehicleSuccess" extends="hometemplate">
+	<definition name="editVehicleModelSuccess" extends="hometemplate">
 		<put-attribute name="title" value="Edit Vehicle Success" />
-		<put-attribute name="body" value="/views/admin/vehicle/vehicleEditSuccess.jsp" />
+		<put-attribute name="body" value="/views/admin/vehicle/vehicleModel/vehicleModelEditSuccess.jsp" />
 	</definition>
 
-	<definition name="viewVehicle" extends="hometemplate">
+	<definition name="viewVehicleModel" extends="hometemplate">
 		<put-attribute name="title" value="View Vehicle" />
-		<put-attribute name="body" value="/views/admin/vehicle/vehicleView.jsp" />
+		<put-attribute name="body" value="/views/admin/vehicle/vehicleModel/vehicleModelView.jsp" />
 	</definition>
 
-	<definition name="deleteVehicleSuccess" extends="hometemplate">
+	<definition name="deleteVehicleModelSuccess" extends="hometemplate">
 		<put-attribute name="title" value="Vehicle Deleted" />
-		<put-attribute name="body" value="/views/admin/vehicle/vehicleDeleteSuccess.jsp" />
+		<put-attribute name="body" value="/views/admin/vehicle/vehicleModel/vehicleModelDeleteSuccess.jsp" />
 	</definition>
 
-	<definition name="vehicleList" extends="hometemplate">
-		<put-attribute name="title" value="Vehicle List" />
-		<put-attribute name="body" value="/views/admin/vehicle/vehicleList.jsp" />
+	<definition name="vehicleModelList" extends="hometemplate">
+		<put-attribute name="title" value="Vehicle Model List" />
+		<put-attribute name="body" value="/views/admin/vehicle/vehicleModel/vehicleModelList.jsp" />
 	</definition>
 
 

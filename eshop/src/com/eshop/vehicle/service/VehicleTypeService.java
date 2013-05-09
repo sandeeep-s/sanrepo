@@ -14,6 +14,6 @@ public interface VehicleTypeService {
 
 	public void deleteVehicleType(Long id);
 
-	public Set<VehicleType> getAllVehilceTypes();
+	public Set<VehicleType> getAllVehicleTypes();
 
 }

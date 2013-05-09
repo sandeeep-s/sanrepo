@@ -14,7 +14,7 @@
 		<tr>
 			<td>${vehicleMake.name}</td>
 			<td><a href="<c:url value='/vehiclemake/${vehicleMake.id}/edit'/>"><s:message code="edit" /></a></td>
-			<td><a href="<c:url value='/vehiclemake/${vehicleMake.id}/view'/>"><s:message code="view" /></a></td>
+			<td><a href="<c:url value='/vehiclemake/${vehicleMake.id}'/>"><s:message code="view" /></a></td>
 			<td>
 			<sf:form action="/eshop/vehiclemake/${vehicleMake.id}" method="DELETE">
 				<a href="#" onclick="parentNode.submit()"><s:message code="delete" /></a>

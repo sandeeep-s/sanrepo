@@ -4,7 +4,7 @@
 	<s:message code="vehicle.make.add" />
 </h1>
 <sf:form action="/eshop/vehiclemake" method="POST" modelAttribute="vehicleMake">
-	<label><s:message code="vehicle.make.name" /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: </label>
+	<label><s:message code="vehicle.make.name" /> : </label>
 	<sf:input path="name" />
 	<sf:errors path="name" />
 	<br />
