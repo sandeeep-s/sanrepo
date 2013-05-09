@@ -8,15 +8,18 @@
 						http://www.springframework.org/schema/context 
 				        http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
-	<mvc:annotation-driven/>
-
-	<context:component-scan base-package="com.eshop.home.controller"/>
-	<context:component-scan base-package="com.eshop.vehicle.controller"/>
-
-	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-		<property name="basename" value="classpath:Messages" />
-		<property name="defaultEncoding" value="UTF-8" />
+	<mvc:annotation-driven conversion-service="conversionService" />
+	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+		<property name="converters">
+			<set>
+				<bean class="com.eshop.vehicle.converter.VehicleMakeConverter" />
+				<bean class="com.eshop.vehicle.converter.VehicleTypeConverter" />
+			</set>
+		</property>
 	</bean>
+
+	<context:component-scan base-package="com.eshop.home.controller" />
+	<context:component-scan base-package="com.eshop.vehicle.controller" />
 
 	<bean class="org.springframework.web.servlet.view.tiles2.TilesViewResolver" />
 
@@ -27,5 +30,10 @@
 			</list>
 		</property>
 	</bean>
-	
+
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basename" value="classpath:Messages" />
+		<property name="defaultEncoding" value="UTF-8" />
+	</bean>
+
 </beans>

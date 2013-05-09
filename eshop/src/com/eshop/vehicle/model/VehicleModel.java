@@ -15,6 +15,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 import com.eshop.common.model.Media;
 
@@ -60,7 +63,7 @@ public class VehicleModel implements Serializable {
 		return id;
 	}
 
-	private void setId(Long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -69,25 +72,27 @@ public class VehicleModel implements Serializable {
 		return version;
 	}
 
-	private void setVersion(int version) {
+	public void setVersion(int version) {
 		this.version = version;
 	}
 
+	@NotEmpty
 	@Column(nullable = false, length = 250)
 	public String getName() {
 		return name;
 	}
 
-	private void setName(String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 
+	@NotNull
 	@Column(nullable = false)
 	public Integer getManufacturingYear() {
 		return manufacturingYear;
 	}
 
-	private void setManufacturingYear(Integer manufacturingYear) {
+	public void setManufacturingYear(Integer manufacturingYear) {
 		this.manufacturingYear = manufacturingYear;
 	}
 
@@ -109,7 +114,7 @@ public class VehicleModel implements Serializable {
 
 	//Vehicle Type should be immutable. Hence private
 
-	private void setVehicleType(VehicleType vehicleType) {
+	public void setVehicleType(VehicleType vehicleType) {
 		this.vehicleType = vehicleType;
 	}
 
@@ -120,7 +125,7 @@ public class VehicleModel implements Serializable {
 	}
 
 	//Vehicle Make should be immutable. Hence private
-	private void setVehicleMake(VehicleMake vehicleMake) {
+	public void setVehicleMake(VehicleMake vehicleMake) {
 		this.vehicleMake = vehicleMake;
 	}
 
