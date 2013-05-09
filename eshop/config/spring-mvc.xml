@@ -14,6 +14,7 @@
 			<set>
 				<bean class="com.eshop.vehicle.converter.VehicleMakeConverter" />
 				<bean class="com.eshop.vehicle.converter.VehicleTypeConverter" />
+				<bean class="com.eshop.vehicle.converter.VehicleModelConverter" />
 			</set>
 		</property>
 	</bean>

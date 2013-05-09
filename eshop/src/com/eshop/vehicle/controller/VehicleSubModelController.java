@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.eshop.vehicle.model.VehicleModel;
 import com.eshop.vehicle.model.VehicleSubModel;
+import com.eshop.vehicle.service.VehicleModelService;
 import com.eshop.vehicle.service.VehicleSubModelService;
 
 @Controller
@@ -23,12 +25,23 @@ public class VehicleSubModelController {
 	@Inject
 	private VehicleSubModelService vehicleSubModelService;
 
+	@Inject
+	private VehicleModelService vehicleModelService;
+
 	public VehicleSubModelService getVehicleSubModelService() {
 		return vehicleSubModelService;
 	}
 
 	public void setVehicleSubModelService(VehicleSubModelService vehicleSubModelService) {
 		this.vehicleSubModelService = vehicleSubModelService;
+	}
+
+	public VehicleModelService getVehicleModelService() {
+		return vehicleModelService;
+	}
+
+	public void setVehicleModelService(VehicleModelService vehicleModelService) {
+		this.vehicleModelService = vehicleModelService;
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
@@ -41,6 +54,8 @@ public class VehicleSubModelController {
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String displayAddVehicleSubModelForm(Model model) {
 		model.addAttribute("vehicleSubModel", new VehicleSubModel());
+		Set<VehicleModel> vehicleModels = vehicleModelService.getAllVehicleModels();
+		model.addAttribute("vehicleModels", vehicleModels);
 		return "addVehicleSubModel";
 	}
 
@@ -48,6 +63,8 @@ public class VehicleSubModelController {
 	public String displayEditVehicleSubModelForm(@PathVariable Long id, Model model) {
 		VehicleSubModel vehicleSubModel = vehicleSubModelService.getVehicleSubModelById(id);
 		model.addAttribute("vehicleSubModel", vehicleSubModel);
+		Set<VehicleModel> vehicleModels = vehicleModelService.getAllVehicleModels();
+		model.addAttribute("vehicleModels", vehicleModels);
 		return "editVehicleSubModel";
 	}
 
@@ -81,6 +98,7 @@ public class VehicleSubModelController {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public String deleteVehicleSubModel(@PathVariable Long id) {
+		vehicleSubModelService.deleteVehicleSubModel(id);
 		return "deleteVehicleSubModelSuccess";
 	}
 

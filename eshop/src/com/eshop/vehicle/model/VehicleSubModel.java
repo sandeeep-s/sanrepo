@@ -15,6 +15,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 import com.eshop.common.model.Media;
 
@@ -37,7 +40,6 @@ public class VehicleSubModel implements Serializable {
 
 	private Set<Media> images;
 
-
 	public VehicleSubModel() {
 
 	}
@@ -54,7 +56,7 @@ public class VehicleSubModel implements Serializable {
 		return id;
 	}
 
-	private void setId(Long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -63,7 +65,7 @@ public class VehicleSubModel implements Serializable {
 		return version;
 	}
 
-	private void setVersion(int version) {
+	public void setVersion(int version) {
 		this.version = version;
 	}
 
@@ -74,22 +76,24 @@ public class VehicleSubModel implements Serializable {
 	 * FetchType.EAGER is the default for ManyToOne association.
 	 * @return
 	 */
+	@NotNull
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "vehicle_model_id", nullable = false)
 	public VehicleModel getVehicleModel() {
 		return vehicleModel;
 	}
 
-	void setVehicleModel(VehicleModel vehicleModel) {
+	public void setVehicleModel(VehicleModel vehicleModel) {
 		this.vehicleModel = vehicleModel;
 	}
 
+	@NotBlank
 	@Column(nullable = false, length = 250)
 	public String getName() {
 		return name;
 	}
 
-	private void setName(String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 
