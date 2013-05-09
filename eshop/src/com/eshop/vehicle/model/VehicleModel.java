@@ -1,6 +1,9 @@
 package com.eshop.vehicle.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CollectionTable;
@@ -38,7 +41,7 @@ public class VehicleModel implements Serializable {
 
 	private Integer manufacturingYear;
 
-	private Set<Media> images;
+	private List<Media> images = new ArrayList<Media>();
 
 	private VehicleType vehicleType;
 
@@ -49,7 +52,7 @@ public class VehicleModel implements Serializable {
 	}
 
 	public VehicleModel(String name, Integer manufacturingYear, String image, VehicleType vehicleType, VehicleMake vehicleMake,
-			Set<Media> images) {
+			List<Media> images) {
 		this.name = name;
 		this.vehicleType = vehicleType;
 		this.vehicleMake = vehicleMake;
@@ -98,11 +101,11 @@ public class VehicleModel implements Serializable {
 
 	@ElementCollection
 	@CollectionTable(name = "Vehicle_Model_Media", joinColumns = @JoinColumn(name = "Vehicle_Model_Id"))
-	public Set<Media> getImages() {
+	public List<Media> getImages() {
 		return images;
 	}
 
-	public void setImages(Set<Media> images) {
+	public void setImages(List<Media> images) {
 		this.images = images;
 	}
 

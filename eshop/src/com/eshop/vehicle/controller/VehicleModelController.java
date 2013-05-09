@@ -1,5 +1,8 @@
 package com.eshop.vehicle.controller;
 
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.inject.Inject;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.eshop.common.model.Media;
 import com.eshop.vehicle.model.VehicleMake;
 import com.eshop.vehicle.model.VehicleModel;
 import com.eshop.vehicle.model.VehicleType;
@@ -66,7 +70,11 @@ public class VehicleModelController {
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String displayAddVehicleModelForm(Model model) {
-		model.addAttribute("vehicleModel", new VehicleModel());
+		VehicleModel vehicleModel = new VehicleModel();
+		List<Media> images = new ArrayList<Media>();
+		images.add(new Media());
+		vehicleModel.setImages(images);
+		model.addAttribute("vehicleModel", vehicleModel);
 		Set<VehicleMake> vehicleMakes = vehicleMakeService.getAllVehicleMakes();
 		model.addAttribute("vehicleMakes", vehicleMakes);
 		Set<VehicleType> vehicleTypes = vehicleTypeService.getAllVehicleTypes();
