@@ -11,7 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Version;
 
-public class Dimension implements Serializable{
+public class Dimension implements Serializable {
 
 	private Long id;
 
@@ -25,7 +25,7 @@ public class Dimension implements Serializable{
 
 	private Category category;
 
-	private Dimension() {
+	public Dimension() {
 
 	}
 

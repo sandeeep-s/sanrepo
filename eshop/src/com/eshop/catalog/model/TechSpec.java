@@ -34,7 +34,7 @@ public class TechSpec implements Serializable {
 
 	private Category category;
 
-	private TechSpec() {
+	public TechSpec() {
 
 	}
 
