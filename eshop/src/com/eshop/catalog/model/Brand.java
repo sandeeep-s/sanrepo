@@ -17,6 +17,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
+
 import com.eshop.common.model.Media;
 
 /**
@@ -67,6 +70,7 @@ public class Brand implements Serializable {
 		this.version = version;
 	}
 
+	@NotBlank
 	@Column(nullable = false, unique = true, length = 250)
 	public String getName() {
 		return name;
