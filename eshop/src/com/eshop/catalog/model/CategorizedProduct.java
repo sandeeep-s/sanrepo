@@ -88,7 +88,7 @@ public class CategorizedProduct implements Serializable{
 		return id;
 	}
 
-	private void setId(Id id) {
+	public void setId(Id id) {
 		this.id = id;
 	}
 
@@ -96,7 +96,7 @@ public class CategorizedProduct implements Serializable{
 		return category;
 	}
 
-	private void setCategory(Category category) {
+	public void setCategory(Category category) {
 		this.category = category;
 	}
 
@@ -104,7 +104,7 @@ public class CategorizedProduct implements Serializable{
 		return product;
 	}
 
-	private void setProduct(Product product) {
+	public void setProduct(Product product) {
 		this.product = product;
 	}
 

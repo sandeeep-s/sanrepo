@@ -19,50 +19,45 @@ import com.eshop.vehicle.service.VehicleSubModelService;
  * @author ssd1kor
  * 
  */
-@Service("vehicleService")
+@Service("vehicleSubModelService")
 @Transactional(propagation = Propagation.REQUIRED)
 public class VehicleSubModelServiceImpl implements VehicleSubModelService {
 
 	@Inject
-	private VehicleSubModelDAO vehicleDAO = null;
+	private VehicleSubModelDAO vehicleSubModelDAO = null;
 
 	public VehicleSubModelDAO getVehicleSubModelDAO() {
-		return vehicleDAO;
+		return vehicleSubModelDAO;
 	}
 
-	public void setVehicleSubModelDAO(VehicleSubModelDAO vehicleDAO) {
-		this.vehicleDAO = vehicleDAO;
+	public void setVehicleSubModelDAO(VehicleSubModelDAO vehicleSubModelDAO) {
+		this.vehicleSubModelDAO = vehicleSubModelDAO;
 	}
 
 	@Override
 	public VehicleSubModel addVehicleSubModel(VehicleSubModel vehicle) {
-		return vehicleDAO.makePersistent(vehicle);
+		return vehicleSubModelDAO.makePersistent(vehicle);
 	}
 
 	@Override
 	public VehicleSubModel getVehicleSubModelById(Long vehicleId) {
-		return vehicleDAO.findById(vehicleId);
+		return vehicleSubModelDAO.findById(vehicleId);
 	}
 
 	@Override
 	public VehicleSubModel updateVehicleSubModel(VehicleSubModel vehicle) {
-		return vehicleDAO.saveOrUpdate(vehicle);
+		return vehicleSubModelDAO.saveOrUpdate(vehicle);
 	}
 
 	@Override
 	public void deleteVehicleSubModel(Long vehicleId) {
-		VehicleSubModel vehicle = vehicleDAO.getReference(vehicleId);
-		vehicleDAO.delete(vehicle);
+		VehicleSubModel vehicle = vehicleSubModelDAO.getReference(vehicleId);
+		vehicleSubModelDAO.delete(vehicle);
 	}
 
 	@Override
 	public Set<VehicleSubModel> getAllVehicleSubModels() {
-		return vehicleDAO.findAllUnique();
-	}
-
-	@Override
-	public Set<VehicleSubModel> getAllVehicleSubModelsForMake(Long vehicleMakeId) {
-		return vehicleDAO.findVehicleSubModelsByMake(vehicleMakeId);
+		return vehicleSubModelDAO.findAllUnique();
 	}
 
 }

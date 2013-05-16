@@ -3,6 +3,7 @@
  */
 package com.eshop.vehicle.service;
 
+import java.util.List;
 import java.util.Set;
 
 import com.eshop.vehicle.model.VehicleModel;
@@ -22,5 +23,7 @@ public interface VehicleModelService {
 	public void deleteVehicleModel(Long id);
 
 	public Set<VehicleModel> getAllVehicleModels();
+	
+	public List<Integer> getModelYearsForMake(Long vehicleMakeId);
 
 }

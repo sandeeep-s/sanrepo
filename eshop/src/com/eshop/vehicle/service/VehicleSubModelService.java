@@ -23,7 +23,4 @@ public interface VehicleSubModelService {
 
 	public Set<VehicleSubModel> getAllVehicleSubModels();
 
-	public Set<VehicleSubModel> getAllVehicleSubModelsForMake(Long vehicleMakeId);
-
-
 }

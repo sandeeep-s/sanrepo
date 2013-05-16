@@ -39,6 +39,7 @@ public class VehicleModel implements Serializable {
 
 	private String name;
 
+	//TODO Change manufacturingYear to modelyear
 	private Integer manufacturingYear;
 
 	private List<Media> images = new ArrayList<Media>();

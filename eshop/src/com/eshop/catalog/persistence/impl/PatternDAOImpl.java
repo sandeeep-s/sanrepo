@@ -1,5 +1,7 @@
 package com.eshop.catalog.persistence.impl;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.eshop.base.persistence.impl.GenericDAOImpl;
@@ -13,4 +15,11 @@ public class PatternDAOImpl extends GenericDAOImpl<Pattern, Long> implements Pat
 		super(Pattern.class);
 	}
 
+	@Override
+	public List<Pattern> findPatternsForBrand(Long brandId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
 }

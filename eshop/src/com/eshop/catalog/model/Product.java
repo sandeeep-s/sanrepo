@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.persistence.Version;
 
 /**
@@ -23,6 +25,7 @@ import javax.persistence.Version;
  * @updated 17-Oct-2012 3:50:23 PM
  */
 @Entity
+@Table(name="product")
 public class Product implements Serializable {
 
 	private Long id;
@@ -96,7 +99,7 @@ public class Product implements Serializable {
 		this.description = description;
 	}
 
-	@OneToMany(mappedBy="product")
+	@OneToOne(mappedBy = "product")
 	public ProductSpec getProductSpec() {
 		return productSpec;
 	}

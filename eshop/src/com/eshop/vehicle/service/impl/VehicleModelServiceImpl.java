@@ -3,6 +3,7 @@
  */
 package com.eshop.vehicle.service.impl;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.inject.Inject;
@@ -58,6 +59,12 @@ public class VehicleModelServiceImpl implements VehicleModelService {
 	@Override
 	public Set<VehicleModel> getAllVehicleModels() {
 		return vehicleModelDAO.findAllUnique();
+	}
+
+	@Override
+	public List<Integer> getModelYearsForMake(Long vehicleMakeId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

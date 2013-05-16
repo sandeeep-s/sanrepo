@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.Set;
 
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,7 +15,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Version;
+
+import com.eshop.common.model.Media;
 
 /**
  * @author ssd1kor
@@ -21,6 +26,7 @@ import javax.persistence.Version;
  * @created 29-Sep-2012 8:48:07 PM
  */
 @Entity
+@Table(name = "category")
 public class Category implements Serializable {
 
 	private Long id;
@@ -31,13 +37,11 @@ public class Category implements Serializable {
 
 	private String description;
 
-	private String image;
+	private Media image;
 
 	private Category parentCategory;
 
 	private Set<Category> children;
-
-	private Set<Brand> brands;
 
 	private Set<CategorizedProduct> categorizedProducts;
 
@@ -50,7 +54,7 @@ public class Category implements Serializable {
 		this.name = name;
 	}
 
-	public Category(String name, String description, String image, Category parentCategory) {
+	public Category(String name, String description, Media image, Category parentCategory) {
 		this.name = name;
 		this.description = description;
 		this.image = image;
@@ -94,12 +98,12 @@ public class Category implements Serializable {
 		this.description = description;
 	}
 
-	@Column(nullable = false, length = 250)
-	public String getImage() {
+	@Embedded
+	public Media getImage() {
 		return image;
 	}
 
-	public void setImage(String image) {
+	public void setImage(Media image) {
 		this.image = image;
 	}
 
@@ -120,19 +124,6 @@ public class Category implements Serializable {
 
 	public void setChildren(Set<Category> children) {
 		this.children = children;
-	}
-
-	/**
-	 * Returning unmodifiabllist to avoid modification of only one side of bidirectional relationship
-	 * @return
-	 */
-	@ManyToMany(mappedBy = "categories")
-	public Set<Brand> getBrands() {
-		return Collections.unmodifiableSet(brands);
-	}
-
-	public void setBrands(Set<Brand> brands) {
-		this.brands = brands;
 	}
 
 	@OneToMany(mappedBy = "category")

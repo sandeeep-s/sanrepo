@@ -1,5 +1,8 @@
 package com.eshop.catalog.persistence.impl;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.stereotype.Repository;
 
 import com.eshop.base.persistence.impl.GenericDAOImpl;
@@ -11,6 +14,14 @@ public class ProductDAOImpl extends GenericDAOImpl<Product, Long> implements Pro
 
 	public ProductDAOImpl() {
 		super(Product.class);
+	}
+
+	public List<Product> getProductsByDimension(Map<String, String> dimensionMap) {
+		return null;
+	}
+
+	public List<Product> getProductByTechSpec(Map<String, String> techSpecMap) {
+		return null;
 	}
 
 }
