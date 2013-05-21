@@ -10,6 +10,11 @@
 	<sf:input type="text" path="name" value="${brand.name}" />
 	<br />
 	<br />
+	<label><s:message code="brand.description" /> : </label>
+	<sf:textarea  path="description" value="${brand.description}"/>
+	<sf:errors path="description" />
+	<br />
+	<br />
 	<h3><s:message code="brand.logo" /> : </h3>
 	<sf:input type="hidden" path="logoImage.mediaType" value="${brand.logoImage.mediaType}"/>
 	<br />

@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.eshop.catalog.admin.service.CategoryService;
 import com.eshop.catalog.admin.service.TechSpecService;
+import com.eshop.catalog.model.Category;
 import com.eshop.catalog.model.TechSpec;
 import com.eshop.common.service.MediaService;
 
@@ -26,7 +28,7 @@ import com.eshop.common.service.MediaService;
  * 
  */
 @Controller
-@RequestMapping("/techSpec")
+@RequestMapping("/techspec")
 public class TechSpecController {
 
 	@Inject
@@ -36,6 +38,10 @@ public class TechSpecController {
 	@Inject
 	@Named("mediaService")
 	private MediaService mediaService;
+
+	@Inject
+	@Named("categoryService")
+	private CategoryService categoryService;
 
 	public TechSpecService getTechSpecService() {
 		return techSpecService;
@@ -53,6 +59,14 @@ public class TechSpecController {
 		this.mediaService = mediaService;
 	}
 
+	public CategoryService getCategoryService() {
+		return categoryService;
+	}
+
+	public void setCategoryService(CategoryService categoryService) {
+		this.categoryService = categoryService;
+	}
+
 	@RequestMapping(method = RequestMethod.GET)
 	public String listTechSpecs(Model model) {
 		Set<TechSpec> techSpecs = techSpecService.getAllTechSpecs();
@@ -63,6 +77,10 @@ public class TechSpecController {
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String displayAddTechSpecForm(Model model) {
 		model.addAttribute("techSpec", new TechSpec());
+
+		Set<Category> categories = categoryService.getAllCategorys();
+		model.addAttribute("categories", categories);
+		
 		return "addTechSpec";
 	}
 
@@ -70,6 +88,9 @@ public class TechSpecController {
 	public String displayEditTechSpecForm(@PathVariable Long id, Model model, HttpServletRequest request) {
 		TechSpec techSpec = techSpecService.getTechSpecById(id);
 		model.addAttribute("techSpec", techSpec);
+
+		Set<Category> categories = categoryService.getAllCategorys();
+		model.addAttribute("categories", categories);
 
 		return "editTechSpec";
 	}

@@ -1,25 +1,17 @@
 package com.eshop.catalog.model;
 
 import java.io.Serializable;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
+import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.NotEmpty;
-
 import com.eshop.common.model.Media;
 
 /**
@@ -80,6 +72,7 @@ public class Brand implements Serializable {
 		this.name = name;
 	}
 
+	@NotBlank
 	@Column(nullable = false, length = 4000)
 	public String getDescription() {
 		return description;
@@ -89,6 +82,7 @@ public class Brand implements Serializable {
 		this.description = description;
 	}
 
+	@Valid
 	@Embedded
 	public Media getLogoImage() {
 		return logoImage;
@@ -113,6 +107,7 @@ public class Brand implements Serializable {
 	 * Always use getters to compare properties of other object. This is to make sure the code works even if proxies are passed instead
 	 * of real objects.
 	 */
+	@Override
 	public boolean equals(Object other) {
 		if (!(other instanceof Brand)) {
 			return false;
@@ -124,8 +119,9 @@ public class Brand implements Serializable {
 		return this.name.equals(that.getName());
 	}
 
+	@Override
 	public int hashCode() {
 		return name.hashCode();
 	}
 
-}//end Brand
+}//end Brands

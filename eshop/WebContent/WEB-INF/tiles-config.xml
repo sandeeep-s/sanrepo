@@ -177,4 +177,240 @@
 
 	<!-- Vehicle SubModel End  -->
 
+
+	<!-- Brand Start  -->
+
+	<definition name="brandList" extends="hometemplate">
+		<put-attribute name="title" value="Brand List" />
+		<put-attribute name="body" value="/views/catalog/brand/brandList.jsp" />
+	</definition>
+
+	<definition name="addBrand" extends="hometemplate">
+		<put-attribute name="title" value="Add Brand" />
+		<put-attribute name="body" value="/views/catalog/brand/brandAdd.jsp" />
+	</definition>
+
+	<definition name="addBrandSuccess" extends="hometemplate">
+		<put-attribute name="title" value="Add Brand Success" />
+		<put-attribute name="body" value="/views/catalog/brand/brandAddSuccess.jsp" />
+	</definition>
+
+	<definition name="editBrand" extends="hometemplate">
+		<put-attribute name="title" value="Edit Brand" />
+		<put-attribute name="body" value="/views/catalog/brand/brandEdit.jsp" />
+	</definition>
+
+	<definition name="editBrandSuccess" extends="hometemplate">
+		<put-attribute name="title" value="Edit Brand Success" />
+		<put-attribute name="body" value="/views/catalog/brand/brandEditSuccess.jsp" />
+	</definition>
+
+	<definition name="viewBrand" extends="hometemplate">
+		<put-attribute name="title" value="View Brand" />
+		<put-attribute name="body" value="/views/catalog/brand/brandView.jsp" />
+	</definition>
+
+	<definition name="deleteBrandSuccess" extends="hometemplate">
+		<put-attribute name="title" value="Brand Deleted" />
+		<put-attribute name="body" value="/views/catalog/brand/brandDeleteSuccess.jsp" />
+	</definition>
+
+	<!-- Brand End  -->
+
+	<!-- Pattern Start  -->
+
+	<definition name="patternList" extends="hometemplate">
+		<put-attribute name="title" value="Pattern List" />
+		<put-attribute name="body" value="/views/catalog/pattern/patternList.jsp" />
+	</definition>
+
+	<definition name="addPattern" extends="hometemplate">
+		<put-attribute name="title" value="Add Pattern" />
+		<put-attribute name="body" value="/views/catalog/pattern/patternAdd.jsp" />
+	</definition>
+
+	<definition name="addPatternSuccess" extends="hometemplate">
+		<put-attribute name="title" value="Add Pattern Success" />
+		<put-attribute name="body" value="/views/catalog/pattern/patternAddSuccess.jsp" />
+	</definition>
+
+	<definition name="editPattern" extends="hometemplate">
+		<put-attribute name="title" value="Edit Pattern" />
+		<put-attribute name="body" value="/views/catalog/pattern/patternEdit.jsp" />
+	</definition>
+
+	<definition name="editPatternSuccess" extends="hometemplate">
+		<put-attribute name="title" value="Edit Pattern Success" />
+		<put-attribute name="body" value="/views/catalog/pattern/patternEditSuccess.jsp" />
+	</definition>
+
+	<definition name="viewPattern" extends="hometemplate">
+		<put-attribute name="title" value="View Pattern" />
+		<put-attribute name="body" value="/views/catalog/pattern/patternView.jsp" />
+	</definition>
+
+	<definition name="deletePatternSuccess" extends="hometemplate">
+		<put-attribute name="title" value="Pattern Deleted" />
+		<put-attribute name="body" value="/views/catalog/pattern/patternDeleteSuccess.jsp" />
+	</definition>
+
+	<!-- Pattern End  -->
+
+	<!-- Tech Spec Start  -->
+
+	<definition name="techSpecList" extends="hometemplate">
+		<put-attribute name="title" value="Tech Spec List" />
+		<put-attribute name="body" value="/views/catalog/techSpec/techSpecList.jsp" />
+	</definition>
+
+	<definition name="addTechSpec" extends="hometemplate">
+		<put-attribute name="title" value="Add Tech Spec" />
+		<put-attribute name="body" value="/views/catalog/techSpec/techSpecAdd.jsp" />
+	</definition>
+
+	<definition name="addTechSpecSuccess" extends="hometemplate">
+		<put-attribute name="title" value="Add Tech Spec Success" />
+		<put-attribute name="body" value="/views/catalog/techSpec/techSpecAddSuccess.jsp" />
+	</definition>
+
+	<definition name="editTechSpec" extends="hometemplate">
+		<put-attribute name="title" value="Edit Tech Spec" />
+		<put-attribute name="body" value="/views/catalog/techSpec/techSpecEdit.jsp" />
+	</definition>
+
+	<definition name="editTechSpecSuccess" extends="hometemplate">
+		<put-attribute name="title" value="Edit Tech Spec Success" />
+		<put-attribute name="body" value="/views/catalog/techSpec/techSpecEditSuccess.jsp" />
+	</definition>
+
+	<definition name="viewTechSpec" extends="hometemplate">
+		<put-attribute name="title" value="View Tech Spec" />
+		<put-attribute name="body" value="/views/catalog/techSpec/techSpecView.jsp" />
+	</definition>
+
+	<definition name="deleteTechSpecSuccess" extends="hometemplate">
+		<put-attribute name="title" value="Tech Spec Deleted" />
+		<put-attribute name="body" value="/views/catalog/techSpec/techSpecDeleteSuccess.jsp" />
+	</definition>
+
+	<!-- Tech Spec End  -->
+
+	<!-- Dimension Start  -->
+
+	<definition name="dimensionList" extends="hometemplate">
+		<put-attribute name="title" value="Dimension List" />
+		<put-attribute name="body" value="/views/catalog/dimension/dimensionList.jsp" />
+	</definition>
+
+	<definition name="addDimension" extends="hometemplate">
+		<put-attribute name="title" value="Add Dimension" />
+		<put-attribute name="body" value="/views/catalog/dimension/dimensionAdd.jsp" />
+	</definition>
+
+	<definition name="addDimensionSuccess" extends="hometemplate">
+		<put-attribute name="title" value="Add Dimension Success" />
+		<put-attribute name="body" value="/views/catalog/dimension/dimensionAddSuccess.jsp" />
+	</definition>
+
+	<definition name="editDimension" extends="hometemplate">
+		<put-attribute name="title" value="Edit Dimension" />
+		<put-attribute name="body" value="/views/catalog/dimension/dimensionEdit.jsp" />
+	</definition>
+
+	<definition name="editDimensionSuccess" extends="hometemplate">
+		<put-attribute name="title" value="Edit Dimension Success" />
+		<put-attribute name="body" value="/views/catalog/dimension/dimensionEditSuccess.jsp" />
+	</definition>
+
+	<definition name="viewDimension" extends="hometemplate">
+		<put-attribute name="title" value="View Dimension" />
+		<put-attribute name="body" value="/views/catalog/dimension/dimensionView.jsp" />
+	</definition>
+
+	<definition name="deleteDimensionSuccess" extends="hometemplate">
+		<put-attribute name="title" value="Dimension Deleted" />
+		<put-attribute name="body" value="/views/catalog/dimension/dimensionDeleteSuccess.jsp" />
+	</definition>
+
+	<!-- Dimension End  -->
+
+	<!-- Category Start  -->
+
+	<definition name="categoryList" extends="hometemplate">
+		<put-attribute name="title" value="Category List" />
+		<put-attribute name="body" value="/views/catalog/category/categoryList.jsp" />
+	</definition>
+
+	<definition name="addCategory" extends="hometemplate">
+		<put-attribute name="title" value="Add Category" />
+		<put-attribute name="body" value="/views/catalog/category/categoryAdd.jsp" />
+	</definition>
+
+	<definition name="addCategorySuccess" extends="hometemplate">
+		<put-attribute name="title" value="Add Category Success" />
+		<put-attribute name="body" value="/views/catalog/category/categoryAddSuccess.jsp" />
+	</definition>
+
+	<definition name="editCategory" extends="hometemplate">
+		<put-attribute name="title" value="Edit Category" />
+		<put-attribute name="body" value="/views/catalog/category/categoryEdit.jsp" />
+	</definition>
+
+	<definition name="editCategorySuccess" extends="hometemplate">
+		<put-attribute name="title" value="Edit Category Success" />
+		<put-attribute name="body" value="/views/catalog/category/categoryEditSuccess.jsp" />
+	</definition>
+
+	<definition name="viewCategory" extends="hometemplate">
+		<put-attribute name="title" value="View Category" />
+		<put-attribute name="body" value="/views/catalog/category/categoryView.jsp" />
+	</definition>
+
+	<definition name="deleteCategorySuccess" extends="hometemplate">
+		<put-attribute name="title" value="Category Deleted" />
+		<put-attribute name="body" value="/views/catalog/category/categoryDeleteSuccess.jsp" />
+	</definition>
+
+	<!-- Category End  -->
+
+	<!-- Product Start  -->
+
+	<definition name="productList" extends="hometemplate">
+		<put-attribute name="title" value="Product List" />
+		<put-attribute name="body" value="/views/catalog/product/productList.jsp" />
+	</definition>
+
+	<definition name="addProduct" extends="hometemplate">
+		<put-attribute name="title" value="Add Product" />
+		<put-attribute name="body" value="/views/catalog/product/productAdd.jsp" />
+	</definition>
+
+	<definition name="addProductSuccess" extends="hometemplate">
+		<put-attribute name="title" value="Add Product Success" />
+		<put-attribute name="body" value="/views/catalog/product/productAddSuccess.jsp" />
+	</definition>
+
+	<definition name="editProduct" extends="hometemplate">
+		<put-attribute name="title" value="Edit Product" />
+		<put-attribute name="body" value="/views/catalog/product/productEdit.jsp" />
+	</definition>
+
+	<definition name="editProductSuccess" extends="hometemplate">
+		<put-attribute name="title" value="Edit Product Success" />
+		<put-attribute name="body" value="/views/catalog/product/productEditSuccess.jsp" />
+	</definition>
+
+	<definition name="viewProduct" extends="hometemplate">
+		<put-attribute name="title" value="View Product" />
+		<put-attribute name="body" value="/views/catalog/product/productView.jsp" />
+	</definition>
+
+	<definition name="deleteProductSuccess" extends="hometemplate">
+		<put-attribute name="title" value="Product Deleted" />
+		<put-attribute name="body" value="/views/catalog/product/productDeleteSuccess.jsp" />
+	</definition>
+
+	<!-- Product End  -->
+
+
 </tiles-definitions>       

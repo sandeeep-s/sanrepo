@@ -1,18 +1,15 @@
 package com.eshop.catalog.model;
 
 import java.io.Serializable;
-import java.util.Collections;
 import java.util.Set;
 
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -153,6 +150,7 @@ public class Category implements Serializable {
 	 * Always use getters to compare properties of other object. This is to make sure the code works even if proxies are passed instead
 	 * of real objects.
 	 */
+	@Override
 	public boolean equals(Object other) {
 		if (!(other instanceof Category)) {
 			return false;
@@ -164,6 +162,7 @@ public class Category implements Serializable {
 		return this.name.equals(that.getName());
 	}
 
+	@Override
 	public int hashCode() {
 		return name.hashCode();
 	}

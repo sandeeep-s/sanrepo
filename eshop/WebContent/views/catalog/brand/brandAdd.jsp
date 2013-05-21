@@ -9,8 +9,8 @@
 	<sf:errors path="name" />
 	<br />
 	<br />
-	<label><s:message code="brand.name" /> : </label>
-	<sf:input path="description" />
+	<label><s:message code="brand.description" /> : </label>
+	<sf:textarea  path="description" />
 	<sf:errors path="description" />
 	<br />
 	<br />

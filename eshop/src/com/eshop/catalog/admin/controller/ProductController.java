@@ -17,8 +17,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.eshop.catalog.admin.service.PatternService;
 import com.eshop.catalog.admin.service.ProductService;
+import com.eshop.catalog.model.Pattern;
 import com.eshop.catalog.model.Product;
+import com.eshop.catalog.model.ProductSpec;
 import com.eshop.common.service.MediaService;
 
 /**
@@ -37,6 +40,10 @@ public class ProductController {
 	@Named("mediaService")
 	private MediaService mediaService;
 
+	@Inject
+	@Named("patternService")
+	private PatternService patternService;
+
 	public ProductService getProductService() {
 		return productService;
 	}
@@ -53,6 +60,14 @@ public class ProductController {
 		this.mediaService = mediaService;
 	}
 
+	public PatternService getPatternService() {
+		return patternService;
+	}
+
+	public void setPatternService(PatternService patternService) {
+		this.patternService = patternService;
+	}
+
 	@RequestMapping(method = RequestMethod.GET)
 	public String listProducts(Model model) {
 		Set<Product> products = productService.getAllProducts();
@@ -62,7 +77,14 @@ public class ProductController {
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String displayAddProductForm(Model model) {
-		model.addAttribute("product", new Product());
+		Product product = new Product();
+		ProductSpec productSpec = new ProductSpec();
+		product.setProductSpec(productSpec);
+		model.addAttribute("product", product);
+		
+		Set<Pattern> patterns = patternService.getAllPatterns();
+		model.addAttribute("patterns", patterns);
+		
 		return "addProduct";
 	}
 

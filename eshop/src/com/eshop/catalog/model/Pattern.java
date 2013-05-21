@@ -1,12 +1,14 @@
 package com.eshop.catalog.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -42,7 +44,7 @@ public class Pattern implements Serializable {
 
 	private String importantNotes;
 
-	private List<Media> images;
+	private List<Media> images = new ArrayList<Media>();
 
 	public Pattern() {
 
@@ -111,7 +113,7 @@ public class Pattern implements Serializable {
 		this.importantNotes = importantNotes;
 	}
 
-	@ElementCollection
+	@ElementCollection(fetch=FetchType.EAGER)
 	@CollectionTable(name = "pattern_image", joinColumns = @JoinColumn(name = "pattern_id"))
 	public List<Media> getImages() {
 		return images;

@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.eshop.catalog.admin.service.CategoryService;
 import com.eshop.catalog.admin.service.DimensionService;
+import com.eshop.catalog.model.Category;
 import com.eshop.catalog.model.Dimension;
 import com.eshop.common.service.MediaService;
 
@@ -37,6 +39,10 @@ public class DimensionController {
 	@Named("mediaService")
 	private MediaService mediaService;
 
+	@Inject
+	@Named("categoryService")
+	private CategoryService categoryService;
+
 	public DimensionService getDimensionService() {
 		return dimensionService;
 	}
@@ -53,6 +59,14 @@ public class DimensionController {
 		this.mediaService = mediaService;
 	}
 
+	public CategoryService getCategoryService() {
+		return categoryService;
+	}
+
+	public void setCategoryService(CategoryService categoryService) {
+		this.categoryService = categoryService;
+	}
+
 	@RequestMapping(method = RequestMethod.GET)
 	public String listDimensions(Model model) {
 		Set<Dimension> dimensions = dimensionService.getAllDimensions();
@@ -63,6 +77,10 @@ public class DimensionController {
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String displayAddDimensionForm(Model model) {
 		model.addAttribute("dimension", new Dimension());
+		
+		Set<Category> categories = categoryService.getAllCategorys();
+		model.addAttribute("categories", categories);
+
 		return "addDimension";
 	}
 
@@ -70,6 +88,9 @@ public class DimensionController {
 	public String displayEditDimensionForm(@PathVariable Long id, Model model, HttpServletRequest request) {
 		Dimension dimension = dimensionService.getDimensionById(id);
 		model.addAttribute("dimension", dimension);
+
+		Set<Category> categories = categoryService.getAllCategorys();
+		model.addAttribute("categories", categories);
 
 		return "editDimension";
 	}

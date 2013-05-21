@@ -5,7 +5,7 @@
 <sf:form action="/eshop/techspec/${techSpec.id}" method="PUT" modelAttribute="techSpec">
 	<label><s:message code="category" /> : </label>
 	<sf:select path="category">
-		<c:forEach items="${categorys}" var="categoryVar">
+		<c:forEach items="${categories}" var="categoryVar">
 			<c:if test="${techSpec.category.id == categoryVar.id}">
 				<sf:option value="${categoryVar.id}" selected="true">${categoryVar.name}</sf:option>
 			</c:if>
@@ -18,8 +18,18 @@
 	<br />
 	<br />
 	<label><s:message code="tech.spec.name" /> : </label>
-	<sf:input type="text" path="name" />
+	<sf:input type="text" path="name" value="${techSpec.name}" />
 	<sf:errors path="name" />
+	<br />
+	<br />
+	<label><s:message code="tech.spec.unit" /> : </label>
+	<sf:input type="text" path="unit" value="${techSpec.unit}" />
+	<sf:errors path="unit" />
+	<br />
+	<br />
+	<label><s:message code="tech.spec.description" /> : </label>
+	<sf:input type="text" path="description" value="${techSpec.description}" />
+	<sf:errors path="description" />
 	<br />
 	<br />
 	<input type="submit" value="<s:message code='tech.spec.edit'/>">

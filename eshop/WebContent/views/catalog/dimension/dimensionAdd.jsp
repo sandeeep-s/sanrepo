@@ -9,7 +9,7 @@
 		<sf:option value="-1">
 			<s:message code="select" />
 		</sf:option>
-		<c:forEach items="${requestScope.categories}" var="categoryVar">
+		<c:forEach items="${categories}" var="categoryVar">
 			<sf:option value="${categoryVar.id}">${categoryVar.name}</sf:option>
 		</c:forEach>
 	</sf:select>
@@ -19,6 +19,16 @@
 	<label><s:message code="dimension.name" /> : </label>
 	<sf:input type="text" path="name"/>
 	<sf:errors path="name" />
+	<br />
+	<br />
+	<label><s:message code="dimension.unit" /> : </label>
+	<sf:input type="text" path="unit"/>
+	<sf:errors path="unit" />
+	<br />
+	<br />
+	<label><s:message code="dimension.description" /> : </label>
+	<sf:input type="text" path="description"/>
+	<sf:errors path="description" />
 	<br />
 	<br />
 	<input type="submit" value="<s:message code='dimension.add'/>">

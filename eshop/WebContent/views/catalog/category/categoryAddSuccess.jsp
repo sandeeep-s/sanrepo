@@ -7,5 +7,3 @@
 ${requestScope.category.name}
 <br />
 <br />
-<label><s:message code="category.logo" /> : </label>
-<img src="<c:url value='/resources/images/${requestScope.category.logoImage.mediaFileName}'/>" title="${requestScope.category.name}">

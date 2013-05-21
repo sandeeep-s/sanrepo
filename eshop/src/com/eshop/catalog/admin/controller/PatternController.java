@@ -3,6 +3,8 @@
  */
 package com.eshop.catalog.admin.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import javax.inject.Inject;
@@ -17,8 +19,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.eshop.catalog.admin.service.BrandService;
 import com.eshop.catalog.admin.service.PatternService;
+import com.eshop.catalog.model.Brand;
 import com.eshop.catalog.model.Pattern;
+import com.eshop.common.model.Media;
+import com.eshop.common.model.MediaType;
 import com.eshop.common.service.MediaService;
 
 /**
@@ -37,6 +43,10 @@ public class PatternController {
 	@Named("mediaService")
 	private MediaService mediaService;
 
+	@Inject
+	@Named("brandService")
+	private BrandService brandService;
+
 	public PatternService getPatternService() {
 		return patternService;
 	}
@@ -53,6 +63,14 @@ public class PatternController {
 		this.mediaService = mediaService;
 	}
 
+	public BrandService getBrandService() {
+		return brandService;
+	}
+
+	public void setBrandService(BrandService brandService) {
+		this.brandService = brandService;
+	}
+
 	@RequestMapping(method = RequestMethod.GET)
 	public String listPatterns(Model model) {
 		Set<Pattern> patterns = patternService.getAllPatterns();
@@ -62,7 +80,15 @@ public class PatternController {
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String displayAddPatternForm(Model model) {
-		model.addAttribute("pattern", new Pattern());
+		Pattern pattern = new Pattern();
+		List<Media> images = new ArrayList<Media>();
+		images.add(new Media());
+		pattern.setImages(images);
+		model.addAttribute("pattern", pattern);
+
+		Set<Brand> brands = brandService.getAllBrands();
+		model.addAttribute("brands", brands);
+
 		return "addPattern";
 	}
 
@@ -70,6 +96,9 @@ public class PatternController {
 	public String displayEditPatternForm(@PathVariable Long id, Model model, HttpServletRequest request) {
 		Pattern pattern = patternService.getPatternById(id);
 		model.addAttribute("pattern", pattern);
+
+		Set<Brand> brands = brandService.getAllBrands();
+		model.addAttribute("brands", brands);
 
 		return "editPattern";
 	}

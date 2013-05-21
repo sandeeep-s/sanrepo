@@ -1,6 +1,7 @@
 package com.eshop.catalog.model;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Map;
 
 import javax.persistence.CollectionTable;
@@ -17,7 +18,7 @@ import javax.persistence.Table;
 import javax.persistence.Version;
 
 @Entity
-@Table(name="product_spec")
+@Table(name = "product_spec")
 public class ProductSpec implements Serializable {
 
 	private Long id;
@@ -28,9 +29,9 @@ public class ProductSpec implements Serializable {
 
 	private Pattern pattern;
 
-	private Map<TechSpec, String> techSpecs;
+	private List<TechSpec> techSpecs;
 
-	private Map<Dimension, String> dimensions;
+	private List<Dimension> dimensions;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
@@ -72,24 +73,22 @@ public class ProductSpec implements Serializable {
 	}
 
 	@ElementCollection
-	@CollectionTable(name = "product_tech_spec", joinColumns = @JoinColumn(name = "product_spec_id"))
-	@MapKeyJoinColumn(name = "tech_spec_id")
-	public Map<TechSpec, String> getTechSpecs() {
+	@CollectionTable(name="product_tech_spec", joinColumns=@JoinColumn(name="product_spec_id"))
+	public List<TechSpec> getTechSpecs() {
 		return techSpecs;
 	}
 
-	public void setTechSpecs(Map<TechSpec, String> techSpecs) {
+	public void setTechSpecs(List<TechSpec> techSpecs) {
 		this.techSpecs = techSpecs;
 	}
 
 	@ElementCollection
-	@CollectionTable(name = "product_dimension", joinColumns = @JoinColumn(name = "product_spec_id"))
-	@MapKeyJoinColumn(name = "dimension_id")
-	public Map<Dimension, String> getDimensions() {
+	@CollectionTable(name="product_dimension", joinColumns=@JoinColumn(name="product_spec_id"))
+	public List<Dimension> getDimensions() {
 		return dimensions;
 	}
 
-	public void setDimensions(Map<Dimension, String> dimensions) {
+	public void setDimensions(List<Dimension> dimensions) {
 		this.dimensions = dimensions;
 	}
 
