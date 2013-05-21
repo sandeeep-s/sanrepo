@@ -256,83 +256,83 @@
 
 	<!-- Pattern End  -->
 
-	<!-- Tech Spec Start  -->
+	<!-- Tech Spec Property Start  -->
 
-	<definition name="techSpecList" extends="hometemplate">
-		<put-attribute name="title" value="Tech Spec List" />
-		<put-attribute name="body" value="/views/catalog/techSpec/techSpecList.jsp" />
+	<definition name="techSpecPropertyList" extends="hometemplate">
+		<put-attribute name="title" value="Tech Spec Property List" />
+		<put-attribute name="body" value="/views/catalog/techSpecProperty/techSpecPropertyList.jsp" />
 	</definition>
 
-	<definition name="addTechSpec" extends="hometemplate">
-		<put-attribute name="title" value="Add Tech Spec" />
-		<put-attribute name="body" value="/views/catalog/techSpec/techSpecAdd.jsp" />
+	<definition name="addTechSpecProperty" extends="hometemplate">
+		<put-attribute name="title" value="Add Tech Spec Property" />
+		<put-attribute name="body" value="/views/catalog/techSpecProperty/techSpecPropertyAdd.jsp" />
 	</definition>
 
-	<definition name="addTechSpecSuccess" extends="hometemplate">
-		<put-attribute name="title" value="Add Tech Spec Success" />
-		<put-attribute name="body" value="/views/catalog/techSpec/techSpecAddSuccess.jsp" />
+	<definition name="addTechSpecPropertySuccess" extends="hometemplate">
+		<put-attribute name="title" value="Add Tech Spec Property Success" />
+		<put-attribute name="body" value="/views/catalog/techSpecProperty/techSpecPropertyAddSuccess.jsp" />
 	</definition>
 
-	<definition name="editTechSpec" extends="hometemplate">
-		<put-attribute name="title" value="Edit Tech Spec" />
-		<put-attribute name="body" value="/views/catalog/techSpec/techSpecEdit.jsp" />
+	<definition name="editTechSpecProperty" extends="hometemplate">
+		<put-attribute name="title" value="Edit Tech Spec Property" />
+		<put-attribute name="body" value="/views/catalog/techSpecProperty/techSpecPropertyEdit.jsp" />
 	</definition>
 
-	<definition name="editTechSpecSuccess" extends="hometemplate">
-		<put-attribute name="title" value="Edit Tech Spec Success" />
-		<put-attribute name="body" value="/views/catalog/techSpec/techSpecEditSuccess.jsp" />
+	<definition name="editTechSpecPropertySuccess" extends="hometemplate">
+		<put-attribute name="title" value="Edit Tech Spec Property Success" />
+		<put-attribute name="body" value="/views/catalog/techSpecProperty/techSpecPropertyEditSuccess.jsp" />
 	</definition>
 
-	<definition name="viewTechSpec" extends="hometemplate">
-		<put-attribute name="title" value="View Tech Spec" />
-		<put-attribute name="body" value="/views/catalog/techSpec/techSpecView.jsp" />
+	<definition name="viewTechSpecProperty" extends="hometemplate">
+		<put-attribute name="title" value="View Tech Spec Property" />
+		<put-attribute name="body" value="/views/catalog/techSpecProperty/techSpecPropertyView.jsp" />
 	</definition>
 
-	<definition name="deleteTechSpecSuccess" extends="hometemplate">
-		<put-attribute name="title" value="Tech Spec Deleted" />
-		<put-attribute name="body" value="/views/catalog/techSpec/techSpecDeleteSuccess.jsp" />
+	<definition name="deleteTechSpecPropertySuccess" extends="hometemplate">
+		<put-attribute name="title" value="Tech Spec Property Deleted" />
+		<put-attribute name="body" value="/views/catalog/techSpecProperty/techSpecPropertyDeleteSuccess.jsp" />
 	</definition>
 
-	<!-- Tech Spec End  -->
+	<!-- Tech Spec Property End  -->
 
-	<!-- Dimension Start  -->
+	<!-- Dimension Property Start  -->
 
-	<definition name="dimensionList" extends="hometemplate">
-		<put-attribute name="title" value="Dimension List" />
-		<put-attribute name="body" value="/views/catalog/dimension/dimensionList.jsp" />
+	<definition name="dimensionPropertyList" extends="hometemplate">
+		<put-attribute name="title" value="Dimension Property List" />
+		<put-attribute name="body" value="/views/catalog/dimensionProperty/dimensionPropertyList.jsp" />
 	</definition>
 
-	<definition name="addDimension" extends="hometemplate">
-		<put-attribute name="title" value="Add Dimension" />
-		<put-attribute name="body" value="/views/catalog/dimension/dimensionAdd.jsp" />
+	<definition name="addDimensionProperty" extends="hometemplate">
+		<put-attribute name="title" value="Add Dimension Property" />
+		<put-attribute name="body" value="/views/catalog/dimensionProperty/dimensionPropertyAdd.jsp" />
 	</definition>
 
-	<definition name="addDimensionSuccess" extends="hometemplate">
-		<put-attribute name="title" value="Add Dimension Success" />
-		<put-attribute name="body" value="/views/catalog/dimension/dimensionAddSuccess.jsp" />
+	<definition name="addDimensionPropertySuccess" extends="hometemplate">
+		<put-attribute name="title" value="Add Dimension Property Success" />
+		<put-attribute name="body" value="/views/catalog/dimensionProperty/dimensionPropertyAddSuccess.jsp" />
 	</definition>
 
-	<definition name="editDimension" extends="hometemplate">
-		<put-attribute name="title" value="Edit Dimension" />
-		<put-attribute name="body" value="/views/catalog/dimension/dimensionEdit.jsp" />
+	<definition name="editDimensionProperty" extends="hometemplate">
+		<put-attribute name="title" value="Edit Dimension Property" />
+		<put-attribute name="body" value="/views/catalog/dimensionProperty/dimensionPropertyEdit.jsp" />
 	</definition>
 
-	<definition name="editDimensionSuccess" extends="hometemplate">
-		<put-attribute name="title" value="Edit Dimension Success" />
-		<put-attribute name="body" value="/views/catalog/dimension/dimensionEditSuccess.jsp" />
+	<definition name="editDimensionPropertySuccess" extends="hometemplate">
+		<put-attribute name="title" value="Edit Dimension Property Success" />
+		<put-attribute name="body" value="/views/catalog/dimensionProperty/dimensionPropertyEditSuccess.jsp" />
 	</definition>
 
-	<definition name="viewDimension" extends="hometemplate">
-		<put-attribute name="title" value="View Dimension" />
-		<put-attribute name="body" value="/views/catalog/dimension/dimensionView.jsp" />
+	<definition name="viewDimensionProperty" extends="hometemplate">
+		<put-attribute name="title" value="View Dimension Property" />
+		<put-attribute name="body" value="/views/catalog/dimensionProperty/dimensionPropertyView.jsp" />
 	</definition>
 
-	<definition name="deleteDimensionSuccess" extends="hometemplate">
-		<put-attribute name="title" value="Dimension Deleted" />
-		<put-attribute name="body" value="/views/catalog/dimension/dimensionDeleteSuccess.jsp" />
+	<definition name="deleteDimensionPropertySuccess" extends="hometemplate">
+		<put-attribute name="title" value="Dimension Property Deleted" />
+		<put-attribute name="body" value="/views/catalog/dimensionProperty/dimensionPropertyDeleteSuccess.jsp" />
 	</definition>
 
-	<!-- Dimension End  -->
+	<!-- Dimension Property End  -->
 
 	<!-- Category Start  -->
 

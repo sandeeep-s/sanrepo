@@ -1,4 +1,4 @@
 <%@include file="/views/init.jsp"%>
 <h1 align="center">
-	<s:message code="tech.spec.deleted" />
+	<s:message code="dimension.property.deleted" />
 </h1>
