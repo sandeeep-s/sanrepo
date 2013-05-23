@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.eshop.catalog.admin.service.ProductService;
+import com.eshop.catalog.model.CategorizedProduct;
 import com.eshop.catalog.model.Product;
 import com.eshop.catalog.persistence.ProductDAO;
 import com.eshop.common.model.Media;
@@ -40,7 +41,15 @@ public class ProductServiceImpl implements ProductService {
 	 */
 	@Override
 	public Product addProduct(Product product) {
-		return productDAO.makePersistent(product);
+		//This adds assocoiation from productSpec to product. Spring form binding does not take care of this.
+		product.getProductSpec().setProduct(product);
+		
+		Product savedProduct = productDAO.makePersistent(product);
+		for (CategorizedProduct categorizedProduct : product.getCategorizedProducts()){
+			categorizedProduct.setProduct(savedProduct);
+		}
+
+		return savedProduct;
 	}
 
 	@Override

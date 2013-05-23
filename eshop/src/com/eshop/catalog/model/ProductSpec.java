@@ -53,7 +53,7 @@ public class ProductSpec implements Serializable {
 	}
 
 	@OneToOne
-	@JoinColumn(name = "product_id")
+	@JoinColumn(name = "product_id", nullable=false)
 	public Product getProduct() {
 		return product;
 	}

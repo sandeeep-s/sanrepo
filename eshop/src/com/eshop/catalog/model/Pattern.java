@@ -138,4 +138,8 @@ public class Pattern implements Serializable {
 		return name.hashCode() + brand.hashCode();
 	}
 
+	public String toString(){
+		return name;
+	}
+	
 }//end Pattern

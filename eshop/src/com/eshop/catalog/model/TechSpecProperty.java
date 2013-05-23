@@ -19,7 +19,7 @@ import javax.persistence.Version;
  * @created 03-Oct-2012 9:57:15 PM
  */
 @Entity
-@Table(name = "tech_spec")
+@Table(name = "tech_spec_property")
 public class TechSpecProperty implements Serializable {
 
 	private Long id;
@@ -107,6 +107,10 @@ public class TechSpecProperty implements Serializable {
 
 	public int hashCode() {
 		return name.hashCode() + category.hashCode();
+	}
+
+	public String toString() {
+		return name;
 	}
 
 }//end TechSpec

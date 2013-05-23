@@ -58,34 +58,20 @@
 	<br />
 	<h3><s:message code="vehicle.type.image" /> : </h3>
 	<c:forEach items="${vehicleModel.images}" var="image" varStatus="status">
-		<s:bind path="images[${status.index}].mediaType">
-				<sf:input type="hidden" path="${status.expression}" value="<%=MediaType.IMAGE%>"/>
- 		</s:bind>
+		<sf:input type="hidden" path="images[${status.index}].mediaType" value="<%=MediaType.IMAGE%>"/>
 		<label><s:message code="image.filename" /> : </label>
-		<s:bind path="images[${status.index}].mediaFileName">
-				<sf:input path="${status.expression}"/>
- 		</s:bind>
-		<s:bind path="images[${status.index}].mediaFileName">
-				<sf:errors path="${status.expression}"/>
- 		</s:bind>
+		<sf:input path="images[${status.index}].mediaFileName"/>
+		<sf:errors path="images[${status.index}].mediaFileName"/>
 		<br />
 		<br />
 		<label><s:message code="image.name" /> : </label>
-		<s:bind path="images[${status.index}].mediaName">
-				<sf:input path="${status.expression}"/>
- 		</s:bind>
-		<s:bind path="images[${status.index}].mediaName">
-				<sf:errors path="${status.expression}"/>
- 		</s:bind>
+		<sf:input path="images[${status.index}].mediaName"/>
+		<sf:errors path="images[${status.index}].mediaName"/>
 		<br />
 		<br />
 		<label><s:message code="image.thumbnailFileName" /> : </label>
-		<s:bind path="images[${status.index}].mediaThumbnailFileName">
-				<sf:input path="${status.expression}"/>
- 		</s:bind>
-		<s:bind path="images[${status.index}].mediaThumbnailFileName">
-				<sf:errors path="${status.expression}"/>
- 		</s:bind>
+		<sf:input path="images[${status.index}].mediaThumbnailFileName"/>
+		<sf:errors path="images[${status.index}].mediaThumbnailFileName"/>
 		<br />
 		<br />
 	</c:forEach>

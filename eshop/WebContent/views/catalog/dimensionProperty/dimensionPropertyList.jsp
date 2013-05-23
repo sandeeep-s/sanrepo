@@ -2,13 +2,13 @@
 <h1 align="center">
 	<s:message code="dimension.property.list" />
 </h1>
-<a href="<c:url value='/dimensionproperty/add'/>"><s:message code="dimensionProperty.add" /></a>
+<a href="<c:url value='/dimensionproperty/add'/>"><s:message code="dimension.property.add" /></a>
 <br />
 <br />
 <table>
 	<tr>
 		<th><s:message code="category.name" /></th>
-		<th><s:message code="dimensionProperty.name" /></th>
+		<th><s:message code="dimension.property.name" /></th>
 	</tr>
 	<c:forEach items="${requestScope.dimensionPropertys}" var="dimensionProperty">
 		<tr>

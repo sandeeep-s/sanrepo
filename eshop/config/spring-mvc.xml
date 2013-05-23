@@ -18,6 +18,9 @@
 				<bean class="com.eshop.catalog.admin.converter.BrandConverter" />
 				<bean class="com.eshop.catalog.admin.converter.CategoryConverter" />
 				<bean class="com.eshop.catalog.admin.converter.PatternConverter" />
+				<bean class="com.eshop.catalog.admin.converter.TechSpecPropertyConverter" />
+				<bean class="com.eshop.catalog.admin.converter.DimensionPropertyConverter" />
+				<bean class="com.eshop.catalog.admin.converter.ProductConverter" />
 			</set>
 		</property>
 	</bean>
@@ -25,6 +28,7 @@
 	<context:component-scan base-package="com.eshop.home.controller" />
 	<context:component-scan base-package="com.eshop.vehicle.controller" />
 	<context:component-scan base-package="com.eshop.catalog.admin.controller" />
+	<context:component-scan base-package="com.eshop.vehiclefitment.controller" />
 
 	<bean class="org.springframework.web.servlet.view.tiles2.TilesViewResolver" />
 

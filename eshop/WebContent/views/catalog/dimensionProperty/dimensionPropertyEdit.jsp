@@ -17,20 +17,20 @@
 	<sf:errors path="category" />
 	<br />
 	<br />
-	<label><s:message code="dimensionProperty.name" /> : </label>
+	<label><s:message code="dimension.property.name" /> : </label>
 	<sf:input type="text" path="name" value="${dimensionProperty.name}"/>
 	<sf:errors path="name" />
 	<br />
 	<br />
-	<label><s:message code="dimensionProperty.unit" /> : </label>
+	<label><s:message code="dimension.property.unit" /> : </label>
 	<sf:input type="text" path="unit" value="${dimensionProperty.unit}"/>
 	<sf:errors path="unit" />
 	<br />
 	<br />
-	<label><s:message code="dimensionProperty.description" /> : </label>
+	<label><s:message code="dimension.property.description" /> : </label>
 	<sf:input type="text" path="description" value="${dimensionProperty.description}"/>
 	<sf:errors path="description" />
 	<br />
 	<br />
-	<input type="submit" value="<s:message code='dimensionProperty.edit'/>">
+	<input type="submit" value="<s:message code='dimension.property.edit'/>">
 </sf:form>

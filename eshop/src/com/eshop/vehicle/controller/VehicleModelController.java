@@ -73,6 +73,7 @@ public class VehicleModelController {
 		VehicleModel vehicleModel = new VehicleModel();
 		List<Media> images = new ArrayList<Media>();
 		images.add(new Media());
+		images.add(new Media());
 		vehicleModel.setImages(images);
 		model.addAttribute("vehicleModel", vehicleModel);
 		Set<VehicleMake> vehicleMakes = vehicleMakeService.getAllVehicleMakes();

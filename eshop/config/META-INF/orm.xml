@@ -13,7 +13,37 @@
 	<named-query name="getVehicleSubModelsForVehicleModel">
 		<query><![CDATA[select vehicleSubModel from VehicleSubModel vehicleSubModel where vehicleSubModel.vehicleModel.id = :vehicleModelId]]></query>
 	</named-query>
-	
-	
 
+	<named-query name="getPatternsForBrand">
+		<query><![CDATA[select pattern from Pattern pattern where pattern.brand.id = :brandId]]></query>
+	</named-query>
+	
+	<named-query name="getProductsForPatterns">
+		<query><![CDATA[
+			select product 
+			from Product product
+			join product.productSpec productSpec
+			join productSpec.pattern pattern
+			where pattern.id = :patternId
+			
+		]]></query>
+	</named-query>
+	<named-query name="getProductsByDimensions">
+		<query><![CDATA[
+			select product 
+			from Product product 
+			join product.productSpec productSpec
+			join productSpec.dimensions dimensions
+			where dimensions.dimensionProperty.name = 'Width' and dimensions.dimensionValue = '45'
+			and exists (
+					select product1 
+					from Product product1 
+					join product1.productSpec productSpec1
+					join productSpec1.dimensions dimensions1
+					where dimensions1.dimensionProperty.name = 'Height' and dimensions1.dimensionValue = '35'
+					and product = product1
+				) 
+		]]></query>
+	</named-query>
+	
 </entity-mappings>

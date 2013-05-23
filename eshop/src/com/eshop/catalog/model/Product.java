@@ -1,10 +1,15 @@
 package com.eshop.catalog.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,6 +21,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import com.eshop.common.model.Media;
+
 /**
  * Using the Joined inheritance strategy(Table per subclass) as polymorphic
  * associations and queries are required. Also Tire subclass has many additional
@@ -25,7 +32,7 @@ import javax.persistence.Version;
  * @updated 17-Oct-2012 3:50:23 PM
  */
 @Entity
-@Table(name="product")
+@Table(name = "product")
 public class Product implements Serializable {
 
 	private Long id;
@@ -40,7 +47,9 @@ public class Product implements Serializable {
 
 	private ProductSpec productSpec;
 
-	private Set<CategorizedProduct> categorizedProducts = new HashSet<CategorizedProduct>();
+	private List<CategorizedProduct> categorizedProducts = new ArrayList<CategorizedProduct>();
+
+	private List<Media> images;
 
 	public Product() {
 
@@ -99,7 +108,7 @@ public class Product implements Serializable {
 		this.description = description;
 	}
 
-	@OneToOne(mappedBy = "product")
+	@OneToOne(mappedBy = "product",cascade=CascadeType.PERSIST)
 	public ProductSpec getProductSpec() {
 		return productSpec;
 	}
@@ -108,15 +117,30 @@ public class Product implements Serializable {
 		this.productSpec = productSpec;
 	}
 
-	@OneToMany(mappedBy = "product")
-	public Set<CategorizedProduct> getCategorizedProducts() {
+	@OneToMany(mappedBy = "product", cascade=CascadeType.PERSIST)
+	public List<CategorizedProduct> getCategorizedProducts() {
 		return categorizedProducts;
 	}
 
-	public void setCategorizedProducts(Set<CategorizedProduct> categorizedProducts) {
+	public void setCategorizedProducts(List<CategorizedProduct> categorizedProducts) {
 		this.categorizedProducts = categorizedProducts;
 	}
 
+	@ElementCollection
+	@CollectionTable(name="product_media",joinColumns=@JoinColumn(name="product_id"))
+	public List<Media> getImages() {
+		return images;
+	}
+
+	public void setImages(List<Media> images) {
+		this.images = images;
+	}
+
+	public void addProductSpec(ProductSpec productSpec){
+		productSpec.setProduct(this);
+		this.setProductSpec(productSpec);
+	}
+	
 	/**
 	 * If this object is used as detached object, it can be outside guaranteed scope identity of persistence context.
 	 * In this case there can be two different objects representing the same row in database. They will have same database identity 

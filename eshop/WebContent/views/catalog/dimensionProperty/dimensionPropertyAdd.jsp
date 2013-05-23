@@ -3,7 +3,7 @@
 <h1 align="center">
 	<s:message code="dimension.property.add" />
 </h1>
-<sf:form action="/eshop/dimensionProperty" method="POST" modelAttribute="dimensionProperty">
+<sf:form action="/eshop/dimensionproperty" method="POST" modelAttribute="dimensionProperty">
 	<label><s:message code="category" /> : </label>
 	<sf:select path="category">
 		<sf:option value="-1">
@@ -16,20 +16,20 @@
 	<sf:errors path="category" />
 	<br />
 	<br />
-	<label><s:message code="dimensionProperty.name" /> : </label>
+	<label><s:message code="dimension.property.name" /> : </label>
 	<sf:input type="text" path="name"/>
 	<sf:errors path="name" />
 	<br />
 	<br />
-	<label><s:message code="dimensionProperty.unit" /> : </label>
+	<label><s:message code="dimension.property.unit" /> : </label>
 	<sf:input type="text" path="unit"/>
 	<sf:errors path="unit" />
 	<br />
 	<br />
-	<label><s:message code="dimensionProperty.description" /> : </label>
+	<label><s:message code="dimension.property.description" /> : </label>
 	<sf:input type="text" path="description"/>
 	<sf:errors path="description" />
 	<br />
 	<br />
-	<input type="submit" value="<s:message code='dimensionProperty.add'/>">
+	<input type="submit" value="<s:message code='dimension.property.add'/>">
 </sf:form>

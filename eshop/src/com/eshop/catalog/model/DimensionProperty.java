@@ -104,4 +104,8 @@ public class DimensionProperty implements Serializable {
 		return name.hashCode() + category.hashCode();
 	}
 
+	public String toString(){
+		return name;
+	}
+	
 }//end Dimensions

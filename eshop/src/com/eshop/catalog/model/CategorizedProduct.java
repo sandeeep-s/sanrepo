@@ -2,6 +2,8 @@ package com.eshop.catalog.model;
 
 import java.io.Serializable;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -32,8 +34,10 @@ public class CategorizedProduct implements Serializable{
 	@Embeddable
 	public static class Id implements Serializable {
 
+		@Column(name="category_id")
 		private Long categoryId;
 
+		@Column(name="product_id")
 		private Long productId;
 
 		private Id() {
@@ -59,7 +63,7 @@ public class CategorizedProduct implements Serializable{
 	}
 
 	@EmbeddedId
-	private Id id;
+	private Id id = new Id();
 
 	@ManyToOne
 	@JoinColumn(name = "category_id", insertable = false, updatable = false)
@@ -97,6 +101,7 @@ public class CategorizedProduct implements Serializable{
 	}
 
 	public void setCategory(Category category) {
+		this.id.categoryId = category.getId();
 		this.category = category;
 	}
 
@@ -105,6 +110,7 @@ public class CategorizedProduct implements Serializable{
 	}
 
 	public void setProduct(Product product) {
+		this.id.productId = product.getId();
 		this.product = product;
 	}
 

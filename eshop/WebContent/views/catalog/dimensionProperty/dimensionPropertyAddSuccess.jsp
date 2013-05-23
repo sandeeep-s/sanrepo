@@ -7,7 +7,7 @@
 ${dimensionProperty.category.name}
 <br />
 <br />
-<label><s:message code="dimensionProperty.name" /> : </label>
+<label><s:message code="dimension.property.name" /> : </label>
 ${dimensionProperty.name}
 <br />
 <br />

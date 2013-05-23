@@ -1,6 +1,7 @@
 package com.eshop.catalog.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -40,7 +41,7 @@ public class Category implements Serializable {
 
 	private Set<Category> children;
 
-	private Set<CategorizedProduct> categorizedProducts;
+	private Set<CategorizedProduct> categorizedProducts = new HashSet<CategorizedProduct>();
 
 	public Category() {
 
@@ -165,6 +166,10 @@ public class Category implements Serializable {
 	@Override
 	public int hashCode() {
 		return name.hashCode();
+	}
+
+	public String toString(){
+		return name;
 	}
 
 }//end Category
