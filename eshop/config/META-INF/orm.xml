@@ -28,6 +28,7 @@
 			
 		]]></query>
 	</named-query>
+
 	<named-query name="getProductsByDimensions">
 		<query><![CDATA[
 			select product 
@@ -43,6 +44,16 @@
 					where dimensions1.dimensionProperty.name = 'Height' and dimensions1.dimensionValue = '35'
 					and product = product1
 				) 
+		]]></query>
+	</named-query>
+
+	<named-query name="getFitmentsForVehicleModel">
+		<query><![CDATA[
+			select fitment 
+			from VehicleFitment vehicleFitment
+			join vehicleFitment.fitments fitment
+			where vehicleFitment.vehicleModel.id = :vehicleModelId
+			and fitment.originalEquipment = :originalEquipment	
 		]]></query>
 	</named-query>
 	
