@@ -17,7 +17,7 @@
 			<td>${vehicleModel.vehicleMake.name}</td>
 			<td>${vehicleModel.vehicleType.name}</td>
 			<td>${vehicleModel.name}</td>
-			<td>${vehicleModel.manufacturingYear}</td>
+			<td>${vehicleModel.modelYear}</td>
 			<td><a href="<c:url value='/vehiclemodel/${vehicleModel.id}/edit'/>"><s:message code="edit" /></a></td>
 			<td><a href="<c:url value='/vehiclemodel/${vehicleModel.id}'/>"><s:message code="view" /></a></td>
 			<td><sf:form action="/eshop/vehiclemodel/${vehicleModel.id}" method="DELETE">

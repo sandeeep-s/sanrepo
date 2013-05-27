@@ -33,15 +33,6 @@ public class VehicleMake implements Serializable {
 
 	private Media logoImage;
 
-	public VehicleMake() {
-
-	}
-
-	public VehicleMake(String name, Media logoImage) {
-		this.name = name;
-		this.logoImage = logoImage;
-	}
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	public Long getId() {
@@ -86,7 +77,7 @@ public class VehicleMake implements Serializable {
 	 * If this object is used as detached object, it can be outside guaranteed scope identity of persistence context.
 	 * In this case there can be two different objects representing the same row in database. They will have same database identity 
 	 * but different java identity. 
-	 * Hence override equals and hashcode method as default check only java identity.
+	 * Hence override equals and hashcode method as default checks only java identity.
 	 * 
 	 * Use a business key comparison in the equals method. Business key characteristics are uniqueness, non-nullability and rare change.
 	 * 

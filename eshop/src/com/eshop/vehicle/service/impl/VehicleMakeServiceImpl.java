@@ -68,10 +68,4 @@ public class VehicleMakeServiceImpl implements VehicleMakeService {
 		return vehicleMakeDAO.findAllUnique();
 	}
 
-	@Override
-	public VehicleMake createVehicleMake(String name, Media logoImage) {
-		VehicleMake vehicleMake = new VehicleMake(name, logoImage);
-		return vehicleMake;
-	}
-
 }

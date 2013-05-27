@@ -1,12 +1,14 @@
 package com.eshop.catalog.model;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -39,25 +41,9 @@ public class Category implements Serializable {
 
 	private Category parentCategory;
 
-	private Set<Category> children;
+	private List<Category> children;
 
-	private Set<CategorizedProduct> categorizedProducts = new HashSet<CategorizedProduct>();
-
-	public Category() {
-
-	}
-
-	/*Constructor with non-nullable field*/
-	public Category(String name) {
-		this.name = name;
-	}
-
-	public Category(String name, String description, Media image, Category parentCategory) {
-		this.name = name;
-		this.description = description;
-		this.image = image;
-		this.parentCategory = parentCategory;
-	}
+	private List<CategorizedProduct> categorizedProducts;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
@@ -87,7 +73,7 @@ public class Category implements Serializable {
 		this.name = name;
 	}
 
-	@Column(nullable = false, length = 4000)
+	@Column(nullable = false, length = 750)
 	public String getDescription() {
 		return description;
 	}
@@ -105,8 +91,15 @@ public class Category implements Serializable {
 		this.image = image;
 	}
 
-	@ManyToOne
-	@JoinColumn(name = "parentCategory_Id")
+	/**
+	 * The FetchType.EAGER will load the association eagerly.  
+	 * FetchType.EAGER provides the guarantee that associated object will always be initialized alongwith the queried object.
+	 * A single join query will be used to load the associated object while using JPA with Hibernate. But JPA does not mandate use of join for this initialization.
+	 * FetchType.EAGER is the default for ManyToOne association in JPA.
+	 * @return
+	 */
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "parent_category_id")
 	public Category getParentCategory() {
 		return parentCategory;
 	}
@@ -115,21 +108,31 @@ public class Category implements Serializable {
 		this.parentCategory = parentCategory;
 	}
 
+	/**
+	 * OneToMany with mappedBy establishes a bidirectional association. Property at the other end of the association is specified by attribute mappedBy.
+	 * It also means that other end of the association will be used for any changes to the association. 
+	 * @return
+	 */
 	@OneToMany(mappedBy = "parentCategory")
-	public Set<Category> getChildren() {
+	public List<Category> getChildren() {
 		return children;
 	}
 
-	public void setChildren(Set<Category> children) {
+	public void setChildren(List<Category> children) {
 		this.children = children;
 	}
 
+	/**
+	 * OneToMany with mappedBy establishes a bidirectional association. Property at the other end of the association is specified by attribute mappedBy.
+	 * It also means that other end of the association will be used for any changes to the association. 
+	 * @return
+	 */
 	@OneToMany(mappedBy = "category")
-	public Set<CategorizedProduct> getCategorizedProducts() {
+	public List<CategorizedProduct> getCategorizedProducts() {
 		return categorizedProducts;
 	}
 
-	public void setCategorizedProducts(Set<CategorizedProduct> categorizedProducts) {
+	public void setCategorizedProducts(List<CategorizedProduct> categorizedProducts) {
 		this.categorizedProducts = categorizedProducts;
 	}
 

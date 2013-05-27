@@ -24,6 +24,4 @@ public interface VehicleMakeService {
 
 	public Set<VehicleMake> getAllVehicleMakes();
 
-	public VehicleMake createVehicleMake(String vehicleMakeName, Media logoImage);
-
 }

@@ -33,15 +33,6 @@ public class VehicleType implements Serializable {
 
 	private Media image;
 
-	public VehicleType() {
-
-	}
-
-	public VehicleType(String name, Media image) {
-		this.name = name;
-		this.image = image;
-	}
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	public Long getId() {

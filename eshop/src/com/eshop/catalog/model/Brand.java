@@ -33,16 +33,6 @@ public class Brand implements Serializable {
 
 	private Media logoImage;
 
-	public Brand() {
-
-	}
-
-	public Brand(String name, String description, Media logoImage) {
-		this.name = name;
-		this.description = description;
-		this.logoImage = logoImage;
-	}
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	public Long getId() {
@@ -73,7 +63,7 @@ public class Brand implements Serializable {
 	}
 
 	@NotBlank
-	@Column(nullable = false, length = 4000)
+	@Column(nullable = false, length = 750)
 	public String getDescription() {
 		return description;
 	}

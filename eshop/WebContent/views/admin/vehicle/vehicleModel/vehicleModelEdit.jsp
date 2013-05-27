@@ -37,24 +37,24 @@
 	<br />
 	<br />
 	<label><s:message code="vehicle.model.year" /> : </label>
-	<sf:select path="manufacturingYear">
+	<sf:select path="modelYear">
 		<sf:option value="-1">
 			<s:message code="select" />
 		</sf:option>
-		<c:if test="${vehicleModel.manufacturingYear == 2012}">
+		<c:if test="${vehicleModel.modelYear == 2012}">
 			<sf:option value="2012" selected="true">2012</sf:option>
 		</c:if>
-		<c:if test="${vehicleModel.manufacturingYear != 2012}">
+		<c:if test="${vehicleModel.modelYear != 2012}">
 			<sf:option value="2012" selected="true">2012</sf:option>
 		</c:if>
-		<c:if test="${vehicleModel.manufacturingYear == 2011}">
+		<c:if test="${vehicleModel.modelYear == 2011}">
 			<sf:option value="2011" selected="true">2011</sf:option>
 		</c:if>
-		<c:if test="${vehicleModel.manufacturingYear != 2011}">
+		<c:if test="${vehicleModel.modelYear != 2011}">
 			<sf:option value="2011" selected="true">2011</sf:option>
 		</c:if>
 	</sf:select>
-	<sf:errors path="manufacturingYear" />
+	<sf:errors path="modelYear" />
 	<br />
 	<br />
 	<input type="submit" value="<s:message code='vehicle.model.edit'/>">

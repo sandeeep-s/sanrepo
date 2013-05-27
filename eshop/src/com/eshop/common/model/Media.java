@@ -40,6 +40,7 @@ public class Media implements Serializable {
 		this.mediaThumbnailFileName = mediaThumbnailFileName;
 	}
 
+	@Column(nullable = false)
 	public MediaType getMediaType() {
 		return mediaType;
 	}
@@ -49,7 +50,7 @@ public class Media implements Serializable {
 	}
 
 	@NotBlank
-	@Column(length = 750, nullable=false)
+	@Column(length = 250, nullable=false)
 	public String getMediaFileName() {
 		return mediaFileName;
 	}
@@ -69,7 +70,7 @@ public class Media implements Serializable {
 	}
 
 	@NotBlank
-	@Column(length = 750, nullable=false)
+	@Column(length = 250, nullable=false)
 	public String getMediaThumbnailFileName() {
 		return mediaThumbnailFileName;
 	}

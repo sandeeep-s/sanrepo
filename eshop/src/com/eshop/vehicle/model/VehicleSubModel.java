@@ -1,6 +1,7 @@
 package com.eshop.vehicle.model;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CollectionTable;
@@ -38,17 +39,7 @@ public class VehicleSubModel implements Serializable {
 
 	private String name;
 
-	private Set<Media> images;
-
-	public VehicleSubModel() {
-
-	}
-
-	public VehicleSubModel(String name, Set<Media> images, VehicleModel vehicleModel) {
-		this.name = name;
-		this.images = images;
-		this.vehicleModel = vehicleModel;
-	}
+	private List<Media> images;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
@@ -70,10 +61,10 @@ public class VehicleSubModel implements Serializable {
 	}
 
 	/**
-	 * The FetchType.EAGER will load the association eagerly. A single join query will be used to load both Vehicle and VehicleModel objects
-	 * It is marked as eager because initialized VehicleModel object is always required with the Vehicle object. FetchType.EAGER provides the guarantee
-	 * that VehicleModel will always be initialized while querying for Vehicle.
-	 * FetchType.EAGER is the default for ManyToOne association.
+	 * The FetchType.EAGER will load the association eagerly.  
+	 * FetchType.EAGER provides the guarantee that associated object will always be initialized alongwith the queried object.
+	 * A single join query will be used to load the associated object while using JPA with Hibernate. But JPA does not mandate use of join for this initialization.
+	 * FetchType.EAGER is the default for ManyToOne association in JPA.
 	 * @return
 	 */
 	@NotNull
@@ -98,12 +89,12 @@ public class VehicleSubModel implements Serializable {
 	}
 
 	@ElementCollection
-	@CollectionTable(name = "Vehicle_Submodel_Media", joinColumns = @JoinColumn(name = "Vehicle_Id"))
-	public Set<Media> getImages() {
+	@CollectionTable(name = "vehicle_submodel_media", joinColumns = @JoinColumn(name = "vehicle_submodel_id"))
+	public List<Media> getImages() {
 		return images;
 	}
 
-	public void setImages(Set<Media> images) {
+	public void setImages(List<Media> images) {
 		this.images = images;
 	}
 

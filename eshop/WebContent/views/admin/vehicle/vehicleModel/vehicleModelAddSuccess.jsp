@@ -16,6 +16,6 @@ ${vehicleModel.name}
 <br />
 <br />
 <label><s:message code="vehicle.model.year" /> : </label>
-${vehicleModel.manufacturingYear}
+${vehicleModel.modelYear}
 <br />
 <br />

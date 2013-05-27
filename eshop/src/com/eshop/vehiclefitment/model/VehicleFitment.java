@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -68,7 +69,14 @@ public class VehicleFitment implements Serializable {
 		this.fitments = fitments;
 	}
 
-	@ManyToOne
+	/**
+	 * The FetchType.EAGER will load the association eagerly.  
+	 * FetchType.EAGER provides the guarantee that associated object will always be initialized alongwith the queried object.
+	 * A single join query will be used to load the associated object while using JPA with Hibernate. But JPA does not mandate use of join for this initialization.
+	 * FetchType.EAGER is the default for ManyToOne association in JPA.
+	 * @return
+	 */
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "vehicle_model_id")
 	public VehicleModel getVehicleModel() {
 		return vehicleModel;
@@ -78,7 +86,14 @@ public class VehicleFitment implements Serializable {
 		this.vehicleModel = vehicleModel;
 	}
 
-	@ManyToOne
+	/**
+	 * The FetchType.EAGER will load the association eagerly.  
+	 * FetchType.EAGER provides the guarantee that associated object will always be initialized alongwith the queried object.
+	 * A single join query will be used to load the associated object while using JPA with Hibernate. But JPA does not mandate use of join for this initialization.
+	 * FetchType.EAGER is the default for ManyToOne association in JPA.
+	 * @return
+	 */
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "vehicle_submodel_id")
 	public VehicleSubModel getVehicleSubModel() {
 		return vehicleSubModel;

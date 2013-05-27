@@ -39,27 +39,13 @@ public class VehicleModel implements Serializable {
 
 	private String name;
 
-	//TODO Change manufacturingYear to modelyear
-	private Integer manufacturingYear;
+	private Integer modelYear;
 
-	private List<Media> images = new ArrayList<Media>();
+	private List<Media> images;
 
 	private VehicleType vehicleType;
 
 	private VehicleMake vehicleMake;
-
-	public VehicleModel() {
-
-	}
-
-	public VehicleModel(String name, Integer manufacturingYear, String image, VehicleType vehicleType, VehicleMake vehicleMake,
-			List<Media> images) {
-		this.name = name;
-		this.vehicleType = vehicleType;
-		this.vehicleMake = vehicleMake;
-		this.manufacturingYear = manufacturingYear;
-		this.images = images;
-	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
@@ -81,7 +67,7 @@ public class VehicleModel implements Serializable {
 	}
 
 	@NotEmpty
-	@Column(nullable = false, length = 250)
+	@Column(unique = true, nullable = false, length = 250)
 	public String getName() {
 		return name;
 	}
@@ -92,16 +78,16 @@ public class VehicleModel implements Serializable {
 
 	@NotNull
 	@Column(nullable = false)
-	public Integer getManufacturingYear() {
-		return manufacturingYear;
+	public Integer getModelYear() {
+		return modelYear;
 	}
 
-	public void setManufacturingYear(Integer manufacturingYear) {
-		this.manufacturingYear = manufacturingYear;
+	public void setModelYear(Integer manufacturingYear) {
+		this.modelYear = manufacturingYear;
 	}
 
 	@ElementCollection
-	@CollectionTable(name = "Vehicle_Model_Media", joinColumns = @JoinColumn(name = "Vehicle_Model_Id"))
+	@CollectionTable(name = "vehicle_model_media", joinColumns = @JoinColumn(name = "vehicle_model_id"))
 	public List<Media> getImages() {
 		return images;
 	}
@@ -110,25 +96,36 @@ public class VehicleModel implements Serializable {
 		this.images = images;
 	}
 
+	/**
+	 * The FetchType.EAGER will load the association eagerly.  
+	 * FetchType.EAGER provides the guarantee that associated object will always be initialized alongwith the queried object.
+	 * A single join query will be used to load the associated object while using JPA with Hibernate. But JPA does not mandate use of join for this initialization.
+	 * FetchType.EAGER is the default for ManyToOne association in JPA.
+	 * @return
+	 */
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "vehicle_type_id", nullable = false)
 	public VehicleType getVehicleType() {
 		return vehicleType;
 	}
 
-	//Vehicle Type should be immutable. Hence private
-
 	public void setVehicleType(VehicleType vehicleType) {
 		this.vehicleType = vehicleType;
 	}
 
+	/**
+	 * The FetchType.EAGER will load the association eagerly.  
+	 * FetchType.EAGER provides the guarantee that associated object will always be initialized alongwith the queried object.
+	 * A single join query will be used to load the associated object while using JPA with Hibernate. But JPA does not mandate use of join for this initialization.
+	 * FetchType.EAGER is the default for ManyToOne association in JPA.
+	 * @return
+	 */
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "vehicle_make_id", nullable = false)
 	public VehicleMake getVehicleMake() {
 		return vehicleMake;
 	}
 
-	//Vehicle Make should be immutable. Hence private
 	public void setVehicleMake(VehicleMake vehicleMake) {
 		this.vehicleMake = vehicleMake;
 	}
@@ -155,12 +152,12 @@ public class VehicleModel implements Serializable {
 			return true;
 		}
 		final VehicleModel that = (VehicleModel) other;
-		return this.name.equals(that.getName()) && this.manufacturingYear.equals(that.getManufacturingYear());
+		return this.name.equals(that.getName()) && this.modelYear.equals(that.getModelYear());
 
 	}
 
 	public int hashCode() {
-		return name.hashCode() + manufacturingYear.hashCode();
+		return name.hashCode() + modelYear.hashCode();
 	}
 
 }// end VehicleModel

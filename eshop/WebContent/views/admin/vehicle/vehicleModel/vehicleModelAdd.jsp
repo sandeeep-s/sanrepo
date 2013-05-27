@@ -35,7 +35,7 @@
 	<br />
 	<br />
 	<label><s:message code="vehicle.model.year" /> : </label>
-	<sf:select path="manufacturingYear">
+	<sf:select path="modelYear">
 		<sf:option value="-1">
 			<s:message code="select" />
 		</sf:option>
@@ -53,7 +53,7 @@
 		<sf:option value="2001">2001</sf:option>
 		<sf:option value="2000">2000</sf:option>
 	</sf:select>
-	<sf:errors path="manufacturingYear" />
+	<sf:errors path="modelYear" />
 	<br />
 	<br />
 	<h3><s:message code="vehicle.type.image" /> : </h3>

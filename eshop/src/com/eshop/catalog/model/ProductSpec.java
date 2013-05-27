@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -52,7 +53,7 @@ public class ProductSpec implements Serializable {
 		this.version = version;
 	}
 
-	@OneToOne
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "product_id", nullable=false)
 	public Product getProduct() {
 		return product;
@@ -62,7 +63,14 @@ public class ProductSpec implements Serializable {
 		this.product = product;
 	}
 
-	@ManyToOne
+	/**
+	 * The FetchType.EAGER will load the association eagerly.  
+	 * FetchType.EAGER provides the guarantee that associated object will always be initialized alongwith the queried object.
+	 * A single join query will be used to load the associated object while using JPA with Hibernate. But JPA does not mandate use of join for this initialization.
+	 * FetchType.EAGER is the default for ManyToOne association in JPA.
+	 * @return
+	 */
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "pattern_id")
 	public Pattern getPattern() {
 		return pattern;
