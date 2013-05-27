@@ -35,7 +35,7 @@ public class VehicleFitment implements Serializable {
 
 	private int version;
 
-	private List<Fitment> fitments = new ArrayList<Fitment>();
+	private List<Fitment> fitments;
 
 	private VehicleModel vehicleModel;
 
