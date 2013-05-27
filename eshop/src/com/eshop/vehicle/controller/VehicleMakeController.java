@@ -3,6 +3,7 @@
  */
 package com.eshop.vehicle.controller;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.inject.Inject;
@@ -109,4 +110,10 @@ public class VehicleMakeController {
 		return "deleteVehicleMakeSuccess";
 	}
 
+	@RequestMapping(value = "/{id}/modelyears", method = RequestMethod.GET)
+	public String getModelYearsForMake(Model model, @PathVariable("id") Long vehicleMakeId, HttpServletRequest request) {
+		List<Integer> modelYears = vehicleMakeService.getModelYearsForMake(vehicleMakeId);
+		model.addAttribute("modelYears", modelYears);
+		return "modelYearsFragment";
+	}
 }

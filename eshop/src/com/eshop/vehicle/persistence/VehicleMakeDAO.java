@@ -3,6 +3,8 @@
  */
 package com.eshop.vehicle.persistence;
 
+import java.util.List;
+
 import com.eshop.base.persistence.GenericDAO;
 import com.eshop.vehicle.model.VehicleMake;
 
@@ -11,5 +13,6 @@ import com.eshop.vehicle.model.VehicleMake;
  * 
  */
 public interface VehicleMakeDAO extends GenericDAO<VehicleMake, Long> {
-
+	
+	public List<Integer> getModelYearsForMake(Long vehicleMakeId);
 }

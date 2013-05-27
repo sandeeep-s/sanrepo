@@ -67,4 +67,9 @@ public class VehicleModelServiceImpl implements VehicleModelService {
 		return null;
 	}
 
+	@Override
+	public List<VehicleModel> getVehicleModelForMakeAndYear(Long vehicleMakeId, Integer modelYear) {
+		return vehicleModelDAO.getVehicleModelForMakeAndYear(vehicleMakeId, modelYear);
+	}
+
 }

@@ -3,6 +3,7 @@
  */
 package com.eshop.vehicle.service;
 
+import java.util.List;
 import java.util.Set;
 
 import com.eshop.common.model.Media;
@@ -24,4 +25,5 @@ public interface VehicleMakeService {
 
 	public Set<VehicleMake> getAllVehicleMakes();
 
+	public List<Integer> getModelYearsForMake(Long vehicleMakeId);
 }

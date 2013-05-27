@@ -7,6 +7,7 @@
   <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title><tiles:getAsString name="title"/></title>
+    <script src="/eshop/resources/js/jquery-1.10.0.min.js"></script>
   </head>
   <body>
         <table>

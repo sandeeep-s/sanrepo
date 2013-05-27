@@ -26,4 +26,6 @@ public interface VehicleModelService {
 	
 	public List<Integer> getModelYearsForMake(Long vehicleMakeId);
 
+	public List<VehicleModel> getVehicleModelForMakeAndYear(Long vehicleMakeId, Integer modelYear);
+
 }

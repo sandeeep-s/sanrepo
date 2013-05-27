@@ -3,6 +3,10 @@
  */
 package com.eshop.vehicle.persistence.impl;
 
+import java.util.List;
+
+import javax.persistence.Query;
+
 import org.springframework.stereotype.Repository;
 
 import com.eshop.base.persistence.impl.GenericDAOImpl;
@@ -20,5 +24,12 @@ public class VehicleMakeDAOImpl extends GenericDAOImpl<VehicleMake, Long> implem
     {
         super(VehicleMake.class);
     }
+
+	@Override
+	public List<Integer> getModelYearsForMake(Long vehicleMakeId) {
+		Query q = getEntityManager().createNamedQuery("getModelYearsForMake").setParameter("vehicleMakeId", vehicleMakeId);
+		List<Integer> modelYears = (List<Integer>)q.getResultList();
+		return modelYears;
+	}
 
 }

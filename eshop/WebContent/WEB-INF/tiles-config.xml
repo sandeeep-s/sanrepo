@@ -451,5 +451,11 @@
 
 	<!-- Vehicle Fitment End  -->
 
+	<definition name="modelYearsFragment" template="/views/admin/vehicle/modelYearsFragment.jsp">
+	</definition>
+
+	<definition name="vehicleModelsFragment" template="/views/admin/vehicle/vehicleModelsFragment.jsp">
+	</definition>
+
 
 </tiles-definitions>       

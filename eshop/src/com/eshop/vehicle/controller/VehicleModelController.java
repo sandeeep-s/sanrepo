@@ -127,4 +127,10 @@ public class VehicleModelController {
 		return "deleteVehicleModelSuccess";
 	}
 
+	@RequestMapping(value = "/vehiclemake/{vehicleMakeId}/modelyear/{modelYear}")
+	public String getVehicleModelsForModelYear(@PathVariable Long vehicleMakeId, @PathVariable Integer modelYear, Model model){
+		List<VehicleModel> vehicleModels = vehicleModelService.getVehicleModelForMakeAndYear(vehicleMakeId, modelYear);
+		model.addAttribute("vehicleModels", vehicleModels);
+		return "vehicleModelsFragment";
+	}
 }

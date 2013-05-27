@@ -3,6 +3,7 @@
  */
 package com.eshop.vehicle.service.impl;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.inject.Inject;
@@ -66,6 +67,11 @@ public class VehicleMakeServiceImpl implements VehicleMakeService {
 	@Override
 	public Set<VehicleMake> getAllVehicleMakes() {
 		return vehicleMakeDAO.findAllUnique();
+	}
+
+	@Override
+	public List<Integer> getModelYearsForMake(Long vehicleMakeId) {
+		return vehicleMakeDAO.getModelYearsForMake(vehicleMakeId);
 	}
 
 }

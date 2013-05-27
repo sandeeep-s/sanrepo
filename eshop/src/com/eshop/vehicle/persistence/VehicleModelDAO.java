@@ -18,6 +18,4 @@ public interface VehicleModelDAO extends GenericDAO<VehicleModel, Long> {
 	
 	public List<VehicleModel> getVehicleModelForMakeAndYear(Long vehicleMakeId, Integer modelYear);
 	
-	
-
 }
