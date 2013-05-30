@@ -1,32 +1,21 @@
+<%@page import="com.eshop.common.model.MediaType"%>
 <%@include file="/views/init.jsp"%>
 <h1 align="center">
 	<s:message code="vehicle.model.edit" />
 </h1>
 <sf:form action="/eshop/vehiclemodel/${vehicleModel.id}" method="PUT" modelAttribute="vehicleModel">
+	<sf:input type="hidden" path="id" value="${vehicleModel.id}" />
+	<sf:input type="hidden" path="version" value="${vehicleModel.version}" />
 	<label><s:message code="vehicle.make" /> : </label>
 	<sf:select path="vehicleMake">
-		<c:forEach items="${vehicleMakes}" var="vehicleMakeVar">
-			<c:if test="${vehicleModel.vehicleMake.id == vehicleMakeVar.id}">
-				<sf:option value="${vehicleMakeVar.id}" selected="true">${vehicleMakeVar.name}</sf:option>
-			</c:if>
-			<c:if test="${vehicleModel.vehicleMake.id != vehicleMakeVar.id}">
-				<sf:option value="${vehicleMakeVar.id}">${vehicleMakeVar.name}</sf:option>
-			</c:if>
-		</c:forEach>
+		<sf:options items="${vehicleMakes}" itemLabel="name" itemValue="id" />
 	</sf:select>
 	<sf:errors path="vehicleMake" />
 	<br />
 	<br />
 	<label><s:message code="vehicle.type" /> : </label>
 	<sf:select path="vehicleType">
-		<c:forEach items="${vehicleTypes}" var="vehicleTypeVar">
-			<c:if test="${vehicleModel.vehicleType.id == vehicleTypeVar.id}">
-				<sf:option value="${vehicleTypeVar.id}" selected="true">${vehicleTypeVar.name}</sf:option>
-			</c:if>
-			<c:if test="${vehicleModel.vehicleType.id != vehicleTypeVar.id}">
-				<sf:option value="${vehicleTypeVar.id}">${vehicleTypeVar.name}</sf:option>
-			</c:if>
-		</c:forEach>
+		<sf:options items="${vehicleTypes}" itemLabel="name" itemValue="id" />
 	</sf:select>
 	<sf:errors path="vehicleType" />
 	<br />
@@ -38,24 +27,30 @@
 	<br />
 	<label><s:message code="vehicle.model.year" /> : </label>
 	<sf:select path="modelYear">
-		<sf:option value="-1">
-			<s:message code="select" />
-		</sf:option>
-		<c:if test="${vehicleModel.modelYear == 2012}">
-			<sf:option value="2012" selected="true">2012</sf:option>
-		</c:if>
-		<c:if test="${vehicleModel.modelYear != 2012}">
-			<sf:option value="2012" selected="true">2012</sf:option>
-		</c:if>
-		<c:if test="${vehicleModel.modelYear == 2011}">
-			<sf:option value="2011" selected="true">2011</sf:option>
-		</c:if>
-		<c:if test="${vehicleModel.modelYear != 2011}">
-			<sf:option value="2011" selected="true">2011</sf:option>
-		</c:if>
-	</sf:select>
+		<sf:options items="${modelYearsRefList}"/>
+ 	</sf:select>
 	<sf:errors path="modelYear" />
 	<br />
 	<br />
+	<h3><s:message code="vehicle.type.image" /> : </h3>
+	<c:forEach items="${vehicleModel.images}" var="image" varStatus="status">
+		<sf:input type="hidden" path="images[${status.index}].mediaType" value="<%=MediaType.IMAGE%>"/>
+		<s:message code="vehicle.model.image" /> ${status.count} :<br/>
+		<label><s:message code="image.filename" /> : </label>
+		<sf:input path="images[${status.index}].mediaFileName"/>
+		<sf:errors path="images[${status.index}].mediaFileName"/>
+		<br />
+		<br />
+		<label><s:message code="image.name" /> : </label>
+		<sf:input path="images[${status.index}].mediaName"/>
+		<sf:errors path="images[${status.index}].mediaName"/>
+		<br />
+		<br />
+		<label><s:message code="image.thumbnailFileName" /> : </label>
+		<sf:input path="images[${status.index}].mediaThumbnailFileName"/>
+		<sf:errors path="images[${status.index}].mediaThumbnailFileName"/>
+		<br />
+		<br />
+	</c:forEach>
 	<input type="submit" value="<s:message code='vehicle.model.edit'/>">
 </sf:form>

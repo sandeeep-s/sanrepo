@@ -34,4 +34,13 @@ public class VehicleSubModelDAOImpl extends GenericDAOImpl<VehicleSubModel, Long
 		return vehicleSubModels;
 	}
 
+	@Override
+	public VehicleSubModel getInitializedVehicleSubModel(Long vehicleSubModelId) {
+		Query query = getEntityManager().createNamedQuery("getInitializedVehicleSubModel")
+				.setParameter("vehicleSubModelId", vehicleSubModelId).setMaxResults(1);
+
+		VehicleSubModel vehicleSubModel = (VehicleSubModel) query.getSingleResult();
+		return vehicleSubModel;
+	}
+
 }

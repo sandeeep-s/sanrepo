@@ -86,7 +86,7 @@ public class VehicleModel implements Serializable {
 		this.modelYear = manufacturingYear;
 	}
 
-	@ElementCollection
+	@ElementCollection(fetch=FetchType.EAGER)
 	@CollectionTable(name = "vehicle_model_media", joinColumns = @JoinColumn(name = "vehicle_model_id"))
 	public List<Media> getImages() {
 		return images;

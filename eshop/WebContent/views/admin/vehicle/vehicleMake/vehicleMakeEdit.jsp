@@ -6,7 +6,7 @@
 <sf:form action="/eshop/vehiclemake/${vehicleMake.id}" method="PUT" modelAttribute="vehicleMake">
 	<sf:input type="hidden" path="id" value="${vehicleMake.id}" />
 	<sf:input type="hidden" path="version" value="${vehicleMake.version}" />
-	<label><s:message code="vehicle.make.name" /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: </label>
+	<label><s:message code="vehicle.make.name" /> : </label>
 	<sf:input type="text" path="name" value="${vehicleMake.name}" />
 	<br />
 	<br />

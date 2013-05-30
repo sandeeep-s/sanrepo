@@ -43,9 +43,10 @@ public class VehicleTypeServiceImpl implements VehicleTypeService {
 	}
 
 	@Override
-	public void deleteVehicleType(Long id) {
+	public VehicleType deleteVehicleType(Long id) {
 		VehicleType vehicleType = vehicleTypeDAO.getReference(id);
 		vehicleTypeDAO.delete(vehicleType);
+		return vehicleType;
 	}
 
 	@Override

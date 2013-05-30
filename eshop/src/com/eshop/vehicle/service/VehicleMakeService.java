@@ -21,7 +21,7 @@ public interface VehicleMakeService {
 
 	public VehicleMake updateVehicleMake(VehicleMake vehicleMake);
 
-	public void deleteVehicleMake(Long vehicleMakeId);
+	public VehicleMake deleteVehicleMake(Long vehicleMakeId);
 
 	public Set<VehicleMake> getAllVehicleMakes();
 

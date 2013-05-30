@@ -6,6 +6,7 @@ package com.eshop.vehicle.service.impl;
 import java.util.List;
 import java.util.Set;
 
+import javax.annotation.Resource;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -21,7 +22,7 @@ import com.eshop.vehicle.service.VehicleModelService;
  *
  */
 @Service("vehicleModelService")
-@Transactional(propagation=Propagation.REQUIRED)
+@Transactional(propagation = Propagation.REQUIRED)
 public class VehicleModelServiceImpl implements VehicleModelService {
 
 	@Inject
@@ -51,9 +52,10 @@ public class VehicleModelServiceImpl implements VehicleModelService {
 	}
 
 	@Override
-	public void deleteVehicleModel(Long id) {
+	public VehicleModel deleteVehicleModel(Long id) {
 		VehicleModel vehicleModel = vehicleModelDAO.getReference(id);
 		vehicleModelDAO.delete(vehicleModel);
+		return vehicleModel;
 	}
 
 	@Override

@@ -9,5 +9,3 @@
 		<option value="${vehicleModelVar.id}">${vehicleModelVar.name}</option>
 	</c:forEach>
 </select>
-<br/>
-<br/>

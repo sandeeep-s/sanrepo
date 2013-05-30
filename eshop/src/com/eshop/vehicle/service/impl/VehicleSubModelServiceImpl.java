@@ -35,24 +35,25 @@ public class VehicleSubModelServiceImpl implements VehicleSubModelService {
 	}
 
 	@Override
-	public VehicleSubModel addVehicleSubModel(VehicleSubModel vehicle) {
-		return vehicleSubModelDAO.makePersistent(vehicle);
+	public VehicleSubModel addVehicleSubModel(VehicleSubModel vehicleSubModel) {
+		return vehicleSubModelDAO.makePersistent(vehicleSubModel);
 	}
 
 	@Override
-	public VehicleSubModel getVehicleSubModelById(Long vehicleId) {
-		return vehicleSubModelDAO.findById(vehicleId);
+	public VehicleSubModel getVehicleSubModelById(Long vehicleSubModelId) {
+		return vehicleSubModelDAO.getInitializedVehicleSubModel(vehicleSubModelId);
 	}
 
 	@Override
-	public VehicleSubModel updateVehicleSubModel(VehicleSubModel vehicle) {
-		return vehicleSubModelDAO.saveOrUpdate(vehicle);
+	public VehicleSubModel updateVehicleSubModel(VehicleSubModel vehicleSubModel) {
+		return vehicleSubModelDAO.saveOrUpdate(vehicleSubModel);
 	}
 
 	@Override
-	public void deleteVehicleSubModel(Long vehicleId) {
-		VehicleSubModel vehicle = vehicleSubModelDAO.getReference(vehicleId);
-		vehicleSubModelDAO.delete(vehicle);
+	public VehicleSubModel deleteVehicleSubModel(Long vehicleSubModelId) {
+		VehicleSubModel vehicleSubModel = vehicleSubModelDAO.getReference(vehicleSubModelId);
+		vehicleSubModelDAO.delete(vehicleSubModel);
+		return vehicleSubModel;
 	}
 
 	@Override

@@ -11,8 +11,6 @@
 	<br />
 	<h3><s:message code="vehicle.make.logo" /> : </h3>
 	<sf:input type="hidden" path="logoImage.mediaType" value="<%=MediaType.IMAGE%>"/>
-	<br />
-	<br />
 	<label><s:message code="image.filename" /> : </label>
 	<sf:input path="logoImage.mediaFileName" />
 	<sf:errors path="logoImage.mediaFileName" />

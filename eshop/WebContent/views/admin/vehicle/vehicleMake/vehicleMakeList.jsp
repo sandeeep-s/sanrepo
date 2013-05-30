@@ -8,9 +8,8 @@
 <table>
 	<tr>
 		<th><s:message code="vehicle.make.name" /></th>
-		<th><s:message code="vehicle.make.logo" /></th>
 	</tr>
-	<c:forEach items="${requestScope.vehicleMakeSet}" var="vehicleMake">
+	<c:forEach items="${vehicleMakes}" var="vehicleMake">
 		<tr>
 			<td>${vehicleMake.name}</td>
 			<td><a href="<c:url value='/vehiclemake/${vehicleMake.id}/edit'/>"><s:message code="edit" /></a></td>

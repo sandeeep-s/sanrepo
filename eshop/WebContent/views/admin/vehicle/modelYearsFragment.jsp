@@ -8,5 +8,3 @@
 		<option value="${modelYearVar}">${modelYearVar}</option>
 	</c:forEach>
 </select>
-<br/>
-<br/>

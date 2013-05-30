@@ -13,13 +13,13 @@ import com.eshop.vehicle.model.VehicleSubModel;
  */
 public interface VehicleSubModelService {
 
-	public VehicleSubModel addVehicleSubModel(VehicleSubModel vehicle);
+	public VehicleSubModel addVehicleSubModel(VehicleSubModel vehicleSubModel);
 
-	public VehicleSubModel getVehicleSubModelById(Long vehicleId);
+	public VehicleSubModel getVehicleSubModelById(Long vehicleSubModelId);
 
-	public VehicleSubModel updateVehicleSubModel(VehicleSubModel vehicle);
+	public VehicleSubModel updateVehicleSubModel(VehicleSubModel vehicleSubModel);
 
-	public void deleteVehicleSubModel(Long vehicleId);
+	public VehicleSubModel deleteVehicleSubModel(Long vehicleId);
 
 	public Set<VehicleSubModel> getAllVehicleSubModels();
 

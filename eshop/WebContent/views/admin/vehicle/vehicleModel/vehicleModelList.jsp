@@ -12,7 +12,7 @@
 		<th><s:message code="vehicle.model.name" /></th>
 		<th><s:message code="vehicle.model.year" /></th>
 	</tr>
-	<c:forEach items="${requestScope.vehicleModels}" var="vehicleModel">
+	<c:forEach items="${vehicleModels}" var="vehicleModel">
 		<tr>
 			<td>${vehicleModel.vehicleMake.name}</td>
 			<td>${vehicleModel.vehicleType.name}</td>

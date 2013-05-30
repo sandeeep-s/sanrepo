@@ -58,6 +58,11 @@
 		<put-attribute name="body" value="/views/admin/vehicle/vehicleMake/vehicleMakeDeleteSuccess.jsp" />
 	</definition>
 
+	<definition name="vehicleMakeNotFound" extends="hometemplate">
+		<put-attribute name="title" value="Vehicle Type" />
+		<put-attribute name="body" value="/views/admin/vehicle/vehicleMake/vehicleMakeNotFound.jsp" />
+	</definition>
+
 	<!-- Vehicle Make End  -->
 
 	<!-- Vehicle Type Start  -->
@@ -95,6 +100,11 @@
 	<definition name="deleteVehicleTypeSuccess" extends="hometemplate">
 		<put-attribute name="title" value="Vehicle Type Deleted" />
 		<put-attribute name="body" value="/views/admin/vehicle/vehicleType/vehicleTypeDeleteSuccess.jsp" />
+	</definition>
+
+	<definition name="vehicleTypeNotFound" extends="hometemplate">
+		<put-attribute name="title" value="Vehicle Type" />
+		<put-attribute name="body" value="/views/admin/vehicle/vehicleType/vehicleTypeNotFound.jsp" />
 	</definition>
 
 	<!-- Vehicle Type End  -->
@@ -136,6 +146,11 @@
 		<put-attribute name="body" value="/views/admin/vehicle/vehicleModel/vehicleModelDeleteSuccess.jsp" />
 	</definition>
 
+	<definition name="vehicleModelNotFound" extends="hometemplate">
+		<put-attribute name="title" value="Vehicle Type" />
+		<put-attribute name="body" value="/views/admin/vehicle/vehicleModel/vehicleModelNotFound.jsp" />
+	</definition>
+
 	<!-- Vehicle Model End  -->
 
 	<!-- Vehicle SubModel Start  -->
@@ -173,6 +188,11 @@
 	<definition name="deleteVehicleSubModelSuccess" extends="hometemplate">
 		<put-attribute name="title" value="Vehicle Deleted" />
 		<put-attribute name="body" value="/views/admin/vehicle/vehicleSubModel/vehicleSubModelDeleteSuccess.jsp" />
+	</definition>
+
+	<definition name="vehicleSubModelNotFound" extends="hometemplate">
+		<put-attribute name="title" value="Vehicle Type" />
+		<put-attribute name="body" value="/views/admin/vehicle/vehicleSubModel/vehicleSubModelNotFound.jsp" />
 	</definition>
 
 	<!-- Vehicle SubModel End  -->

@@ -20,7 +20,7 @@ public interface VehicleModelService {
 
 	public VehicleModel updateVehicleModel(VehicleModel vehicleModel);
 
-	public void deleteVehicleModel(Long id);
+	public VehicleModel deleteVehicleModel(Long id);
 
 	public Set<VehicleModel> getAllVehicleModels();
 	

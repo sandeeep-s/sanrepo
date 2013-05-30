@@ -9,7 +9,7 @@
 	<tr>
 		<th><s:message code="vehicle.type.name" /></th>
 	</tr>
-	<c:forEach items="${requestScope.vehicleTypes}" var="vehicleType">
+	<c:forEach items="${vehicleTypes}" var="vehicleType">
 		<tr>
 			<td>${vehicleType.name}</td>
 			<td><a href="<c:url value='/vehicletype/${vehicleType.id}/edit'/>"><s:message code="edit" /></a></td>

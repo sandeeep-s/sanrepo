@@ -69,6 +69,10 @@ public class VehicleMakeController {
 	@RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
 	public String displayEditVehicleMakeForm(@PathVariable Long id, Model model, HttpServletRequest request) {
 		VehicleMake vehicleMake = vehicleMakeService.getVehicleMakeById(id);
+		if (null == vehicleMake){
+			model.addAttribute("vehicleMakeId", id);
+			return "vehicleMakeNotFound";
+		}
 		model.addAttribute("vehicleMake", vehicleMake);
 
 		return "editVehicleMake";
@@ -88,6 +92,11 @@ public class VehicleMakeController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String getVehicleMake(@PathVariable Long id, Model model) {
 		VehicleMake vehicleMake = vehicleMakeService.getVehicleMakeById(id);
+		if (null == vehicleMake){
+			model.addAttribute("vehicleMakeId", id);
+			return "vehicleMakeNotFound";
+		}
+
 		model.addAttribute("vehicleMake", vehicleMake);
 		return "viewVehicleMake";
 	}
@@ -105,8 +114,9 @@ public class VehicleMakeController {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public String deleteVehicleMake(@PathVariable Long id) {
-		vehicleMakeService.deleteVehicleMake(id);
+	public String deleteVehicleMake(@PathVariable Long id, Model model) {
+		VehicleMake vehicleMake = vehicleMakeService.deleteVehicleMake(id);
+		model.addAttribute("vehicleMake", vehicleMake);
 		return "deleteVehicleMakeSuccess";
 	}
 

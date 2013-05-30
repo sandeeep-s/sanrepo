@@ -6,7 +6,7 @@
 <sf:form action="/eshop/vehicletype/${vehicleType.id}" method="PUT" modelAttribute="vehicleType">
 	<sf:input type="hidden" path="id" value="${vehicleType.id}" />
 	<sf:input type="hidden" path="version" value="${vehicleType.version}" />
-	<label><s:message code="vehicle.type.name" /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: </label>
+	<label><s:message code="vehicle.type.name" /> : </label>
 	<sf:input type="text" path="name" value="${vehicleType.name}" />
 	<br />
 	<br />

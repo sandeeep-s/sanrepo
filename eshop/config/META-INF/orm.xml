@@ -14,6 +14,12 @@
 		<query><![CDATA[select vehicleSubModel from VehicleSubModel vehicleSubModel where vehicleSubModel.vehicleModel.id = :vehicleModelId]]></query>
 	</named-query>
 
+	<named-query name="getInitializedVehicleSubModel">
+		<query><![CDATA[
+			select distinct vehicleSubModel from VehicleSubModel vehicleSubModel left join fetch vehicleSubModel.images where vehicleSubModel.id = :vehicleSubModelId
+		]]></query>
+	</named-query>
+
 	<named-query name="getPatternsForBrand">
 		<query><![CDATA[select pattern from Pattern pattern where pattern.brand.id = :brandId]]></query>
 	</named-query>

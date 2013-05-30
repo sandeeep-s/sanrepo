@@ -59,9 +59,10 @@ public class VehicleMakeServiceImpl implements VehicleMakeService {
 	}
 
 	@Override
-	public void deleteVehicleMake(Long vehicleMakeId) {
+	public VehicleMake deleteVehicleMake(Long vehicleMakeId) {
 		VehicleMake vehicleMake = vehicleMakeDAO.getReference(vehicleMakeId);
 		vehicleMakeDAO.delete(vehicleMake);
+		return vehicleMake;
 	}
 
 	@Override

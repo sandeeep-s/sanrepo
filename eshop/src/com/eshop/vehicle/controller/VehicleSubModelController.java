@@ -1,5 +1,7 @@
 package com.eshop.vehicle.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import javax.inject.Inject;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.eshop.common.model.Media;
 import com.eshop.vehicle.model.VehicleMake;
 import com.eshop.vehicle.model.VehicleModel;
 import com.eshop.vehicle.model.VehicleSubModel;
@@ -68,7 +71,12 @@ public class VehicleSubModelController {
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String displayAddVehicleSubModelForm(Model model) {
-		model.addAttribute("vehicleSubModel", new VehicleSubModel());
+		VehicleSubModel vehicleSubModel = new VehicleSubModel();
+		List<Media> images = new ArrayList<Media>();
+		images.add(new Media());
+		images.add(new Media());
+		vehicleSubModel.setImages(images);
+		model.addAttribute("vehicleSubModel", vehicleSubModel);
 		
 		Set<VehicleMake> vehicleMakes = vehicleMakeService.getAllVehicleMakes();
 		model.addAttribute("vehicleMakes", vehicleMakes);
@@ -82,6 +90,12 @@ public class VehicleSubModelController {
 	public String displayEditVehicleSubModelForm(@PathVariable Long id, Model model) {
 		VehicleSubModel vehicleSubModel = vehicleSubModelService.getVehicleSubModelById(id);
 		model.addAttribute("vehicleSubModel", vehicleSubModel);
+
+		if (null == vehicleSubModel){
+			model.addAttribute("vehicleSubModelId", id);
+			return "vehicleSubModelNotFound";
+		}
+
 		Set<VehicleModel> vehicleModels = vehicleModelService.getAllVehicleModels();
 		model.addAttribute("vehicleModels", vehicleModels);
 		return "editVehicleSubModel";
@@ -103,7 +117,11 @@ public class VehicleSubModelController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String viewVehicleSubModel(@PathVariable Long id, Model model) {
 		VehicleSubModel vehicleSubModel = vehicleSubModelService.getVehicleSubModelById(id);
-		model.addAttribute(vehicleSubModel);
+		if (null == vehicleSubModel){
+			model.addAttribute("vehicleSubModelId", id);
+			return "vehicleSubModelNotFound";
+		}
+		model.addAttribute("vehicleSubModel", vehicleSubModel);
 		return "viewVehicleSubModel";
 	}
 
@@ -116,8 +134,9 @@ public class VehicleSubModelController {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public String deleteVehicleSubModel(@PathVariable Long id) {
-		vehicleSubModelService.deleteVehicleSubModel(id);
+	public String deleteVehicleSubModel(@PathVariable Long id, Model model) {
+		VehicleSubModel vehicleSubModel = vehicleSubModelService.deleteVehicleSubModel(id);
+		model.addAttribute("vehicleSubModel", vehicleSubModel);
 		return "deleteVehicleSubModelSuccess";
 	}
 

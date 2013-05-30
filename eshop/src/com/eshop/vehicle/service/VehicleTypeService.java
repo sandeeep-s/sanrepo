@@ -12,7 +12,7 @@ public interface VehicleTypeService {
 
 	public VehicleType updateVehicleType(VehicleType vehicleType);
 
-	public void deleteVehicleType(Long id);
+	public VehicleType deleteVehicleType(Long id);
 
 	public Set<VehicleType> getAllVehicleTypes();
 

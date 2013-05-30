@@ -15,5 +15,7 @@ import com.eshop.vehicle.model.VehicleSubModel;
 public interface VehicleSubModelDAO extends GenericDAO<VehicleSubModel, Long> {
 
 	public List<VehicleSubModel> getVehicleSubModelsForVehicleModel(Long vehicleModelId);
+	
+	public VehicleSubModel getInitializedVehicleSubModel(Long vehicleSubModelId);
 
 }
