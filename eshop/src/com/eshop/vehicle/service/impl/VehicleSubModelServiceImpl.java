@@ -6,11 +6,13 @@ package com.eshop.vehicle.service.impl;
 import java.util.Set;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.eshop.vehicle.factory.VehicleSubModelFactory;
 import com.eshop.vehicle.model.VehicleSubModel;
 import com.eshop.vehicle.persistence.VehicleSubModelDAO;
 import com.eshop.vehicle.service.VehicleSubModelService;
@@ -26,12 +28,24 @@ public class VehicleSubModelServiceImpl implements VehicleSubModelService {
 	@Inject
 	private VehicleSubModelDAO vehicleSubModelDAO = null;
 
+	@Inject
+	@Named("vehicleSubModelCommandFactory")
+	private VehicleSubModelFactory vehicleSubModelFactory;
+
 	public VehicleSubModelDAO getVehicleSubModelDAO() {
 		return vehicleSubModelDAO;
 	}
 
 	public void setVehicleSubModelDAO(VehicleSubModelDAO vehicleSubModelDAO) {
 		this.vehicleSubModelDAO = vehicleSubModelDAO;
+	}
+
+	public VehicleSubModelFactory getVehicleSubModelFactory() {
+		return vehicleSubModelFactory;
+	}
+
+	public void setVehicleSubModelFactory(VehicleSubModelFactory vehicleSubModelFactory) {
+		this.vehicleSubModelFactory = vehicleSubModelFactory;
 	}
 
 	@Override
@@ -59,6 +73,11 @@ public class VehicleSubModelServiceImpl implements VehicleSubModelService {
 	@Override
 	public Set<VehicleSubModel> getAllVehicleSubModels() {
 		return vehicleSubModelDAO.findAllUnique();
+	}
+
+	@Override
+	public VehicleSubModel createVehicleSubModel() {
+		return vehicleSubModelFactory.createVehicleSubModel();
 	}
 
 }

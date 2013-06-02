@@ -23,4 +23,6 @@ public interface VehicleSubModelService {
 
 	public Set<VehicleSubModel> getAllVehicleSubModels();
 
+	public VehicleSubModel createVehicleSubModel();
+
 }

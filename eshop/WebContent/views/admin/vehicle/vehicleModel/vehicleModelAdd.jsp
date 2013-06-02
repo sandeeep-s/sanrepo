@@ -7,12 +7,7 @@
 <sf:form action="/eshop/vehiclemodel" method="POST" modelAttribute="vehicleModel">
 	<label><s:message code="vehicle.make" /> : </label>
 	<sf:select path="vehicleMake">
-		<sf:option value="-1">
-			<s:message code="select" />
-		</sf:option>
-		<c:forEach items="${vehicleMakes}" var="vehicleMakeVar">
-			<sf:option value="${vehicleMakeVar.id}">${vehicleMakeVar.name}</sf:option>
-		</c:forEach>
+		<sf:options items="${vehicleMakes}" itemLabel="name" itemValue="id" />
 	</sf:select>
 	<sf:errors path="vehicleMake" />
 	<br />
@@ -20,12 +15,7 @@
 
 	<label><s:message code="vehicle.type" /> : </label>
 	<sf:select path="vehicleType">
-		<sf:option value="-1">
-			<s:message code="select" />
-		</sf:option>
-		<c:forEach items="${vehicleTypes}" var="vehicleTypeVar">
-			<sf:option value="${vehicleTypeVar.id}">${vehicleTypeVar.name}</sf:option>
-		</c:forEach>
+		<sf:options items="${vehicleTypes}" itemLabel="name" itemValue="id" />
 	</sf:select>
 	<sf:errors path="vehicleType" />
 	<br />
@@ -39,12 +29,7 @@
 
 	<label><s:message code="vehicle.model.year" /> : </label>
 	<sf:select path="modelYear">
-		<sf:option value="-1">
-			<s:message code="select" />
-		</sf:option>
-		<c:forEach items="${modelYearsRefList}" var="modelYearRef">
-			<sf:option value="${modelYearRef}">${modelYearRef}</sf:option>
-		</c:forEach>
+		<sf:options items="${modelYearsRefList}"/>
 	</sf:select>
 	<sf:errors path="modelYear" />
 	<br />
