@@ -105,8 +105,9 @@ public class CategoryController {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public String deleteCategory(@PathVariable Long id) {
-		categoryService.deleteCategory(id);
+	public String deleteCategory(@PathVariable Long id, Model model) {
+		Category category = categoryService.deleteCategory(id);
+		model.addAttribute("category", category);
 		return "deleteCategorySuccess";
 	}
 

@@ -67,9 +67,10 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public void deleteProduct(Long productId) {
+	public Product deleteProduct(Long productId) {
 		Product product = productDAO.getReference(productId);
 		productDAO.delete(product);
+		return product;
 	}
 
 	@Override

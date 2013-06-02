@@ -7,6 +7,8 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.orm.ObjectRetrievalFailureException;
 import org.springframework.stereotype.Controller;
@@ -28,6 +30,8 @@ import com.eshop.vehicle.service.VehicleTypeService;
 @Controller
 @RequestMapping("/vehiclemodel")
 public class VehicleModelController {
+
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Inject
 	private VehicleModelService vehicleModelService;
@@ -113,6 +117,7 @@ public class VehicleModelController {
 
 			return "editVehicleModel";
 		} catch (ObjectRetrievalFailureException e) {
+			logger.error("VehicleModel with id " + id + " not found.", e);
 			model.addAttribute("vehicleModelId", id);
 			return "vehicleModelNotFound";
 		}
@@ -138,6 +143,7 @@ public class VehicleModelController {
 			model.addAttribute("vehicleModel", vehicleModel);
 			return "viewVehicleModel";
 		} catch (ObjectRetrievalFailureException e) {
+			logger.error("VehicleModel with id " + id + " not found.", e);
 			model.addAttribute("vehicleModelId", id);
 			return "vehicleModelNotFound";
 		}

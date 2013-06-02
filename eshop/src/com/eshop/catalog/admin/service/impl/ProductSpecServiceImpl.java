@@ -58,9 +58,10 @@ public class ProductSpecServiceImpl implements ProductSpecService {
 	}
 
 	@Override
-	public void deleteProductSpec(Long productSpecId) {
+	public ProductSpec deleteProductSpec(Long productSpecId) {
 		ProductSpec productSpec = productSpecDAO.getReference(productSpecId);
 		productSpecDAO.delete(productSpec);
+		return productSpec;
 	}
 
 	@Override

@@ -58,9 +58,10 @@ public class DimensionPropertyServiceImpl implements DimensionPropertyService {
 	}
 
 	@Override
-	public void deleteDimensionProperty(Long dimensionPropertyId) {
+	public DimensionProperty deleteDimensionProperty(Long dimensionPropertyId) {
 		DimensionProperty dimensionProperty = dimensionPropertyDAO.getReference(dimensionPropertyId);
 		dimensionPropertyDAO.delete(dimensionProperty);
+		return dimensionProperty;
 	}
 
 	@Override

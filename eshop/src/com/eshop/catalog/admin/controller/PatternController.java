@@ -134,8 +134,9 @@ public class PatternController {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public String deletePattern(@PathVariable Long id) {
-		patternService.deletePattern(id);
+	public String deletePattern(@PathVariable Long id, Model model) {
+		Pattern pattern = patternService.deletePattern(id);
+		model.addAttribute("pattern", pattern);
 		return "deletePatternSuccess";
 	}
 

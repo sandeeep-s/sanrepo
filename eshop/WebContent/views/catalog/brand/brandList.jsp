@@ -8,9 +8,8 @@
 <table>
 	<tr>
 		<th><s:message code="brand.name" /></th>
-		<th><s:message code="brand.logo" /></th>
 	</tr>
-	<c:forEach items="${requestScope.brands}" var="brand">
+	<c:forEach items="${brands}" var="brand">
 		<tr>
 			<td>${brand.name}</td>
 			<td><a href="<c:url value='/brand/${brand.id}/edit'/>"><s:message code="edit" /></a></td>

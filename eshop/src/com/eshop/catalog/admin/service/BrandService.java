@@ -20,7 +20,7 @@ public interface BrandService {
 
 	public Brand updateBrand(Brand brand);
 
-	public void deleteBrand(Long brandId);
+	public Brand deleteBrand(Long brandId);
 
 	public Set<Brand> getAllBrands();
 

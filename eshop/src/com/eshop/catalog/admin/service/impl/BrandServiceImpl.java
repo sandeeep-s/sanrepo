@@ -58,9 +58,10 @@ public class BrandServiceImpl implements BrandService {
 	}
 
 	@Override
-	public void deleteBrand(Long brandId) {
+	public Brand deleteBrand(Long brandId) {
 		Brand brand = brandDAO.getReference(brandId);
 		brandDAO.delete(brand);
+		return brand;
 	}
 
 	@Override

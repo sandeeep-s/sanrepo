@@ -58,9 +58,10 @@ public class PatternServiceImpl implements PatternService {
 	}
 
 	@Override
-	public void deletePattern(Long patternId) {
+	public Pattern deletePattern(Long patternId) {
 		Pattern pattern = patternDAO.getReference(patternId);
 		patternDAO.delete(pattern);
+		return pattern;
 	}
 
 	@Override

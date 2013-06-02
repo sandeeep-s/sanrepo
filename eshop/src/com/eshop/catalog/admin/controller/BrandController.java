@@ -10,6 +10,7 @@ import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.springframework.orm.ObjectRetrievalFailureException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -105,8 +106,9 @@ public class BrandController {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public String deleteBrand(@PathVariable Long id) {
-		brandService.deleteBrand(id);
+	public String deleteBrand(@PathVariable Long id, Model model) {
+		Brand brand = brandService.deleteBrand(id);
+		model.addAttribute("brand", brand);
 		return "deleteBrandSuccess";
 	}
 

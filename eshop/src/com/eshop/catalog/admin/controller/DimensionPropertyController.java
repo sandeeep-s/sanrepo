@@ -126,8 +126,9 @@ public class DimensionPropertyController {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public String deleteDimensionProperty(@PathVariable Long id) {
-		dimensionPropertyService.deleteDimensionProperty(id);
+	public String deleteDimensionProperty(@PathVariable Long id, Model model) {
+		DimensionProperty dimensionProperty = dimensionPropertyService.deleteDimensionProperty(id);
+		model.addAttribute("dimensionProperty", dimensionProperty);
 		return "deleteDimensionPropertySuccess";
 	}
 

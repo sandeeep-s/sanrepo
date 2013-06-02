@@ -20,7 +20,7 @@ public interface PatternService {
 
 	public Pattern updatePattern(Pattern pattern);
 
-	public void deletePattern(Long patternId);
+	public Pattern deletePattern(Long patternId);
 
 	public Set<Pattern> getAllPatterns();
 

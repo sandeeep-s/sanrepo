@@ -7,11 +7,11 @@
 	<sf:input type="hidden" path="id" value="${brand.id}" />
 	<sf:input type="hidden" path="version" value="${brand.version}" />
 	<label><s:message code="brand.name" /> : </label>
-	<sf:input type="text" path="name" value="${brand.name}" />
+	<sf:input type="text" path="name"/>
 	<br />
 	<br />
 	<label><s:message code="brand.description" /> : </label>
-	<sf:textarea  path="description" value="${brand.description}"/>
+	<sf:textarea  path="description"/>
 	<sf:errors path="description" />
 	<br />
 	<br />
@@ -20,17 +20,17 @@
 	<br />
 	<br />
 	<label><s:message code="image.filename" /> : </label>
-	<sf:input type="text" path="logoImage.mediaFileName" value="${brand.logoImage.mediaFileName}" />
+	<sf:input type="text" path="logoImage.mediaFileName"/>
 	<sf:errors path="logoImage.mediaFileName" />
 	<br />
 	<br />
 	<label><s:message code="image.name" /> : </label>
-	<sf:input path="logoImage.mediaName" value="${brand.logoImage.mediaName}"/>
+	<sf:input path="logoImage.mediaName"/>
 	<sf:errors path="logoImage.mediaName" />
 	<br />
 	<br />
 	<label><s:message code="image.thumbnailFileName" /> : </label>
-	<sf:input path="logoImage.mediaThumbnailFileName" value="${brand.logoImage.mediaThumbnailFileName}"/>
+	<sf:input path="logoImage.mediaThumbnailFileName"/>
 	<sf:errors path="logoImage.mediaThumbnailFileName" />
 	<br />
 	<br />

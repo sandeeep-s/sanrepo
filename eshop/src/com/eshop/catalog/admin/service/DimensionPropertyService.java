@@ -20,7 +20,7 @@ public interface DimensionPropertyService {
 
 	public DimensionProperty updateDimensionProperty(DimensionProperty dimensionProperty);
 
-	public void deleteDimensionProperty(Long dimensionPropertyId);
+	public DimensionProperty deleteDimensionProperty(Long dimensionPropertyId);
 
 	public Set<DimensionProperty> getAllDimensionPropertys();
 

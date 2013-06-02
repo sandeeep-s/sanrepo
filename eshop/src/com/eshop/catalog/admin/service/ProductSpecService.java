@@ -20,7 +20,7 @@ public interface ProductSpecService {
 
 	public ProductSpec updateProductSpec(ProductSpec productSpec);
 
-	public void deleteProductSpec(Long productSpecId);
+	public ProductSpec deleteProductSpec(Long productSpecId);
 
 	public Set<ProductSpec> getAllProductSpecs();
 

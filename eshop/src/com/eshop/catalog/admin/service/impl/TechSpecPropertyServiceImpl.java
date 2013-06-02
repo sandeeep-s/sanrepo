@@ -58,9 +58,10 @@ public class TechSpecPropertyServiceImpl implements TechSpecPropertyService {
 	}
 
 	@Override
-	public void deleteTechSpecProperty(Long techSpecPropertyId) {
+	public TechSpecProperty deleteTechSpecProperty(Long techSpecPropertyId) {
 		TechSpecProperty techSpecProperty = techSpecPropertyDAO.getReference(techSpecPropertyId);
 		techSpecPropertyDAO.delete(techSpecProperty);
+		return techSpecProperty;
 	}
 
 	@Override

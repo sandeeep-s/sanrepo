@@ -230,8 +230,9 @@ public class ProductController {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public String deleteProduct(@PathVariable Long id) {
-		productService.deleteProduct(id);
+	public String deleteProduct(@PathVariable Long id, Model model) {
+		Product product = productService.deleteProduct(id);
+		model.addAttribute("product", product);
 		return "deleteProductSuccess";
 	}
 

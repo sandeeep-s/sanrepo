@@ -3,9 +3,17 @@
 	<s:message code="brand.added" />
 </h1>
 
-<label><s:message code="brand.name" /> : </label>
-${requestScope.brand.name}
+<label><s:message code="brand.name" /> : </label> ${brand.name}
 <br />
 <br />
-<label><s:message code="brand.logo" /> : </label>
-<img src="<c:url value='/resources/images/${requestScope.brand.logoImage.mediaFileName}'/>" title="${requestScope.brand.name}">
+<h3><s:message code="brand.logo" /> : </h3>
+<label><s:message code="image.filename" /> : </label> ${brand.logoImage.mediaFileName}
+<br />
+<br />
+<label><s:message code="image.name" /> : </label> ${brand.logoImage.mediaName}
+<br />
+<br />
+<label><s:message code="image.thumbnailFileName" /> : </label> ${brand.logoImage.mediaThumbnailFileName}
+<br />
+<br />
+

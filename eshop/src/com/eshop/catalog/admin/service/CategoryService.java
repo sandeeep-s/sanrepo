@@ -20,7 +20,7 @@ public interface CategoryService {
 
 	public Category updateCategory(Category category);
 
-	public void deleteCategory(Long categoryId);
+	public Category deleteCategory(Long categoryId);
 
 	public Set<Category> getAllCategorys();
 

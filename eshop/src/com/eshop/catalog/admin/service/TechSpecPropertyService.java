@@ -20,7 +20,7 @@ public interface TechSpecPropertyService {
 
 	public TechSpecProperty updateTechSpecProperty(TechSpecProperty techSpecProperty);
 
-	public void deleteTechSpecProperty(Long techSpecPropertyId);
+	public TechSpecProperty deleteTechSpecProperty(Long techSpecPropertyId);
 
 	public Set<TechSpecProperty> getAllTechSpecPropertys();
 

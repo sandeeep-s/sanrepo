@@ -126,8 +126,9 @@ public class TechSpecPropertyController {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public String deleteTechSpecProperty(@PathVariable Long id) {
-		techSpecPropertyService.deleteTechSpecProperty(id);
+	public String deleteTechSpecProperty(@PathVariable Long id, Model model) {
+		TechSpecProperty techSpecProperty = techSpecPropertyService.deleteTechSpecProperty(id);
+		model.addAttribute("techSpecProperty", techSpecProperty);
 		return "deleteTechSpecPropertySuccess";
 	}
 
