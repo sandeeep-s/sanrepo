@@ -23,7 +23,7 @@
 		</property>
 		<property name="jpaProperties">
 			<bean class="org.springframework.beans.factory.config.PropertiesFactoryBean">
-				<property name="location" value="classpath:hibernate.properties"></property>
+				<property name="location" value="classpath:${app.env}/hibernate.properties"></property>
 			</bean>
 		</property>
 	</bean>
@@ -33,8 +33,8 @@
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
 
-	<bean class="org.springframework.orm.hibernate4.HibernateExceptionTranslator" />
-
+<!-- 	<bean class="org.springframework.orm.hibernate4.HibernateExceptionTranslator" />
+ -->
  	<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
 	<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
 

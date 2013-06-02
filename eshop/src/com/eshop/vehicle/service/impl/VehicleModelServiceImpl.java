@@ -8,11 +8,13 @@ import java.util.Set;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.eshop.vehicle.factory.VehicleModelFactory;
 import com.eshop.vehicle.model.VehicleModel;
 import com.eshop.vehicle.persistence.VehicleModelDAO;
 import com.eshop.vehicle.service.VehicleModelService;
@@ -28,12 +30,24 @@ public class VehicleModelServiceImpl implements VehicleModelService {
 	@Inject
 	private VehicleModelDAO vehicleModelDAO;
 
+	@Inject
+	@Named("vehicleModelCommandFactory")
+	private VehicleModelFactory vehicleModelFactory;
+
 	public VehicleModelDAO getVehicleModelDAO() {
 		return vehicleModelDAO;
 	}
 
 	public void setVehicleModelDAO(VehicleModelDAO vehicleModelDAO) {
 		this.vehicleModelDAO = vehicleModelDAO;
+	}
+
+	public VehicleModelFactory getVehicleModelFactory() {
+		return vehicleModelFactory;
+	}
+
+	public void setVehicleModelFactory(VehicleModelFactory vehicleModelFactory) {
+		this.vehicleModelFactory = vehicleModelFactory;
 	}
 
 	@Override
@@ -72,6 +86,11 @@ public class VehicleModelServiceImpl implements VehicleModelService {
 	@Override
 	public List<VehicleModel> getVehicleModelForMakeAndYear(Long vehicleMakeId, Integer modelYear) {
 		return vehicleModelDAO.getVehicleModelForMakeAndYear(vehicleMakeId, modelYear);
+	}
+
+	@Override
+	public VehicleModel createVehicleModelCommandObject() {
+		return vehicleModelFactory.createVehicleModel();
 	}
 
 }

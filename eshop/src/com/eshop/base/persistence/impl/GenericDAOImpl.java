@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceContext;
 
 import org.hibernate.Criteria;
@@ -156,7 +157,8 @@ public abstract class GenericDAOImpl<T, PK extends Serializable> implements Gene
 
 		if (logger.isDebugEnabled()) {
 			if (null == result) {
-				logger.debug("Entity not found.");
+				logger.debug("No entity found with \"" + id + "\" of class " + type);
+				throw new EntityNotFoundException("No entity found with \"" + id + "\" of class " + type);
 			} else {
 				logger.debug("Found entity with \"" + id + "\" of class " + type);
 			}

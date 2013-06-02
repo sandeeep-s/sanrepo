@@ -1,24 +1,22 @@
 package com.eshop.vehicle.controller;
 
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.annotation.Resource;
 import javax.inject.Inject;
-import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.springframework.dao.OptimisticLockingFailureException;
+import org.springframework.orm.ObjectRetrievalFailureException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.eshop.common.model.Media;
 import com.eshop.vehicle.model.VehicleMake;
 import com.eshop.vehicle.model.VehicleModel;
 import com.eshop.vehicle.model.VehicleType;
@@ -82,44 +80,42 @@ public class VehicleModelController {
 		return "vehicleModelList";
 	}
 
-	@RequestMapping(value = "/add", method = RequestMethod.GET)
-	public String displayAddVehicleModelForm(Model model) {
-
-		VehicleModel vehicleModel = new VehicleModel();
-		List<Media> images = new ArrayList<Media>();
-		images.add(new Media());
-		images.add(new Media());
-		vehicleModel.setImages(images);
-		model.addAttribute("vehicleModel", vehicleModel);
-
+	private void addRefDataRequestAttributes(Model model) {
 		Set<VehicleMake> vehicleMakes = vehicleMakeService.getAllVehicleMakes();
 		model.addAttribute("vehicleMakes", vehicleMakes);
 		Set<VehicleType> vehicleTypes = vehicleTypeService.getAllVehicleTypes();
 		model.addAttribute("vehicleTypes", vehicleTypes);
 		List<Integer> modelYearsRefList = vehicleReferenceDataService.getModelYearsReferenceList();
 		model.addAttribute("modelYearsRefList", modelYearsRefList);
+	}
+
+	@RequestMapping(value = "/add", method = RequestMethod.GET)
+	public String displayAddVehicleModelForm(Model model) {
+
+		VehicleModel vehicleModel = vehicleModelService.createVehicleModelCommandObject();
+
+		model.addAttribute("vehicleModel", vehicleModel);
+
+		addRefDataRequestAttributes(model);
 
 		return "addVehicleModel";
 	}
 
 	@RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
 	public String displayEditVehicleModelForm(@PathVariable Long id, Model model) {
-		VehicleModel vehicleModel = vehicleModelService.getVehicleModelById(id);
-		if (null == vehicleModel){
+
+		try {
+			VehicleModel vehicleModel = vehicleModelService.getVehicleModelById(id);
+
+			model.addAttribute("vehicleModel", vehicleModel);
+
+			addRefDataRequestAttributes(model);
+
+			return "editVehicleModel";
+		} catch (ObjectRetrievalFailureException e) {
 			model.addAttribute("vehicleModelId", id);
 			return "vehicleModelNotFound";
 		}
-
-		model.addAttribute("vehicleModel", vehicleModel);
-
-		Set<VehicleMake> vehicleMakes = vehicleMakeService.getAllVehicleMakes();
-		model.addAttribute("vehicleMakes", vehicleMakes);
-		Set<VehicleType> vehicleTypes = vehicleTypeService.getAllVehicleTypes();
-		model.addAttribute("vehicleTypes", vehicleTypes);
-		List<Integer> modelYearsRefList = vehicleReferenceDataService.getModelYearsReferenceList();
-		model.addAttribute("modelYearsRefList", modelYearsRefList);
-		
-		return "editVehicleModel";
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
@@ -136,21 +132,30 @@ public class VehicleModelController {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String viewVehicleModel(@PathVariable Long id, Model model) {
-		VehicleModel vehicleModel = vehicleModelService.getVehicleModelById(id);
-		if (null == vehicleModel){
+
+		try {
+			VehicleModel vehicleModel = vehicleModelService.getVehicleModelById(id);
+			model.addAttribute("vehicleModel", vehicleModel);
+			return "viewVehicleModel";
+		} catch (ObjectRetrievalFailureException e) {
 			model.addAttribute("vehicleModelId", id);
 			return "vehicleModelNotFound";
 		}
-		model.addAttribute("vehicleModel", vehicleModel);
-		return "viewVehicleModel";
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public String updateVehicleModel(@Valid VehicleModel vehicleModel, BindingResult bindingResult, Model model) {
+
 		if (bindingResult.hasErrors()) {
 			return "editVehicleModel";
 		}
-		VehicleModel updatedVehicleModel = vehicleModelService.updateVehicleModel(vehicleModel);
+		
+		VehicleModel updatedVehicleModel = null;
+		try {
+			updatedVehicleModel = vehicleModelService.updateVehicleModel(vehicleModel);
+		} catch (OptimisticLockingFailureException e) {
+			bindingResult.addError(new ObjectError("vehicleModel", "vehicle.model.edited.by.other.user"));
+		}
 		model.addAttribute("vehicleModel", updatedVehicleModel);
 		return "editVehicleModelSuccess";
 	}
