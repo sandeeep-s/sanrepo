@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.eshop.catalog.admin.service.ProductService;
+import com.eshop.catalog.factory.ProductFactory;
 import com.eshop.catalog.model.CategorizedProduct;
 import com.eshop.catalog.model.Product;
 import com.eshop.catalog.persistence.ProductDAO;
@@ -27,10 +28,13 @@ import com.eshop.common.model.Media;
 @Transactional(propagation = Propagation.REQUIRED)
 public class ProductServiceImpl implements ProductService {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(ProductServiceImpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(ProductServiceImpl.class);
 
 	@Inject
 	private ProductDAO productDAO = null;
+
+	@Inject
+	private ProductFactory productFactory;
 
 	/*
 	 * (non-Javadoc)
@@ -43,9 +47,9 @@ public class ProductServiceImpl implements ProductService {
 	public Product addProduct(Product product) {
 		//This adds assocoiation from productSpec to product. Spring form binding does not take care of this.
 		product.getProductSpec().setProduct(product);
-		
+
 		Product savedProduct = productDAO.makePersistent(product);
-		for (CategorizedProduct categorizedProduct : product.getCategorizedProducts()){
+		for (CategorizedProduct categorizedProduct : product.getCategorizedProducts()) {
 			categorizedProduct.setProduct(savedProduct);
 		}
 
@@ -54,7 +58,8 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public Product getProductById(Long productId) {
-		return productDAO.findById(productId);
+		//return productDAO.findById(productId);
+		return productDAO.getProduct(productId);
 	}
 
 	/**
@@ -63,7 +68,16 @@ public class ProductServiceImpl implements ProductService {
 	 */
 	@Override
 	public Product updateProduct(Product product) {
-		return productDAO.saveOrUpdate(product);
+		for (CategorizedProduct categorizedProduct : product.getCategorizedProducts()) {
+			categorizedProduct.setProduct(product);
+			logger.debug("product id=" + product.getId());
+			logger.debug("categorizedProduct product id=" + categorizedProduct.getProduct().getId());
+		}
+		product.getProductSpec().setProduct(product);
+		//Not sending back the returned product from saveOrUpdate call DAO as it will not be fully initialized.
+		//Safe to send back the passed in product as it will be the latest if saved successfully
+		productDAO.saveOrUpdate(product);
+		return product;
 	}
 
 	@Override
@@ -79,8 +93,8 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public Product createProduct(String name, Media logoImage) {
-		Product product = new Product();
+	public Product createProduct() {
+		Product product = productFactory.createProduct();
 		return product;
 	}
 

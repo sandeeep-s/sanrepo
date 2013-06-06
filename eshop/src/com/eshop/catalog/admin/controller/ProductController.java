@@ -3,8 +3,6 @@
  */
 package com.eshop.catalog.admin.controller;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 import javax.inject.Inject;
@@ -12,6 +10,10 @@ import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.orm.ObjectRetrievalFailureException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,14 +28,10 @@ import com.eshop.catalog.admin.service.PatternService;
 import com.eshop.catalog.admin.service.ProductService;
 import com.eshop.catalog.admin.service.TechSpecPropertyService;
 import com.eshop.catalog.model.Brand;
-import com.eshop.catalog.model.CategorizedProduct;
 import com.eshop.catalog.model.Category;
-import com.eshop.catalog.model.Dimension;
 import com.eshop.catalog.model.DimensionProperty;
 import com.eshop.catalog.model.Pattern;
 import com.eshop.catalog.model.Product;
-import com.eshop.catalog.model.ProductSpec;
-import com.eshop.catalog.model.TechSpec;
 import com.eshop.catalog.model.TechSpecProperty;
 import com.eshop.common.service.MediaService;
 
@@ -44,6 +42,8 @@ import com.eshop.common.service.MediaService;
 @Controller
 @RequestMapping("/product")
 public class ProductController {
+
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Inject
 	@Named("productService")
@@ -128,50 +128,10 @@ public class ProductController {
 		this.brandService = brandService;
 	}
 
-	@RequestMapping(method = RequestMethod.GET)
-	public String listProducts(Model model) {
-		Set<Product> products = productService.getAllProducts();
-		model.addAttribute("products", products);
-		return "productList";
-	}
-
-	@RequestMapping(value = "/add", method = RequestMethod.GET)
-	public String displayAddProductForm(Model model) {
-		Product product = new Product();
-		ProductSpec productSpec = new ProductSpec();
-
-		List<TechSpec> techSpecList = new ArrayList<TechSpec>();
-		TechSpecProperty techSpecProperty = new TechSpecProperty();
-		TechSpec techSpec = new TechSpec();
-		techSpec.setTechSpecProperty(techSpecProperty);
-		techSpecList.add(techSpec);
-		productSpec.setTechSpecs(techSpecList);
-
-		List<Dimension> dimensionList = new ArrayList<Dimension>();
-		DimensionProperty dimensionProperty = new DimensionProperty();
-		Dimension dimension = new Dimension();
-		dimension.setDimensionProperty(dimensionProperty);
-		dimensionList.add(dimension);
-		DimensionProperty dimensionProperty1 = new DimensionProperty();
-		Dimension dimension1 = new Dimension();
-		dimension.setDimensionProperty(dimensionProperty1);
-		dimensionList.add(dimension1);
-		productSpec.setDimensions(dimensionList);
-
-		Pattern pattern = new Pattern();
-		productSpec.setPattern(pattern);
-		product.addProductSpec(productSpec);
-
-		Category category = new Category();
-		CategorizedProduct categorizedProduct = new CategorizedProduct(category, product);
-		List<CategorizedProduct> categorizedProducts = new ArrayList<CategorizedProduct>();
-		categorizedProducts.add(categorizedProduct);
-		product.setCategorizedProducts(categorizedProducts);
-		model.addAttribute("product", product);
-
+	private void addRefDataRequestAttributes(Model model) {
 		Set<Category> categories = categoryService.getAllCategorys();
 		model.addAttribute("categories", categories);
-		
+
 		Set<Brand> brands = brandService.getAllBrands();
 		model.addAttribute("brands", brands);
 
@@ -183,14 +143,39 @@ public class ProductController {
 
 		Set<DimensionProperty> dimensionProperties = dimensionPropertyService.getAllDimensionPropertys();
 		model.addAttribute("dimensionProperties", dimensionProperties);
+	}
+
+	@RequestMapping(method = RequestMethod.GET)
+	public String listProducts(Model model) {
+		Set<Product> products = productService.getAllProducts();
+		model.addAttribute("products", products);
+		return "productList";
+	}
+
+	@RequestMapping(value = "/add", method = RequestMethod.GET)
+	public String displayAddProductForm(Model model) {
+		Product product = productService.createProduct();
+		model.addAttribute("product", product);
+
+		addRefDataRequestAttributes(model);
 
 		return "addProduct";
 	}
 
 	@RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
 	public String displayEditProductForm(@PathVariable Long id, Model model, HttpServletRequest request) {
-		Product product = productService.getProductById(id);
-		model.addAttribute("product", product);
+
+		try {
+			Product product = productService.getProductById(id);
+			model.addAttribute("product", product);
+
+		} catch (ObjectRetrievalFailureException e) {
+			logger.error("Product with id " + id + " not found", e);
+			model.addAttribute("productId", id);
+			return "productNotFound";
+		}
+
+		addRefDataRequestAttributes(model);
 
 		return "editProduct";
 	}
@@ -201,10 +186,10 @@ public class ProductController {
 			return "addProduct";
 		}
 
-		System.out.println("product Spec product="+product.getProductSpec().getProduct());
-		System.out.println("categorizedProducts = " +product.getCategorizedProducts().size());
-		System.out.println("categorizedProducts = " +product.getCategorizedProducts().get(0).getCategory());
-		System.out.println("categorizedProducts = " +product.getCategorizedProducts().get(0).getCategory().getId());
+		System.out.println("product Spec product=" + product.getProductSpec().getProduct());
+		System.out.println("categorizedProducts = " + product.getCategorizedProducts().size());
+		System.out.println("categorizedProducts = " + product.getCategorizedProducts().get(0).getCategory());
+		System.out.println("categorizedProducts = " + product.getCategorizedProducts().get(0).getCategory().getId());
 		product = productService.addProduct(product);
 		model.addAttribute("product", product);
 		return "addProductSuccess";
@@ -212,8 +197,19 @@ public class ProductController {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String getProduct(@PathVariable Long id, Model model) {
-		Product product = productService.getProductById(id);
-		model.addAttribute("product", product);
+
+		try {
+			Product product = productService.getProductById(id);
+			model.addAttribute("product", product);
+		} catch (ObjectRetrievalFailureException e) {
+			logger.error("Product with id " + id + " not found", e);
+			model.addAttribute("productId", id);
+			return "productNotFound";
+		} catch (EmptyResultDataAccessException e) {
+			logger.error("Product with id " + id + " not found", e);
+			model.addAttribute("productId", id);
+			return "productNotFound";
+		} 
 		return "viewProduct";
 	}
 

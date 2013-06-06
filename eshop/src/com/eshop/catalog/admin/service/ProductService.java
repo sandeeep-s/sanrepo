@@ -24,6 +24,6 @@ public interface ProductService {
 
 	public Set<Product> getAllProducts();
 
-	public Product createProduct(String productName, Media logoImage);
+	public Product createProduct();
 
 }

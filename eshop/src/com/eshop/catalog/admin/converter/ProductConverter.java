@@ -24,6 +24,9 @@ public class ProductConverter implements Converter<String, Product> {
 
 	@Override
 	public Product convert(String id) {
+		if ("-1".equals(id)){
+			return null;
+		}
 		return productService.getProductById(Long.valueOf(id));
 	}
 

@@ -3,7 +3,19 @@
 	<s:message code="category.edited" />
 </h1>
 
-<label><s:message code="category.name" />: </label>
-${requestScope.category.name}
+<label><s:message code="category.name" /> : </label> ${category.name}
+<br />
+<br />
+<label><s:message code="category.description" /> : </label> ${category.description}
+<br />
+<br />
+<h3><s:message code="category.image" /> : </h3>
+<label><s:message code="image.filename" /> : </label> ${category.image.mediaFileName}
+<br />
+<br />
+<label><s:message code="image.name" /> : </label> ${category.image.mediaName}
+<br />
+<br />
+<label><s:message code="image.thumbnailFileName" /> : </label> ${category.image.mediaThumbnailFileName}
 <br />
 <br />

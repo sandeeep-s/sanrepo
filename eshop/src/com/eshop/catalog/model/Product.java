@@ -116,7 +116,7 @@ public class Product implements Serializable {
 		this.description = description;
 	}
 
-	@OneToOne(mappedBy = "product", cascade = CascadeType.PERSIST)
+	@OneToOne(mappedBy = "product", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
 	public ProductSpec getProductSpec() {
 		return productSpec;
 	}
@@ -125,7 +125,7 @@ public class Product implements Serializable {
 		this.productSpec = productSpec;
 	}
 
-	@OneToMany(mappedBy = "product", cascade = CascadeType.PERSIST)
+	@OneToMany(mappedBy = "product", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, fetch=FetchType.EAGER)
 	public List<CategorizedProduct> getCategorizedProducts() {
 		return categorizedProducts;
 	}

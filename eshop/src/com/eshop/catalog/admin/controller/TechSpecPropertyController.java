@@ -10,6 +10,9 @@ import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.orm.ObjectRetrievalFailureException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -30,6 +33,8 @@ import com.eshop.common.service.MediaService;
 @Controller
 @RequestMapping("/techspecproperty")
 public class TechSpecPropertyController {
+
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Inject
 	@Named("techSpecPropertyService")
@@ -80,23 +85,32 @@ public class TechSpecPropertyController {
 
 		Set<Category> categories = categoryService.getAllCategorys();
 		model.addAttribute("categories", categories);
-		
+
 		return "addTechSpecProperty";
 	}
 
 	@RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
 	public String displayEditTechSpecPropertyForm(@PathVariable Long id, Model model, HttpServletRequest request) {
-		TechSpecProperty techSpecProperty = techSpecPropertyService.getTechSpecPropertyById(id);
-		model.addAttribute("techSpecProperty", techSpecProperty);
 
-		Set<Category> categories = categoryService.getAllCategorys();
-		model.addAttribute("categories", categories);
+		try {
+			TechSpecProperty techSpecProperty = techSpecPropertyService.getTechSpecPropertyById(id);
+			model.addAttribute("techSpecProperty", techSpecProperty);
+
+			Set<Category> categories = categoryService.getAllCategorys();
+			model.addAttribute("categories", categories);
+
+		} catch (ObjectRetrievalFailureException e) {
+			logger.error("TechSpecProperty with id " + id + " not found", e);
+			model.addAttribute("techSpecPropertyId", id);
+			return "techSpecPropertyNotFound";
+		}
 
 		return "editTechSpecProperty";
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String addTechSpecProperty(@Valid TechSpecProperty techSpecProperty, BindingResult result, Model model, HttpServletRequest request) {
+	public String addTechSpecProperty(@Valid TechSpecProperty techSpecProperty, BindingResult result, Model model,
+			HttpServletRequest request) {
 		if (result.hasErrors()) {
 			return "addTechSpecProperty";
 		}
@@ -108,13 +122,22 @@ public class TechSpecPropertyController {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String getTechSpecProperty(@PathVariable Long id, Model model) {
-		TechSpecProperty techSpecProperty = techSpecPropertyService.getTechSpecPropertyById(id);
-		model.addAttribute("techSpecProperty", techSpecProperty);
+
+		try {
+			TechSpecProperty techSpecProperty = techSpecPropertyService.getTechSpecPropertyById(id);
+			model.addAttribute("techSpecProperty", techSpecProperty);
+		} catch (ObjectRetrievalFailureException e) {
+			logger.error("TechSpecProperty with id " + id + " not found", e);
+			model.addAttribute("techSpecPropertyId", id);
+			return "techSpecPropertyNotFound";
+		}
+
 		return "viewTechSpecProperty";
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public String updateTechSpecProperty(@Valid TechSpecProperty techSpecProperty, BindingResult result, Model model, HttpServletRequest request) {
+	public String updateTechSpecProperty(@Valid TechSpecProperty techSpecProperty, BindingResult result, Model model,
+			HttpServletRequest request) {
 
 		if (result.hasErrors()) {
 			return "editTechSpecProperty";

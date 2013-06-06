@@ -5,30 +5,23 @@
 <sf:form action="/eshop/techspecproperty/${techSpecProperty.id}" method="PUT" modelAttribute="techSpecProperty">
 	<label><s:message code="category" /> : </label>
 	<sf:select path="category">
-		<c:forEach items="${categories}" var="categoryVar">
-			<c:if test="${techSpecProperty.category.id == categoryVar.id}">
-				<sf:option value="${categoryVar.id}" selected="true">${categoryVar.name}</sf:option>
-			</c:if>
-			<c:if test="${techSpecProperty.category.id != categoryVar.id}">
-				<sf:option value="${categoryVar.id}">${categoryVar.name}</sf:option>
-			</c:if>
-		</c:forEach>
+		<sf:options items="${categories}" itemLabel="name" itemValue="id"/>
 	</sf:select>
 	<sf:errors path="category" />
 	<br />
 	<br />
 	<label><s:message code="tech.spec.property.name" /> : </label>
-	<sf:input type="text" path="name" value="${techSpecProperty.name}" />
+	<sf:input type="text" path="name"/>
 	<sf:errors path="name" />
 	<br />
 	<br />
 	<label><s:message code="tech.spec.property.unit" /> : </label>
-	<sf:input type="text" path="unit" value="${techSpecProperty.unit}" />
+	<sf:input type="text" path="unit"/>
 	<sf:errors path="unit" />
 	<br />
 	<br />
 	<label><s:message code="tech.spec.property.description" /> : </label>
-	<sf:input type="text" path="description" value="${techSpecProperty.description}" />
+	<sf:input type="text" path="description"/>
 	<sf:errors path="description" />
 	<br />
 	<br />

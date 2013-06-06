@@ -24,6 +24,9 @@ public class BrandConverter implements Converter<String, Brand> {
 
 	@Override
 	public Brand convert(String id) {
+		if ("-1".equals(id)){
+			return null;
+		}
 		return brandService.getBrandById(Long.valueOf(id));
 	}
 

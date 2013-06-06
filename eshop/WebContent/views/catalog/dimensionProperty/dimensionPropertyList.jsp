@@ -10,7 +10,7 @@
 		<th><s:message code="category.name" /></th>
 		<th><s:message code="dimension.property.name" /></th>
 	</tr>
-	<c:forEach items="${requestScope.dimensionPropertys}" var="dimensionProperty">
+	<c:forEach items="${dimensionPropertys}" var="dimensionProperty">
 		<tr>
 			<td>${dimensionProperty.category.name}</td>
 			<td>${dimensionProperty.name}</td>

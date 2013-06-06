@@ -10,6 +10,9 @@ import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.orm.ObjectRetrievalFailureException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -30,6 +33,8 @@ import com.eshop.common.service.MediaService;
 @Controller
 @RequestMapping("/dimensionproperty")
 public class DimensionPropertyController {
+
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Inject
 	@Named("dimensionPropertyService")
@@ -77,7 +82,7 @@ public class DimensionPropertyController {
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String displayAddDimensionPropertyForm(Model model) {
 		model.addAttribute("dimensionProperty", new DimensionProperty());
-		
+
 		Set<Category> categories = categoryService.getAllCategorys();
 		model.addAttribute("categories", categories);
 
@@ -86,17 +91,25 @@ public class DimensionPropertyController {
 
 	@RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
 	public String displayEditDimensionPropertyForm(@PathVariable Long id, Model model, HttpServletRequest request) {
-		DimensionProperty dimensionProperty = dimensionPropertyService.getDimensionPropertyById(id);
-		model.addAttribute("dimensionProperty", dimensionProperty);
 
-		Set<Category> categories = categoryService.getAllCategorys();
-		model.addAttribute("categories", categories);
+		try {
+			DimensionProperty dimensionProperty = dimensionPropertyService.getDimensionPropertyById(id);
+			model.addAttribute("dimensionProperty", dimensionProperty);
+
+			Set<Category> categories = categoryService.getAllCategorys();
+			model.addAttribute("categories", categories);
+		} catch (ObjectRetrievalFailureException e) {
+			logger.error("DimensionProperty with id " + id + " not found", e);
+			model.addAttribute("dimensionPropertyId", id);
+			return "dimensionPropertyNotFound";
+		}
 
 		return "editDimensionProperty";
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String addDimensionProperty(@Valid DimensionProperty dimensionProperty, BindingResult result, Model model, HttpServletRequest request) {
+	public String addDimensionProperty(@Valid DimensionProperty dimensionProperty, BindingResult result, Model model,
+			HttpServletRequest request) {
 		if (result.hasErrors()) {
 			return "addDimensionProperty";
 		}
@@ -108,13 +121,20 @@ public class DimensionPropertyController {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String getDimensionProperty(@PathVariable Long id, Model model) {
-		DimensionProperty dimensionProperty = dimensionPropertyService.getDimensionPropertyById(id);
-		model.addAttribute("dimensionProperty", dimensionProperty);
+		try {
+			DimensionProperty dimensionProperty = dimensionPropertyService.getDimensionPropertyById(id);
+			model.addAttribute("dimensionProperty", dimensionProperty);
+		} catch (ObjectRetrievalFailureException e) {
+			logger.error("DimensionProperty with id " + id + " not found", e);
+			model.addAttribute("dimensionPropertyId", id);
+			return "dimensionPropertyNotFound";
+		}
 		return "viewDimensionProperty";
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public String updateDimensionProperty(@Valid DimensionProperty dimensionProperty, BindingResult result, Model model, HttpServletRequest request) {
+	public String updateDimensionProperty(@Valid DimensionProperty dimensionProperty, BindingResult result, Model model,
+			HttpServletRequest request) {
 
 		if (result.hasErrors()) {
 			return "editDimensionProperty";

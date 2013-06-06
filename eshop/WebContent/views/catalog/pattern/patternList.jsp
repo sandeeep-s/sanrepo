@@ -10,7 +10,7 @@
 		<th><s:message code="brand.name" /></th>
 		<th><s:message code="pattern.name" /></th>
 	</tr>
-	<c:forEach items="${requestScope.patterns}" var="pattern">
+	<c:forEach items="${patterns}" var="pattern">
 		<tr>
 			<td>${pattern.brand.name}</td>
 			<td>${pattern.name}</td>

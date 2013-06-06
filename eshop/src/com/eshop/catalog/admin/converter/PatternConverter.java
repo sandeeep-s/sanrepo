@@ -24,6 +24,9 @@ public class PatternConverter implements Converter<String, Pattern> {
 
 	@Override
 	public Pattern convert(String id) {
+		if ("-1".equals(id)){
+			return null;
+		}
 		return patternService.getPatternById(Long.valueOf(id));
 	}
 

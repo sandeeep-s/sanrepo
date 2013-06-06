@@ -22,6 +22,7 @@
 				<bean class="com.eshop.catalog.admin.converter.TechSpecPropertyConverter" />
 				<bean class="com.eshop.catalog.admin.converter.DimensionPropertyConverter" />
 				<bean class="com.eshop.catalog.admin.converter.ProductConverter" />
+				<bean class="com.eshop.catalog.admin.converter.CategorizedProductConverter" />
 			</set>
 		</property>
 	</bean>

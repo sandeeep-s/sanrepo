@@ -63,4 +63,33 @@
 		]]></query>
 	</named-query>
 	
+	<named-query name="getProduct">
+		<query><![CDATA[
+			select product 
+			from Product product 
+			join fetch product.brand brand
+			join fetch product.productSpec productSpec
+			join fetch productSpec.pattern pattern
+			where product.id = :productId
+		]]></query>
+	</named-query>
+
+	<named-query name="getProductSpecWithTechSpecs">
+		<query><![CDATA[
+			select distinct productSpec 
+			from ProductSpec productSpec 
+			join fetch productSpec.techSpecs techSpecs
+			where productSpec.id = :productSpecId
+		]]></query>
+	</named-query>
+
+	<named-query name="getProductSpecWithDimensions">
+		<query><![CDATA[
+			select distinct productSpec 
+			from ProductSpec productSpec 
+			join fetch productSpec.dimensions dimensions
+			where productSpec.id = :productSpecId
+		]]></query>
+	</named-query>
+	
 </entity-mappings>

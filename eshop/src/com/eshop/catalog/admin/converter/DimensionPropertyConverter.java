@@ -24,6 +24,9 @@ public class DimensionPropertyConverter implements Converter<String, DimensionPr
 
 	@Override
 	public DimensionProperty convert(String id) {
+		if ("-1".equals(id)){
+			return null;
+		}
 		return dimensionPropertyService.getDimensionPropertyById(Long.valueOf(id));
 	}
 

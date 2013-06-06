@@ -116,7 +116,7 @@ public class Pattern implements Serializable {
 		this.brand = brand;
 	}
 
-	@ElementCollection
+	@ElementCollection(fetch=FetchType.EAGER)
 	@CollectionTable(name = "pattern_media", joinColumns = @JoinColumn(name = "pattern_id"))
 	public List<Media> getImages() {
 		return images;
@@ -148,11 +148,11 @@ public class Pattern implements Serializable {
 			return true;
 		}
 		final Pattern that = (Pattern) other;
-		return this.name.equals(that.getName()) && this.brand.equals(that.getBrand());
+		return this.name.equals(that.getName()) ;
 	}
 
 	public int hashCode() {
-		return name.hashCode() + brand.hashCode();
+		return name.hashCode();
 	}
 
 	public String toString() {

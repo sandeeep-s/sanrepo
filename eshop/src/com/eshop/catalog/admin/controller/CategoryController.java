@@ -10,6 +10,9 @@ import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.orm.ObjectRetrievalFailureException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,6 +31,8 @@ import com.eshop.common.service.MediaService;
 @Controller
 @RequestMapping("/category")
 public class CategoryController {
+
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Inject
 	@Named("categoryService")
@@ -68,8 +73,15 @@ public class CategoryController {
 
 	@RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
 	public String displayEditCategoryForm(@PathVariable Long id, Model model, HttpServletRequest request) {
-		Category category = categoryService.getCategoryById(id);
-		model.addAttribute("category", category);
+
+		try {
+			Category category = categoryService.getCategoryById(id);
+			model.addAttribute("category", category);
+		} catch (ObjectRetrievalFailureException e) {
+			logger.error("Category with id " + id + " not found", e);
+			model.addAttribute("categoryId", id);
+			return "categoryNotFound";
+		}
 
 		return "editCategory";
 	}
@@ -87,8 +99,15 @@ public class CategoryController {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String getCategory(@PathVariable Long id, Model model) {
-		Category category = categoryService.getCategoryById(id);
-		model.addAttribute("category", category);
+
+		try {
+			Category category = categoryService.getCategoryById(id);
+			model.addAttribute("category", category);
+		} catch (ObjectRetrievalFailureException e) {
+			logger.error("Category with id " + id + " not found", e);
+			model.addAttribute("categoryId", id);
+			return "categoryNotFound";
+		}
 		return "viewCategory";
 	}
 

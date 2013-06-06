@@ -10,7 +10,7 @@
 		<th><s:message code="category.name" /></th>
 		<th><s:message code="tech.spec.property.name" /></th>
 	</tr>
-	<c:forEach items="${requestScope.techSpecPropertys}" var="techSpecProperty">
+	<c:forEach items="${techSpecPropertys}" var="techSpecProperty">
 		<tr>
 			<td>${techSpecProperty.category.name}</td>
 			<td>${techSpecProperty.name}</td>

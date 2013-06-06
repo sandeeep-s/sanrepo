@@ -12,4 +12,6 @@ public interface ProductDAO extends GenericDAO<Product, Long> {
 	
 	public List<Product> getProductByTechSpec(Map<String, String> techSpecMap);
 
+	public Product getProduct(Long productId);
+	
 }

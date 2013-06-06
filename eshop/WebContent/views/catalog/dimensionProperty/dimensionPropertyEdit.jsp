@@ -5,30 +5,23 @@
 <sf:form action="/eshop/dimensionproperty/${dimensionProperty.id}" method="PUT" modelAttribute="dimensionProperty">
 	<label><s:message code="category" /> : </label>
 	<sf:select path="category">
-		<c:forEach items="${categories}" var="categoryVar">
-			<c:if test="${dimensionProperty.category.id == categoryVar.id}">
-				<sf:option value="${categoryVar.id}" selected="true">${categoryVar.name}</sf:option>
-			</c:if>
-			<c:if test="${dimensionProperty.category.id != categoryVar.id}">
-				<sf:option value="${categoryVar.id}">${categoryVar.name}</sf:option>
-			</c:if>
-		</c:forEach>
+		<sf:options items="${categories}" itemLabel="name" itemValue="id"/>
 	</sf:select>
 	<sf:errors path="category" />
 	<br />
 	<br />
 	<label><s:message code="dimension.property.name" /> : </label>
-	<sf:input type="text" path="name" value="${dimensionProperty.name}"/>
+	<sf:input type="text" path="name"/>
 	<sf:errors path="name" />
 	<br />
 	<br />
 	<label><s:message code="dimension.property.unit" /> : </label>
-	<sf:input type="text" path="unit" value="${dimensionProperty.unit}"/>
+	<sf:input type="text" path="unit"/>
 	<sf:errors path="unit" />
 	<br />
 	<br />
 	<label><s:message code="dimension.property.description" /> : </label>
-	<sf:input type="text" path="description" value="${dimensionProperty.description}"/>
+	<sf:input type="text" path="description"/>
 	<sf:errors path="description" />
 	<br />
 	<br />

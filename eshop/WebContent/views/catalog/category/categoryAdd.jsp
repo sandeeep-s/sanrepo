@@ -9,9 +9,7 @@
 			<sf:option value="-1">
 				<s:message code="select" />
 			</sf:option>
-			<c:forEach items="${categories}" var="categoryVar">
-				<sf:option value="${category.id}">${category.name}</sf:option>
-			</c:forEach>
+		<sf:options items="${categories}" itemLabel="name" itemValue="id"/>
 		</sf:select>
 	<br/>
 	<br/>

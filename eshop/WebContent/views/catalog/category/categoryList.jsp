@@ -8,7 +8,6 @@
 <table>
 	<tr>
 		<th><s:message code="category.name" /></th>
-		<th><s:message code="category.image" /></th>
 	</tr>
 	<c:forEach items="${requestScope.categorys}" var="category">
 		<tr>

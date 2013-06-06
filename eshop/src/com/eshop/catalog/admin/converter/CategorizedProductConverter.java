@@ -6,9 +6,10 @@ import javax.inject.Named;
 import org.springframework.core.convert.converter.Converter;
 
 import com.eshop.catalog.admin.service.CategoryService;
+import com.eshop.catalog.model.CategorizedProduct;
 import com.eshop.catalog.model.Category;
 
-public class CategoryConverter implements Converter<String, Category> {
+public class CategorizedProductConverter implements Converter<String, CategorizedProduct>{
 
 	@Inject
 	@Named("categoryService")
@@ -23,11 +24,15 @@ public class CategoryConverter implements Converter<String, Category> {
 	}
 
 	@Override
-	public Category convert(String id) {
+	public CategorizedProduct convert(String id) {
 		if ("-1".equals(id)){
 			return null;
 		}
-		return categoryService.getCategoryById(Long.valueOf(id));
+		
+		Category category = categoryService.getCategoryById(Long.valueOf(id));
+		CategorizedProduct categorizedProduct = new CategorizedProduct();
+		categorizedProduct.setCategory(category);
+		return categorizedProduct;
 	}
 
 }

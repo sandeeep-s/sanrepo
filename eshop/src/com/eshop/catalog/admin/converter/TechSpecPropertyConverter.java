@@ -24,6 +24,9 @@ public class TechSpecPropertyConverter implements Converter<String, TechSpecProp
 
 	@Override
 	public TechSpecProperty convert(String id) {
+		if ("-1".equals(id)){
+			return null;
+		}
 		return techSpecPropertyService.getTechSpecPropertyById(Long.valueOf(id));
 	}
 

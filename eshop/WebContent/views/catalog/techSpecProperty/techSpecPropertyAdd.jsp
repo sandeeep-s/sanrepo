@@ -6,12 +6,7 @@
 <sf:form action="/eshop/techspecproperty" method="POST" modelAttribute="techSpecProperty">
 	<label><s:message code="category" /> : </label>
 	<sf:select path="category">
-		<sf:option value="-1">
-			<s:message code="select" />
-		</sf:option>
-		<c:forEach items="${categories}" var="categoryVar">
-			<sf:option value="${categoryVar.id}">${categoryVar.name}</sf:option>
-		</c:forEach>
+		<sf:options items="${categories}" itemLabel="name" itemValue="id"/>
 	</sf:select>
 	<sf:errors path="category" />
 	<br />

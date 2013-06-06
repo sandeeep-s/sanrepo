@@ -235,6 +235,11 @@
 		<put-attribute name="body" value="/views/catalog/brand/brandDeleteSuccess.jsp" />
 	</definition>
 
+	<definition name="brandNotFound" extends="hometemplate">
+		<put-attribute name="title" value="Brand" />
+		<put-attribute name="body" value="/views/catalog/brand/brandNotFound.jsp" />
+	</definition>
+
 	<!-- Brand End  -->
 
 	<!-- Pattern Start  -->
@@ -272,6 +277,11 @@
 	<definition name="deletePatternSuccess" extends="hometemplate">
 		<put-attribute name="title" value="Pattern Deleted" />
 		<put-attribute name="body" value="/views/catalog/pattern/patternDeleteSuccess.jsp" />
+	</definition>
+
+	<definition name="patternNotFound" extends="hometemplate">
+		<put-attribute name="title" value="Pattern" />
+		<put-attribute name="body" value="/views/catalog/pattern/patternNotFound.jsp" />
 	</definition>
 
 	<!-- Pattern End  -->
@@ -313,6 +323,11 @@
 		<put-attribute name="body" value="/views/catalog/techSpecProperty/techSpecPropertyDeleteSuccess.jsp" />
 	</definition>
 
+	<definition name="techSpecPropertyNotFound" extends="hometemplate">
+		<put-attribute name="title" value="Tech Spec Property" />
+		<put-attribute name="body" value="/views/catalog/techSpecProperty/techSpecPropertyNotFound.jsp" />
+	</definition>
+
 	<!-- Tech Spec Property End  -->
 
 	<!-- Dimension Property Start  -->
@@ -350,6 +365,11 @@
 	<definition name="deleteDimensionPropertySuccess" extends="hometemplate">
 		<put-attribute name="title" value="Dimension Property Deleted" />
 		<put-attribute name="body" value="/views/catalog/dimensionProperty/dimensionPropertyDeleteSuccess.jsp" />
+	</definition>
+
+	<definition name="dimensionPropertyNotFound" extends="hometemplate">
+		<put-attribute name="title" value="Dimension Property" />
+		<put-attribute name="body" value="/views/catalog/dimensionProperty/dimensionPropertyNotFound.jsp" />
 	</definition>
 
 	<!-- Dimension Property End  -->
@@ -391,6 +411,11 @@
 		<put-attribute name="body" value="/views/catalog/category/categoryDeleteSuccess.jsp" />
 	</definition>
 
+	<definition name="categoryNotFound" extends="hometemplate">
+		<put-attribute name="title" value="Category Property" />
+		<put-attribute name="body" value="/views/catalog/category/categoryNotFound.jsp" />
+	</definition>
+
 	<!-- Category End  -->
 
 	<!-- Product Start  -->
@@ -428,6 +453,11 @@
 	<definition name="deleteProductSuccess" extends="hometemplate">
 		<put-attribute name="title" value="Product Deleted" />
 		<put-attribute name="body" value="/views/catalog/product/productDeleteSuccess.jsp" />
+	</definition>
+
+	<definition name="productNotFound" extends="hometemplate">
+		<put-attribute name="title" value="Product Property" />
+		<put-attribute name="body" value="/views/catalog/product/productNotFound.jsp" />
 	</definition>
 
 	<!-- Product End  -->

@@ -8,70 +8,50 @@
 	<sf:input type="hidden" path="version" value="${pattern.version}" />
 	<label><s:message code="brand" /> : </label>
 	<sf:select path="brand">
-		<c:forEach items="${brands}" var="brandVar">
-			<c:if test="${pattern.brand.id == brandVar.id}">
-				<sf:option value="${brandVar.id}" selected="true">${brandVar.name}</sf:option>
-			</c:if>
-			<c:if test="${pattern.brand.id != brandVar.id}">
-				<sf:option value="${brandVar.id}">${brandVar.name}</sf:option>
-			</c:if>
-		</c:forEach>
+		<sf:options items="${brands}" itemLabel="name" itemValue="id"/>
 	</sf:select>
 	<sf:errors path="brand" />
 	<br />
 	<br />
 	<label><s:message code="pattern.name" /> : </label>
-	<sf:input type="text" path="name" value="${pattern.name}"/>
+	<sf:input type="text" path="name"/>
 	<sf:errors path="name" />
 	<br />
 	<br />
 	<label><s:message code="pattern.description" /> : </label>
-	<sf:textarea type="text" path="description" value="${pattern.description}"/>
+	<sf:textarea type="text" path="description"/>
 	<sf:errors path="description" />
 	<br />
 	<br />
 	<label><s:message code="pattern.warranty" /> : </label>
-	<sf:textarea type="text" path="warranty" value="${pattern.warranty}"/>
+	<sf:textarea type="text" path="warranty"/>
 	<sf:errors path="warranty" />
 	<br />
 	<br />
 	<label><s:message code="pattern.important.notes" /> : </label>
-	<sf:textarea type="text" path="importantNotes" value="${pattern.importantNotes}"/>
+	<sf:textarea type="text" path="importantNotes"/>
 	<sf:errors path="importantNotes" />
 	<br />
 	<br />
 	<h3><s:message code="pattern.image" /> : </h3>
-		<c:forEach items="${pattern.images}" var="image" varStatus="status">
-			<s:bind path="images[${status.index}].mediaType">
-					<sf:input type="hidden" path="${status.expression}" value="<%=MediaType.IMAGE%>"/>
-	 		</s:bind>
-			<label><s:message code="image.filename" /> : </label>
-			<s:bind path="images[${status.index}].mediaFileName">
-					<sf:input path="${status.expression}" value="${image.mediaFileName}"/>
-	 		</s:bind>
-			<s:bind path="images[${status.index}].mediaFileName">
-					<sf:errors path="${status.expression}"/>
-	 		</s:bind>
-			<br />
-			<br />
-			<label><s:message code="image.name" /> : </label>
-			<s:bind path="images[${status.index}].mediaName">
-					<sf:input path="${status.expression}" value="${image.mediaName}"/>
-	 		</s:bind>
-			<s:bind path="images[${status.index}].mediaName">
-					<sf:errors path="${status.expression}"/>
-	 		</s:bind>
-			<br />
-			<br />
-			<label><s:message code="image.thumbnailFileName" /> : </label>
-			<s:bind path="images[${status.index}].mediaThumbnailFileName">
-					<sf:input path="${status.expression}" value="${image.mediaThumbnailFileName}"/>
-	 		</s:bind>
-			<s:bind path="images[${status.index}].mediaThumbnailFileName">
-					<sf:errors path="${status.expression}"/>
-	 		</s:bind>
-			<br />
-			<br />
-		</c:forEach>	
+	<c:forEach items="${pattern.images}" var="image" varStatus="status">
+		<s:message code="pattern.image" /> ${status.count} :<br/>
+		<sf:input type="hidden" path="images[${status.index}].mediaType" value="<%=MediaType.IMAGE%>"/>
+		<label><s:message code="image.filename" /> : </label>
+		<sf:input path="images[${status.index}].mediaFileName"/>
+		<sf:errors path="images[${status.index}].mediaFileName"/>
+		<br />
+		<br />
+		<label><s:message code="image.name" /> : </label>
+		<sf:input path="images[${status.index}].mediaName"/>
+		<sf:errors path="images[${status.index}].mediaName"/>
+		<br />
+		<br />
+		<label><s:message code="image.thumbnailFileName" /> : </label>
+		<sf:input path="images[${status.index}].mediaThumbnailFileName"/>
+		<sf:errors path="images[${status.index}].mediaThumbnailFileName"/>
+		<br />
+		<br />
+	</c:forEach>	
 	<input type="submit" value="<s:message code='pattern.edit'/>">
 </sf:form>

@@ -12,6 +12,9 @@ import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.orm.ObjectRetrievalFailureException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -34,6 +37,8 @@ import com.eshop.common.service.MediaService;
 @Controller
 @RequestMapping("/pattern")
 public class PatternController {
+
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Inject
 	@Named("patternService")
@@ -94,11 +99,18 @@ public class PatternController {
 
 	@RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
 	public String displayEditPatternForm(@PathVariable Long id, Model model, HttpServletRequest request) {
-		Pattern pattern = patternService.getPatternById(id);
-		model.addAttribute("pattern", pattern);
 
-		Set<Brand> brands = brandService.getAllBrands();
-		model.addAttribute("brands", brands);
+		try {
+			Pattern pattern = patternService.getPatternById(id);
+			model.addAttribute("pattern", pattern);
+
+			Set<Brand> brands = brandService.getAllBrands();
+			model.addAttribute("brands", brands);
+		} catch (ObjectRetrievalFailureException e) {
+			logger.error("Pattern with id " + id + " not found", e);
+			model.addAttribute("patternId", id);
+			return "patternNotFound";
+		}
 
 		return "editPattern";
 	}
@@ -116,8 +128,16 @@ public class PatternController {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String getPattern(@PathVariable Long id, Model model) {
-		Pattern pattern = patternService.getPatternById(id);
-		model.addAttribute("pattern", pattern);
+
+		try {
+			Pattern pattern = patternService.getPatternById(id);
+			model.addAttribute("pattern", pattern);
+		} catch (ObjectRetrievalFailureException e) {
+			logger.error("Pattern with id " + id + " not found", e);
+			model.addAttribute("patternId", id);
+			return "patternNotFound";
+		}
+
 		return "viewPattern";
 	}
 
