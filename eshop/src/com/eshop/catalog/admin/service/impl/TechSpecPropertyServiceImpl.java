@@ -45,7 +45,7 @@ public class TechSpecPropertyServiceImpl implements TechSpecPropertyService {
 
 	@Override
 	public TechSpecProperty getTechSpecPropertyById(Long techSpecPropertyId) {
-		return techSpecPropertyDAO.findById(techSpecPropertyId);
+		return techSpecPropertyDAO.getTechSpecPropertyInitialized(techSpecPropertyId);
 	}
 
 	/**

@@ -7,7 +7,7 @@
 <sf:form action="/eshop/product" method="POST" modelAttribute="product">
 	<label><s:message code="category" /> : </label>
 	<sf:select path="categorizedProducts" multiple="true">
-		<sf:options items="${categories}" itemLabel="name" itemValue="id" />
+		<sf:options items="${categorizedProducts}" itemLabel="category.name" itemValue="category.id" />
 	</sf:select>
 	<sf:errors path="categorizedProducts" />
 	<br />

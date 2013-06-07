@@ -98,7 +98,7 @@ public class Category implements Serializable {
 	 * FetchType.EAGER is the default for ManyToOne association in JPA.
 	 * @return
 	 */
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "parent_category_id")
 	public Category getParentCategory() {
 		return parentCategory;

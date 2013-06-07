@@ -9,7 +9,9 @@ import org.hibernate.Hibernate;
 import org.springframework.stereotype.Repository;
 
 import com.eshop.base.persistence.impl.GenericDAOImpl;
+import com.eshop.catalog.model.Dimension;
 import com.eshop.catalog.model.Product;
+import com.eshop.catalog.model.TechSpec;
 import com.eshop.catalog.persistence.ProductDAO;
 
 @Repository("productDAO")
@@ -28,15 +30,21 @@ public class ProductDAOImpl extends GenericDAOImpl<Product, Long> implements Pro
 	}
 
 	@Override
-	public Product getProduct(Long productId){
+	public Product getProduct(Long productId) {
 		Query query = getEntityManager().createNamedQuery("getProduct");
 		query.setParameter("productId", productId);
 		query.setMaxResults(1);
-		Product product = (Product)query.getSingleResult();
+		Product product = (Product) query.getSingleResult();
 		Hibernate.initialize(product.getImages());
 		Hibernate.initialize(product.getProductSpec().getTechSpecs());
+		for (TechSpec techSpec : product.getProductSpec().getTechSpecs()) {
+			Hibernate.initialize(techSpec.getTechSpecProperty().getCategory());
+		}
 		Hibernate.initialize(product.getProductSpec().getDimensions());
+		for (Dimension dimension : product.getProductSpec().getDimensions()) {
+			Hibernate.initialize(dimension.getDimensionProperty().getCategory());
+		}
 		return product;
 	}
-	
+
 }

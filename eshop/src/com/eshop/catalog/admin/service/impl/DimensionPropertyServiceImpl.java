@@ -45,7 +45,7 @@ public class DimensionPropertyServiceImpl implements DimensionPropertyService {
 
 	@Override
 	public DimensionProperty getDimensionPropertyById(Long dimensionPropertyId) {
-		return dimensionPropertyDAO.findById(dimensionPropertyId);
+		return dimensionPropertyDAO.getDimensionPropertyInitialized(dimensionPropertyId);
 	}
 
 	/**

@@ -92,4 +92,22 @@
 		]]></query>
 	</named-query>
 	
+	<named-query name="getTechSpecPropertyInitialized">
+		<query><![CDATA[
+			select techSpecProperty 
+			from TechSpecProperty techSpecProperty
+			join fetch techSpecProperty.category category
+			where techSpecProperty.id = :techSpecPropertyId
+		]]></query>
+	</named-query>
+
+	<named-query name="getDimensionPropertyInitialized">
+		<query><![CDATA[
+			select dimensionProperty 
+			from DimensionProperty dimensionProperty
+			join fetch dimensionProperty.category category
+			where dimensionProperty.id = :dimensionPropertyId
+		]]></query>
+	</named-query>
+	
 </entity-mappings>

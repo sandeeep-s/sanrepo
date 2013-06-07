@@ -3,6 +3,8 @@
  */
 package com.eshop.catalog.admin.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import javax.inject.Inject;
@@ -28,6 +30,7 @@ import com.eshop.catalog.admin.service.PatternService;
 import com.eshop.catalog.admin.service.ProductService;
 import com.eshop.catalog.admin.service.TechSpecPropertyService;
 import com.eshop.catalog.model.Brand;
+import com.eshop.catalog.model.CategorizedProduct;
 import com.eshop.catalog.model.Category;
 import com.eshop.catalog.model.DimensionProperty;
 import com.eshop.catalog.model.Pattern;
@@ -130,7 +133,13 @@ public class ProductController {
 
 	private void addRefDataRequestAttributes(Model model) {
 		Set<Category> categories = categoryService.getAllCategorys();
-		model.addAttribute("categories", categories);
+		List<CategorizedProduct> categorizedProducts = new ArrayList<CategorizedProduct>();
+		for (Category  category :  categories){
+			CategorizedProduct categorizedProduct = new CategorizedProduct();
+			categorizedProduct.setCategory(category);
+			categorizedProducts.add(categorizedProduct);
+		}
+		model.addAttribute("categorizedProducts", categorizedProducts);
 
 		Set<Brand> brands = brandService.getAllBrands();
 		model.addAttribute("brands", brands);

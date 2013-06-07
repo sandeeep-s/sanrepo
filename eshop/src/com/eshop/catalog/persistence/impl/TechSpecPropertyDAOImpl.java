@@ -1,5 +1,7 @@
 package com.eshop.catalog.persistence.impl;
 
+import javax.persistence.Query;
+
 import org.springframework.stereotype.Repository;
 
 import com.eshop.base.persistence.impl.GenericDAOImpl;
@@ -11,6 +13,15 @@ public class TechSpecPropertyDAOImpl extends GenericDAOImpl<TechSpecProperty, Lo
 
 	public TechSpecPropertyDAOImpl() {
 		super(TechSpecProperty.class);
+	}
+
+	@Override
+	public TechSpecProperty getTechSpecPropertyInitialized(Long techSpecPropertyId) {
+		Query query =  getEntityManager().createNamedQuery("getTechSpecPropertyInitialized");
+		query.setParameter("techSpecPropertyId", techSpecPropertyId);
+		query.setMaxResults(1);
+		TechSpecProperty techSpecProperty = (TechSpecProperty)query.getSingleResult();
+		return techSpecProperty;
 	}
 
 }

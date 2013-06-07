@@ -48,7 +48,7 @@ public class Product implements Serializable {
 
 	private ProductSpec productSpec;
 
-	private List<CategorizedProduct> categorizedProducts = new ArrayList<CategorizedProduct>();
+	private List<CategorizedProduct> categorizedProducts;
 
 	private List<Media> images;
 
@@ -88,7 +88,7 @@ public class Product implements Serializable {
 	 * FetchType.EAGER is the default for ManyToOne association in JPA.
 	 * @return
 	 */
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "brand_id", nullable = false)
 	public Brand getBrand() {
 		return brand;
@@ -116,7 +116,7 @@ public class Product implements Serializable {
 		this.description = description;
 	}
 
-	@OneToOne(mappedBy = "product", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+	@OneToOne(mappedBy = "product", cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
 	public ProductSpec getProductSpec() {
 		return productSpec;
 	}
@@ -125,7 +125,7 @@ public class Product implements Serializable {
 		this.productSpec = productSpec;
 	}
 
-	@OneToMany(mappedBy = "product", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "product", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE }, fetch = FetchType.EAGER, orphanRemoval = true)
 	public List<CategorizedProduct> getCategorizedProducts() {
 		return categorizedProducts;
 	}

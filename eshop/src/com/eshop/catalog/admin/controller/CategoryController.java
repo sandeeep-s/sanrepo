@@ -68,6 +68,8 @@ public class CategoryController {
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String displayAddCategoryForm(Model model) {
 		model.addAttribute("category", new Category());
+		Set<Category> categories = categoryService.getAllCategorys();
+		model.addAttribute("categories", categories);
 		return "addCategory";
 	}
 

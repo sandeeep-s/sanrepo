@@ -83,7 +83,7 @@ public class DimensionProperty implements Serializable {
 	 * FetchType.EAGER is the default for ManyToOne association in JPA.
 	 * @return
 	 */
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "category_id", nullable = false)
 	public Category getCategory() {
 		return category;

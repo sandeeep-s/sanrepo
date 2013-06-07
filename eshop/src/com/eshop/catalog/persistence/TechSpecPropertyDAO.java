@@ -7,4 +7,6 @@ import com.eshop.catalog.model.TechSpecProperty;
 
 public interface TechSpecPropertyDAO extends GenericDAO<TechSpecProperty, Long> {
 
+	public TechSpecProperty getTechSpecPropertyInitialized(Long techSpecPropertyId);
+	
 }

@@ -1,3 +1,8 @@
+<%@page import="com.eshop.catalog.model.Category"%>
+<%@page import="java.util.Set"%>
+<%@page import="com.eshop.catalog.model.Product"%>
+<%@page import="com.eshop.catalog.model.CategorizedProduct"%>
+<%@page import="java.util.List"%>
 <%@page import="com.eshop.common.model.MediaType"%>
 <%@include file="/views/init.jsp"%>
 <h1 align="center">
@@ -11,7 +16,28 @@
 	<sf:input type="hidden" path="productSpec.version" value="${product.productSpec.version}" />
 	<label><s:message code="category" /> : </label>
 	<sf:select path="categorizedProducts" multiple="true">
-		<sf:options items="${categories}" itemLabel="name" itemValue="id" />
+		<%
+			Product product = (Product)request.getAttribute("product");
+			Set<Category> categories = (Set<Category>)request.getAttribute("categories");
+			for (Category category : categories ){
+				boolean categorySelected = false;
+				for (CategorizedProduct categorizedProduct : product.getCategorizedProducts()){
+					if (category.equals(categorizedProduct.getCategory())){
+						categorySelected = true;
+						break;
+					}
+				}
+				if (categorySelected == true){
+			%>
+				<sf:option value="<%=category.getId()%>" label="<%=category.getName()%>" selected="true"/>						
+			<%		
+				}else{
+			%>
+				<sf:option value="<%=category.getId()%>" label="<%=category.getName()%>"/>						
+			<%		
+				}
+			}
+		%>
 	</sf:select>
 	<sf:errors path="categorizedProducts" />
 	<br />
