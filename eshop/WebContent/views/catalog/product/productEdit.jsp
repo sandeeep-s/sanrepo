@@ -16,28 +16,7 @@
 	<sf:input type="hidden" path="productSpec.version" value="${product.productSpec.version}" />
 	<label><s:message code="category" /> : </label>
 	<sf:select path="categorizedProducts" multiple="true">
-		<%
-			Product product = (Product)request.getAttribute("product");
-			Set<Category> categories = (Set<Category>)request.getAttribute("categories");
-			for (Category category : categories ){
-				boolean categorySelected = false;
-				for (CategorizedProduct categorizedProduct : product.getCategorizedProducts()){
-					if (category.equals(categorizedProduct.getCategory())){
-						categorySelected = true;
-						break;
-					}
-				}
-				if (categorySelected == true){
-			%>
-				<sf:option value="<%=category.getId()%>" label="<%=category.getName()%>" selected="true"/>						
-			<%		
-				}else{
-			%>
-				<sf:option value="<%=category.getId()%>" label="<%=category.getName()%>"/>						
-			<%		
-				}
-			}
-		%>
+		<sf:options items="${categorizedProducts}" itemLabel="category.name" itemValue="category.id" />
 	</sf:select>
 	<sf:errors path="categorizedProducts" />
 	<br />

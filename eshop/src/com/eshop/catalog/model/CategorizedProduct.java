@@ -54,10 +54,30 @@ public class CategorizedProduct implements Serializable{
 				return false;
 			}
 			Id that = (Id) other;
+
+			if (this.productId == null && this.categoryId != null){
+				return this.categoryId.equals(that.categoryId);
+			}
+			if (this.productId != null && this.categoryId == null){
+				return this.productId.equals(that.productId);
+			}
+			if (this.productId == null && this.categoryId == null){
+				return false;
+			}
+			
 			return this.categoryId.equals(that.categoryId) && this.productId.equals(that.productId);
 		}
 
 		public int hashCode() {
+			if (this.productId == null && this.categoryId != null){
+				return this.categoryId.hashCode();
+			}
+			if (this.productId != null && this.categoryId == null){
+				return this.productId.hashCode();
+			}
+			if (this.productId == null && this.categoryId == null){
+				return super.hashCode();
+			}
 			return categoryId.hashCode() + productId.hashCode();
 		}
 	}
@@ -112,6 +132,22 @@ public class CategorizedProduct implements Serializable{
 	public void setProduct(Product product) {
 		this.id.productId = product.getId();
 		this.product = product;
+	}
+	
+	@Override
+	public boolean equals(Object other){
+		if (null == other || !(other instanceof CategorizedProduct)){
+			return false;
+		}
+		
+		CategorizedProduct that = (CategorizedProduct)other;
+		
+		return this.id.equals(that.id);
+	}
+	
+	@Override
+	public int hashCode(){
+		return this.id.hashCode();
 	}
 
 }//end CategorizedProduct
