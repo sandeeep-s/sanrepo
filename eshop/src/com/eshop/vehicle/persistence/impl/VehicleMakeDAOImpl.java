@@ -32,4 +32,14 @@ public class VehicleMakeDAOImpl extends GenericDAOImpl<VehicleMake, Long> implem
 		return modelYears;
 	}
 
+	@Override
+	public VehicleMake findById(Long id){
+		Query q = getEntityManager().createQuery("select vehicleMake from VehicleMake vehicleMake where vehicleMake.id = :vehicleMakeId");
+		q.setParameter("vehicleMakeId", id);
+		q.setMaxResults(1);
+		q.setHint("org.hibernate.cacheable", true);
+		VehicleMake vehicleMake = (VehicleMake)q.getSingleResult();
+		return vehicleMake;
+	}
+	
 }

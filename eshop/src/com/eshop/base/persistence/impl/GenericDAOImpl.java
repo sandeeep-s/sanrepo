@@ -191,7 +191,7 @@ public abstract class GenericDAOImpl<T, PK extends Serializable> implements Gene
 			logger.debug("Getting all unique persistent entites of class " + type);
 		}
 		Criteria criteria = ((Session) entityManager.getDelegate()).createCriteria(type);
-
+		
 		List<T> result = (List<T>) criteria.list();
 		if (logger.isDebugEnabled() && (null == result || result.isEmpty())) {
 			logger.debug("No persistent entities of class " + type + " found.");

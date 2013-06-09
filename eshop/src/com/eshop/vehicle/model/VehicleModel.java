@@ -6,6 +6,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.Cacheable;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -21,6 +22,8 @@ import javax.persistence.Table;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.eshop.common.model.Media;
@@ -32,6 +35,8 @@ import com.eshop.common.model.Media;
  */
 @Entity
 @Table(name = "vehicle_model")
+@Cacheable
+@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
 public class VehicleModel implements Serializable {
 
 	private Long id;
@@ -87,7 +92,7 @@ public class VehicleModel implements Serializable {
 		this.modelYear = manufacturingYear;
 	}
 
-	@ElementCollection(fetch=FetchType.EAGER)
+	@ElementCollection(fetch=FetchType.LAZY)
 	@CollectionTable(name = "vehicle_model_media", joinColumns = @JoinColumn(name = "vehicle_model_id"))
 	@OrderColumn(name="sort_order")
 	public List<Media> getImages() {
@@ -105,7 +110,7 @@ public class VehicleModel implements Serializable {
 	 * FetchType.EAGER is the default for ManyToOne association in JPA.
 	 * @return
 	 */
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "vehicle_type_id", nullable = false)
 	public VehicleType getVehicleType() {
 		return vehicleType;
@@ -122,7 +127,7 @@ public class VehicleModel implements Serializable {
 	 * FetchType.EAGER is the default for ManyToOne association in JPA.
 	 * @return
 	 */
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "vehicle_make_id", nullable = false)
 	public VehicleMake getVehicleMake() {
 		return vehicleMake;
