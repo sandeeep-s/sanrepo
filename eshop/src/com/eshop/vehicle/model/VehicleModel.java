@@ -16,6 +16,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OrderColumn;
 import javax.persistence.Table;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
@@ -88,6 +89,7 @@ public class VehicleModel implements Serializable {
 
 	@ElementCollection(fetch=FetchType.EAGER)
 	@CollectionTable(name = "vehicle_model_media", joinColumns = @JoinColumn(name = "vehicle_model_id"))
+	@OrderColumn(name="sort_order")
 	public List<Media> getImages() {
 		return images;
 	}

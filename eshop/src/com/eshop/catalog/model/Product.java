@@ -19,6 +19,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.OrderColumn;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
@@ -136,6 +137,7 @@ public class Product implements Serializable {
 
 	@ElementCollection
 	@CollectionTable(name = "product_media", joinColumns = @JoinColumn(name = "product_id"))
+	@OrderColumn(name="sort_order")
 	public List<Media> getImages() {
 		return images;
 	}

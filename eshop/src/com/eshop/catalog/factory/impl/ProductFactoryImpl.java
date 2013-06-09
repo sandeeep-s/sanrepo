@@ -23,11 +23,15 @@ public class ProductFactoryImpl implements ProductFactory {
 		List<TechSpec> techSpecList = new ArrayList<TechSpec>();
 		TechSpec techSpec = new TechSpec();
 		techSpecList.add(techSpec);
+		TechSpec techSpec1 = new TechSpec();
+		techSpecList.add(techSpec1);
 		productSpec.setTechSpecs(techSpecList);
 
 		List<Dimension> dimensionList = new ArrayList<Dimension>();
 		Dimension dimension = new Dimension();
 		dimensionList.add(dimension);
+		Dimension dimension1 = new Dimension();
+		dimensionList.add(dimension1);
 		productSpec.setDimensions(dimensionList);
 
 		product.addProductSpec(productSpec);

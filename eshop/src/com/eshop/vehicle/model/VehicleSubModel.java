@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OrderColumn;
 import javax.persistence.Table;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
@@ -90,6 +91,7 @@ public class VehicleSubModel implements Serializable {
 
 	@ElementCollection
 	@CollectionTable(name = "vehicle_submodel_media", joinColumns = @JoinColumn(name = "vehicle_submodel_id"))
+	@OrderColumn(name="sort_order")
 	public List<Media> getImages() {
 		return images;
 	}

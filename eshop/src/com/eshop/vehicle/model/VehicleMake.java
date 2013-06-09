@@ -2,6 +2,7 @@ package com.eshop.vehicle.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -12,6 +13,8 @@ import javax.persistence.Table;
 import javax.persistence.Version;
 import javax.validation.Valid;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.validator.constraints.NotBlank;
 
 import com.eshop.common.model.Media;
@@ -23,6 +26,8 @@ import com.eshop.common.model.Media;
  */
 @Entity
 @Table(name = "vehicle_make")
+@Cacheable
+@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
 public class VehicleMake implements Serializable {
 
 	private Long id;

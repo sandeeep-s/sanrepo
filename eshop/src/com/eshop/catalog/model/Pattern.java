@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OrderColumn;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
@@ -118,6 +119,7 @@ public class Pattern implements Serializable {
 
 	@ElementCollection(fetch=FetchType.EAGER)
 	@CollectionTable(name = "pattern_media", joinColumns = @JoinColumn(name = "pattern_id"))
+	@OrderColumn(name="sort_order")
 	public List<Media> getImages() {
 		return images;
 	}

@@ -14,6 +14,7 @@ import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.orm.ObjectRetrievalFailureException;
 import org.springframework.stereotype.Controller;
@@ -133,11 +134,14 @@ public class ProductController {
 
 	private void addRefDataRequestAttributes(Model model) {
 		Set<Category> categories = categoryService.getAllCategorys();
-		List<CategorizedProduct> categorizedProducts = new ArrayList<CategorizedProduct>();
-		for (Category  category :  categories){
-			CategorizedProduct categorizedProduct = new CategorizedProduct();
-			categorizedProduct.setCategory(category);
-			categorizedProducts.add(categorizedProduct);
+		List<CategorizedProduct> categorizedProducts = null;
+		if (null != categories) {
+			categorizedProducts = new ArrayList<CategorizedProduct>();
+			for (Category category : categories) {
+				CategorizedProduct categorizedProduct = new CategorizedProduct();
+				categorizedProduct.setCategory(category);
+				categorizedProducts.add(categorizedProduct);
+			}
 		}
 		model.addAttribute("categorizedProducts", categorizedProducts);
 
@@ -195,11 +199,13 @@ public class ProductController {
 			return "addProduct";
 		}
 
-		System.out.println("product Spec product=" + product.getProductSpec().getProduct());
-		System.out.println("categorizedProducts = " + product.getCategorizedProducts().size());
-		System.out.println("categorizedProducts = " + product.getCategorizedProducts().get(0).getCategory());
-		System.out.println("categorizedProducts = " + product.getCategorizedProducts().get(0).getCategory().getId());
-		product = productService.addProduct(product);
+		try {
+			product = productService.addProduct(product);
+		} catch (DataIntegrityViolationException e) {
+			logger.error(e.getMessage(), e);
+			addRefDataRequestAttributes(model);
+			return "addProduct";
+		}
 		model.addAttribute("product", product);
 		return "addProductSuccess";
 	}
@@ -218,7 +224,7 @@ public class ProductController {
 			logger.error("Product with id " + id + " not found", e);
 			model.addAttribute("productId", id);
 			return "productNotFound";
-		} 
+		}
 		return "viewProduct";
 	}
 
