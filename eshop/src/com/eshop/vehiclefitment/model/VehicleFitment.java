@@ -1,13 +1,12 @@
-/**
- * 
- */
 package com.eshop.vehiclefitment.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -15,17 +14,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
 import com.eshop.vehicle.model.VehicleModel;
 import com.eshop.vehicle.model.VehicleSubModel;
-
-/**
- * @author ssd1kor
- *
- */
 
 @Entity
 @Table(name = "vehicle_fitment")
@@ -35,13 +28,15 @@ public class VehicleFitment implements Serializable {
 
 	private int version;
 
-	private List<Fitment> fitments;
+	private List<FitmentComponent> fitmentComponents;
+
+	private Boolean originalEquipment;
 
 	private VehicleModel vehicleModel;
 
 	private VehicleSubModel vehicleSubModel;
 
-	@Id
+	@Id()
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	public Long getId() {
 		return id;
@@ -60,24 +55,27 @@ public class VehicleFitment implements Serializable {
 		this.version = version;
 	}
 
-	@OneToMany(mappedBy = "vehicleFitment", cascade=CascadeType.PERSIST)
-	public List<Fitment> getFitments() {
-		return fitments;
+	@ElementCollection(fetch=FetchType.EAGER)
+	@CollectionTable(name = "fitment_component", joinColumns = @JoinColumn(name = "fitment_id"))
+	public List<FitmentComponent> getFitmentComponents() {
+		return fitmentComponents;
 	}
 
-	public void setFitments(List<Fitment> fitments) {
-		this.fitments = fitments;
+	public void setFitmentComponents(List<FitmentComponent> fitmentComponents) {
+		this.fitmentComponents = fitmentComponents;
 	}
 
-	/**
-	 * The FetchType.EAGER will load the association eagerly.  
-	 * FetchType.EAGER provides the guarantee that associated object will always be initialized alongwith the queried object.
-	 * A single join query will be used to load the associated object while using JPA with Hibernate. But JPA does not mandate use of join for this initialization.
-	 * FetchType.EAGER is the default for ManyToOne association in JPA.
-	 * @return
-	 */
+	@Column(nullable = false)
+	public Boolean getOriginalEquipment() {
+		return originalEquipment;
+	}
+
+	public void setOriginalEquipment(Boolean originalEquipment) {
+		this.originalEquipment = originalEquipment;
+	}
+
 	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name = "vehicle_model_id")
+	@JoinColumn(name="vehicle_model_id")
 	public VehicleModel getVehicleModel() {
 		return vehicleModel;
 	}
@@ -86,26 +84,14 @@ public class VehicleFitment implements Serializable {
 		this.vehicleModel = vehicleModel;
 	}
 
-	/**
-	 * The FetchType.EAGER will load the association eagerly.  
-	 * FetchType.EAGER provides the guarantee that associated object will always be initialized alongwith the queried object.
-	 * A single join query will be used to load the associated object while using JPA with Hibernate. But JPA does not mandate use of join for this initialization.
-	 * FetchType.EAGER is the default for ManyToOne association in JPA.
-	 * @return
-	 */
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name = "vehicle_submodel_id")
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="vehicle_submodel_id")
 	public VehicleSubModel getVehicleSubModel() {
 		return vehicleSubModel;
 	}
 
 	public void setVehicleSubModel(VehicleSubModel vehicleSubModel) {
 		this.vehicleSubModel = vehicleSubModel;
-	}
-
-	public void addFitment(Fitment fitment) {
-		fitment.setVehicleFitment(this);
-		this.fitments.add(fitment);
 	}
 
 }

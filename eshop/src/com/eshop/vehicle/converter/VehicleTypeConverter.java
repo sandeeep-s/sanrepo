@@ -21,6 +21,9 @@ public class VehicleTypeConverter implements Converter<String, VehicleType> {
 
 	@Override
 	public VehicleType convert(String id) {
+		if ("-1".equals(id)){
+			return null;
+		}
 		return vehicleTypeService.getVehicleTypeById(Long.valueOf(id));
 	}
 

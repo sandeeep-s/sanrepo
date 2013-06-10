@@ -3,6 +3,7 @@
  */
 package com.eshop.vehiclefitment.service;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.inject.Inject;
@@ -13,7 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.eshop.vehiclefitment.model.Fitment;
+import com.eshop.vehiclefitment.factory.VehicleFitmentFactory;
 import com.eshop.vehiclefitment.model.VehicleFitment;
 import com.eshop.vehiclefitment.persistence.VehicleFitmentDAO;
 
@@ -28,8 +29,11 @@ public class VehicleFitmentServiceImpl implements VehicleFitmentService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(VehicleFitmentServiceImpl.class);
 
 	@Inject
-	private VehicleFitmentDAO vehicleFitmentDAO = null;
+	private VehicleFitmentDAO vehicleFitmentDAO;
 
+	@Inject
+	private VehicleFitmentFactory vehicleFitmentFactory;
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -39,9 +43,6 @@ public class VehicleFitmentServiceImpl implements VehicleFitmentService {
 	 */
 	@Override
 	public VehicleFitment addVehicleFitment(VehicleFitment vehicleFitment) {
-		for (Fitment fitment : vehicleFitment.getFitments() ){
-			fitment.setVehicleFitment(vehicleFitment);
-		}
 		return vehicleFitmentDAO.makePersistent(vehicleFitment);
 	}
 
@@ -70,4 +71,11 @@ public class VehicleFitmentServiceImpl implements VehicleFitmentService {
 		return vehicleFitmentDAO.findAllUnique();
 	}
 
+	public List<VehicleFitment> getVehicleFitmentsForVehicleModel(Long vehicleModelId){
+		return vehicleFitmentDAO.findByVehicleModel(vehicleModelId);
+	}
+	
+	public VehicleFitment createVehicleFitment() {
+		return vehicleFitmentFactory.createVehicleFitment();
+	}
 }

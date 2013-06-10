@@ -10,7 +10,7 @@
 		<sf:option value="-1">
 			<s:message code="select" />
 		</sf:option>
-		<c:forEach items="${requestScope.vehicleModels}" var="vehicleModelVar">
+		<c:forEach items="${vehicleModels}" var="vehicleModelVar">
 			<sf:option value="${vehicleModelVar.id}">${vehicleModelVar.name}</sf:option>
 		</c:forEach>
 	</sf:select>
@@ -18,37 +18,27 @@
 	<br />
 	<br />
 	<label><s:message code="vehicle.fitment.name" /> : </label>
-	<c:forEach items="${vehicleFitment.fitments}" var="fitment" varStatus="fitmentStatus">
-		<c:forEach items="${fitment.fitmentComponents}" var="fitmentComponent" varStatus="componentStatus">
-			<label><s:message code="vehicle.fitment.product" /> : </label>
-			<sf:select path="fitments[${fitmentStatus.index}].fitmentComponents[${componentStatus.index}].product">
-				<sf:option value="-1">
-					<s:message code="select" />
-				</sf:option>
-				<c:forEach items="${products}" var="product" varStatus="status">
-					<sf:option value="${product.id}">${product.name}</sf:option>
-				</c:forEach>
-			</sf:select>
-			<sf:errors path="fitments[${fitmentStatus.index}].fitmentComponents[${componentStatus.index}].product"/>
-			<br />
-			<br />
-			<label><s:message code="vehicle.fitment.position" /> : </label>
-			<sf:select path="fitments[${fitmentStatus.index}].fitmentComponents[${componentStatus.index}].position">
-				<sf:option value="-1">
-					<s:message code="select" />
-				</sf:option>
-				<sf:option value="<%=VehiclePosition.ALL%>"><%=VehiclePosition.ALL%></sf:option>
-			</sf:select>
-			<sf:errors path="fitments[${fitmentStatus.index}].fitmentComponents[${componentStatus.index}].position"/>
-			<br />
-			<br />
-		</c:forEach>
-		<label><s:message code="vehicle.fitment.original.equipment" /> : </label>
-		<sf:radiobutton path="fitments[${fitmentStatus.index}].originalEquipment" value="true" label="Yes"/>
-		<sf:radiobutton path="fitments[${fitmentStatus.index}].originalEquipment" value="false" label="No"/>
+	<c:forEach items="${vehicleFitment.fitmentComponents}" var="fitmentComponent" varStatus="status">
+		<label><s:message code="vehicle.fitment.product" /> : </label>
+		<sf:select path="fitmentComponents[${status.index}].product">
+			<sf:options items="${products}" itemLabel="name" itemValue="id"/>
+		</sf:select>
+		<sf:errors path="fitmentComponents[${status.index}].product"/>
+		<br />
+		<br />
+		<label><s:message code="vehicle.fitment.position" /> : </label>
+		<sf:select path="fitmentComponents[${status.index}].position">
+			<sf:option value="<%=VehiclePosition.ALL%>"><%=VehiclePosition.ALL%></sf:option>
+		</sf:select>
+		<sf:errors path="fitmentComponents[${status.index}].position"/>
 		<br />
 		<br />
 	</c:forEach>
+	<label><s:message code="vehicle.fitment.original.equipment" /> : </label>
+	<sf:radiobutton path="originalEquipment" value="true" label="Yes" />
+	<sf:radiobutton path="originalEquipment" value="false" label="No" checked="true"/>
+	<br />
+	<br />
 	<br />
 	<br />
 	<input type="submit" value="<s:message code='vehicle.fitment.add'/>">

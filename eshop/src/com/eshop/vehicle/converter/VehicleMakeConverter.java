@@ -24,6 +24,9 @@ public class VehicleMakeConverter implements Converter<String, VehicleMake> {
 
 	@Override
 	public VehicleMake convert(String id) {
+		if ("-1".equals(id)){
+			return null;
+		}
 		return vehicleMakeService.getVehicleMakeById(Long.valueOf(id));
 	}
 

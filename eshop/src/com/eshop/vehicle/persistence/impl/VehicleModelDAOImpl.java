@@ -2,6 +2,7 @@ package com.eshop.vehicle.persistence.impl;
 
 import java.util.List;
 
+import javax.persistence.CacheRetrieveMode;
 import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
@@ -33,6 +34,7 @@ public class VehicleModelDAOImpl extends GenericDAOImpl<VehicleModel, Long> impl
 		Query query = getEntityManager().createNamedQuery("getVehicleModelForMakeAndYear");
 		query.setParameter("vehicleMakeId", vehicleMakeId);
 		query.setParameter("modelYear", modelYear);
+//		query.setHint("javax.persistence.cache.retrieveMode", CacheRetrieveMode.USE);
 
 		List<VehicleModel> vehicleModels = (List<VehicleModel>) query.getResultList();
 

@@ -3,6 +3,7 @@
  */
 package com.eshop.vehiclefitment.controller;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.inject.Inject;
@@ -10,6 +11,8 @@ import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,8 +24,6 @@ import com.eshop.catalog.admin.service.ProductService;
 import com.eshop.catalog.model.Product;
 import com.eshop.vehicle.model.VehicleModel;
 import com.eshop.vehicle.service.VehicleModelService;
-import com.eshop.vehiclefitment.model.Fitment;
-import com.eshop.vehiclefitment.model.FitmentComponent;
 import com.eshop.vehiclefitment.model.VehicleFitment;
 import com.eshop.vehiclefitment.service.VehicleFitmentService;
 
@@ -34,6 +35,8 @@ import com.eshop.vehiclefitment.service.VehicleFitmentService;
 @RequestMapping("/vehiclefitment")
 public class VehicleFitmentController {
 
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	@Inject
 	@Named("vehicleFitmentService")
 	private VehicleFitmentService vehicleFitmentService;
@@ -72,18 +75,26 @@ public class VehicleFitmentController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String listVehicleFitments(Model model) {
-		Set<VehicleFitment> vehicleFitments = vehicleFitmentService.getAllVehicleFitments();
+		Set<VehicleModel> vehicleModels = vehicleModelService.getAllVehicleModels();
+		model.addAttribute("vehicleModels", vehicleModels);
+
+		return "vehicleFitmentList";
+	}
+
+	@RequestMapping(value="/vehiclemodel/{id}", method = RequestMethod.GET)
+	public String listVehicleFitmentsForVehicleModel(@PathVariable("id") Long vehicleModelId, Model model) {
+		List<VehicleFitment> vehicleFitments = vehicleFitmentService.getVehicleFitmentsForVehicleModel(vehicleModelId);
 		model.addAttribute("vehicleFitments", vehicleFitments);
+
+		Set<VehicleModel> vehicleModels = vehicleModelService.getAllVehicleModels();
+		model.addAttribute("vehicleModels", vehicleModels);
+
 		return "vehicleFitmentList";
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String displayAddVehicleFitmentForm(Model model) {
-		FitmentComponent fitmentComponent = new FitmentComponent();
-		Fitment fitment = new Fitment();
-		fitment.getFitmentComponents().add(fitmentComponent);
-		VehicleFitment vehicleFitment = new VehicleFitment();
-		vehicleFitment.getFitments().add(fitment);
+		VehicleFitment vehicleFitment = vehicleFitmentService.createVehicleFitment();
 		model.addAttribute("vehicleFitment", vehicleFitment);
 
 		Set<VehicleModel> vehicleModels = vehicleModelService.getAllVehicleModels();
@@ -99,6 +110,9 @@ public class VehicleFitmentController {
 	public String displayEditVehicleFitmentForm(@PathVariable Long id, Model model, HttpServletRequest request) {
 		VehicleFitment vehicleFitment = vehicleFitmentService.getVehicleFitmentById(id);
 		model.addAttribute("vehicleFitment", vehicleFitment);
+
+		Set<Product> products = productService.getAllProducts();
+		model.addAttribute("products", products);
 
 		return "editVehicleFitment";
 	}
@@ -125,7 +139,9 @@ public class VehicleFitmentController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public String updateVehicleFitment(@Valid VehicleFitment vehicleFitment, BindingResult result, Model model, HttpServletRequest request) {
 
+		logger.debug("Inside updateVehicleFitment");
 		if (result.hasErrors()) {
+			logger.error("Binding error="+result.getAllErrors());
 			return "editVehicleFitment";
 		}
 

@@ -1,5 +1,6 @@
 package com.eshop.vehiclefitment.service;
 
+import java.util.List;
 import java.util.Set;
 
 import com.eshop.vehiclefitment.model.VehicleFitment;
@@ -16,4 +17,7 @@ public interface VehicleFitmentService {
 
 	public Set<VehicleFitment> getAllVehicleFitments();
 
+	public List<VehicleFitment> getVehicleFitmentsForVehicleModel(Long vehicleModelId);
+
+	public VehicleFitment createVehicleFitment();
 }

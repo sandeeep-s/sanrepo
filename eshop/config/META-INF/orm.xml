@@ -19,7 +19,8 @@
 				where vehicleModel.vehicleMake.id = :vehicleMakeId and vehicleModel.modelYear = :modelYear
 			]]>
 		</query>
-		<hint name="org.hibernate.cacheable" value="true"/>			
+		<hint name="org.hibernate.cacheable" value="true"/>
+		<hint name="javax.persistence.cache.retrieveMode" value="BYPASS"/>			
 	</named-query>
 
 	<named-query name="getVehicleSubModelsForVehicleModel">
@@ -67,11 +68,19 @@
 
 	<named-query name="getFitmentsForVehicleModel">
 		<query><![CDATA[
-			select fitment 
+			select vehicleFitment 
 			from VehicleFitment vehicleFitment
-			join vehicleFitment.fitments fitment
 			where vehicleFitment.vehicleModel.id = :vehicleModelId
-			and fitment.originalEquipment = :originalEquipment	
+			and vehicleFitment.originalEquipment = :originalEquipment	
+		]]></query>
+	</named-query>
+
+	<named-query name="findAllVehicleFitmentsForVehicleModel">
+		<query><![CDATA[
+			select vehicleFitment 
+			from VehicleFitment vehicleFitment
+			inner join fetch vehicleFitment.vehicleModel vehicleModel
+			where vehicleFitment.vehicleModel.id = :vehicleModelId
 		]]></query>
 	</named-query>
 	
