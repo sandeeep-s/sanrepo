@@ -2,37 +2,6 @@
 <entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd" version="1.0">
 
-	<named-query name="getModelYearsForMake">
-		<query><![CDATA[
-			select distinct vehicleModel.modelYear 
-			from VehicleModel vehicleModel
-			where vehicleModel.vehicleMake.id = :vehicleMakeId
-		]]></query>
-	</named-query>
-
-	<named-query name="getVehicleModelForMakeAndYear">
-		<query>
-			<![CDATA[
-				select vehicleModel 
-				from VehicleModel vehicleModel
-				inner join fetch vehicleModel.vehicleType vehicleType
-				where vehicleModel.vehicleMake.id = :vehicleMakeId and vehicleModel.modelYear = :modelYear
-			]]>
-		</query>
-		<hint name="org.hibernate.cacheable" value="true"/>
-		<hint name="javax.persistence.cache.retrieveMode" value="BYPASS"/>			
-	</named-query>
-
-	<named-query name="getVehicleSubModelsForVehicleModel">
-		<query><![CDATA[select vehicleSubModel from VehicleSubModel vehicleSubModel where vehicleSubModel.vehicleModel.id = :vehicleModelId]]></query>
-	</named-query>
-
-	<named-query name="getInitializedVehicleSubModel">
-		<query><![CDATA[
-			select distinct vehicleSubModel from VehicleSubModel vehicleSubModel left join fetch vehicleSubModel.images where vehicleSubModel.id = :vehicleSubModelId
-		]]></query>
-	</named-query>
-
 	<named-query name="getPatternsForBrand">
 		<query><![CDATA[select pattern from Pattern pattern where pattern.brand.id = :brandId]]></query>
 	</named-query>
@@ -66,24 +35,6 @@
 		]]></query>
 	</named-query>
 
-	<named-query name="getFitmentsForVehicleModel">
-		<query><![CDATA[
-			select vehicleFitment 
-			from VehicleFitment vehicleFitment
-			where vehicleFitment.vehicleModel.id = :vehicleModelId
-			and vehicleFitment.originalEquipment = :originalEquipment	
-		]]></query>
-	</named-query>
-
-	<named-query name="findAllVehicleFitmentsForVehicleModel">
-		<query><![CDATA[
-			select vehicleFitment 
-			from VehicleFitment vehicleFitment
-			inner join fetch vehicleFitment.vehicleModel vehicleModel
-			where vehicleFitment.vehicleModel.id = :vehicleModelId
-		]]></query>
-	</named-query>
-	
 	<named-query name="getProduct">
 		<query><![CDATA[
 			select product 

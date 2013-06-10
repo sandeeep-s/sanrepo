@@ -15,4 +15,6 @@ import com.eshop.vehicle.model.VehicleMake;
 public interface VehicleMakeDAO extends GenericDAO<VehicleMake, Long> {
 	
 	public List<Integer> getModelYearsForMake(Long vehicleMakeId);
+	
+	public VehicleMake updateVehicleMake(VehicleMake detachedVehicleMake);	
 }

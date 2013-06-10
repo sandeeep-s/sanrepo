@@ -55,7 +55,7 @@ public class VehicleMakeServiceImpl implements VehicleMakeService {
 	 */
 	@Override
 	public VehicleMake updateVehicleMake(VehicleMake vehicleMake) {
-		return vehicleMakeDAO.saveOrUpdate(vehicleMake);
+		return vehicleMakeDAO.updateVehicleMake(vehicleMake);
 	}
 
 	@Override

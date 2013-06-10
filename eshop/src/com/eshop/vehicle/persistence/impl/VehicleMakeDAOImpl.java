@@ -41,5 +41,12 @@ public class VehicleMakeDAOImpl extends GenericDAOImpl<VehicleMake, Long> implem
 		VehicleMake vehicleMake = (VehicleMake)q.getSingleResult();
 		return vehicleMake;
 	}
+
+	public VehicleMake updateVehicleMake(VehicleMake detachedVehicleMake){
+		VehicleMake persistentVehicleMake = findById(detachedVehicleMake.getId());
+		persistentVehicleMake.setName(detachedVehicleMake.getName());
+		persistentVehicleMake.setLogoImage(detachedVehicleMake.getLogoImage());
+		return persistentVehicleMake;
+	}
 	
 }
