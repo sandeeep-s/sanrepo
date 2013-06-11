@@ -28,6 +28,10 @@ public class ProductFactoryImpl implements ProductFactory {
 		List<Dimension> dimensionList = new ArrayList<Dimension>();
 		Dimension dimension = new Dimension();
 		dimensionList.add(dimension);
+		Dimension dimension1 = new Dimension();
+		dimensionList.add(dimension1);
+		Dimension dimension2 = new Dimension();
+		dimensionList.add(dimension2);
 		productSpec.setDimensions(dimensionList);
 
 		product.addProductSpec(productSpec);

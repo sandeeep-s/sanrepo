@@ -24,5 +24,14 @@ public class VehicleFitmentDAOImpl extends GenericDAOImpl<VehicleFitment, Long> 
 		List<VehicleFitment> vehicleFitments =  (List<VehicleFitment>)q.getResultList();
 		return vehicleFitments;
 	}
+
+	@Override
+	public List<VehicleFitment> findByVehicleModel(Long vehicleModelId, Boolean isOriginalEquipment) {
+		Query q = getEntityManager().createNamedQuery("getFitmentsForVehicleModel");
+		q.setParameter("vehicleModelId", vehicleModelId);
+		q.setParameter("originalEquipment", isOriginalEquipment);
+		List<VehicleFitment> vehicleFitments =  (List<VehicleFitment>)q.getResultList();
+		return vehicleFitments;
+	}
 	
 }

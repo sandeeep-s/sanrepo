@@ -36,7 +36,7 @@ public class VehicleFitment implements Serializable {
 
 	private VehicleSubModel vehicleSubModel;
 
-	@Id()
+	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	public Long getId() {
 		return id;
@@ -94,4 +94,5 @@ public class VehicleFitment implements Serializable {
 		this.vehicleSubModel = vehicleSubModel;
 	}
 
+	
 }

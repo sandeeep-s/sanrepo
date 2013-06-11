@@ -31,6 +31,7 @@
 	<context:component-scan base-package="com.eshop.vehicle.controller" />
 	<context:component-scan base-package="com.eshop.catalog.admin.controller" />
 	<context:component-scan base-package="com.eshop.vehiclefitment.controller" />
+	<context:component-scan base-package="com.eshop.productsearch.controller" />
 
 	<bean class="org.springframework.web.servlet.view.tiles2.TilesViewResolver" />
 

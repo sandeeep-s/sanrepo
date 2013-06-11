@@ -507,5 +507,14 @@
 	<definition name="vehicleModelsFragment" template="/views/admin/vehicle/vehicleModelsFragment.jsp">
 	</definition>
 
+	<definition name="vehicleSelection" extends="hometemplate">
+		<put-attribute name="title" value="Select Vehicle" />
+		<put-attribute name="body" value="/views/productSearch/searchByVehicle/vehicleSelection.jsp" />
+	</definition>
+
+	<definition name="vehicleOriginalFitments" extends="hometemplate">
+		<put-attribute name="title" value="Vehicle Original Equipment" />
+		<put-attribute name="body" value="/views/productSearch/searchByVehicle/originalEquipments.jsp" />
+	</definition>
 
 </tiles-definitions>       

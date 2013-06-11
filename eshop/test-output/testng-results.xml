@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" total="2" passed="2">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="30" started-at="2013-06-11T04:57:04Z" finished-at="2013-06-11T04:57:04Z">
+    <groups>
+    </groups>
+    <test name="Default test" duration-ms="30" started-at="2013-06-11T04:57:04Z" finished-at="2013-06-11T04:57:04Z">
+      <class name="com.eshop.test.ListContainsAllTest">
+        <test-method status="PASS" signature="testListContainsAllString()[pri:0, instance:com.eshop.test.ListContainsAllTest@65b60280]" name="testListContainsAllString" duration-ms="15" started-at="2013-06-11T10:27:04Z" finished-at="2013-06-11T10:27:04Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testListContainsAllString -->
+        <test-method status="PASS" signature="testListEqualsString()[pri:0, instance:com.eshop.test.ListContainsAllTest@65b60280]" name="testListEqualsString" duration-ms="1" started-at="2013-06-11T10:27:04Z" finished-at="2013-06-11T10:27:04Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testListEqualsString -->
+      </class> <!-- com.eshop.test.ListContainsAllTest -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
