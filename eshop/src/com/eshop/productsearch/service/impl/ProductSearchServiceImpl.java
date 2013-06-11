@@ -2,13 +2,25 @@ package com.eshop.productsearch.service.impl;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.eshop.catalog.model.Dimension;
 import com.eshop.catalog.model.Product;
 import com.eshop.catalog.model.TechSpec;
+import com.eshop.catalog.persistence.ProductDAO;
 import com.eshop.productsearch.service.ProductSearchService;
 
+@Service
+@Transactional(propagation=Propagation.REQUIRED)
 public class ProductSearchServiceImpl implements ProductSearchService{
 
+	@Inject
+	private ProductDAO productDAO;
+	
 	@Override
 	public List<Product> searchProductsByCategoryAndBrand(Long categoryId, Long brandId) {
 		// TODO Auto-generated method stub
@@ -23,8 +35,8 @@ public class ProductSearchServiceImpl implements ProductSearchService{
 
 	@Override
 	public List<Product> searchProductsByCategoryAndDimensions(Long categoryId, List<Dimension> dimensions) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return productDAO.findProductsByDimension(dimensions);
 	}
 
 	@Override

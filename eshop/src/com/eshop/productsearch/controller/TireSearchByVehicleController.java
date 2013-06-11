@@ -11,15 +11,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.eshop.catalog.model.Product;
 import com.eshop.productsearch.form.TireFitmentForm;
 import com.eshop.productsearch.service.TireFitmentSearchService;
-import com.eshop.productsearch.service.VehicleFitmentSearchService;
 import com.eshop.vehicle.model.VehicleModel;
 import com.eshop.vehicle.service.VehicleModelService;
-import com.eshop.vehiclefitment.model.VehicleFitment;
 
 @Controller
-@RequestMapping("/tirefitment")
 public class TireSearchByVehicleController {
 
 	@Inject
@@ -27,16 +25,16 @@ public class TireSearchByVehicleController {
 
 	@Inject
 	private VehicleModelService vehicleModelService;
-	
-	@RequestMapping(value="/vehicle", method = RequestMethod.GET)
+
+	@RequestMapping(value = "/tirefitment/vehicle", method = RequestMethod.GET)
 	public String displayVehicleSelectionForm(Model model) {
 		Set<VehicleModel> vehicleModels = vehicleModelService.getAllVehicleModels();
 		model.addAttribute("vehicleModels", vehicleModels);
-		
+
 		return "vehicleSelection";
 	}
 
-	@RequestMapping("/original/category/{categoryId}/vehiclemodel/{vehicleModelId}")
+	@RequestMapping("/tirefitment/original/category/{categoryId}/vehiclemodel/{vehicleModelId}")
 	public String listOriginalFitmentsForVehicleModel(@PathVariable Long categoryId, @PathVariable Long vehicleModelId, Model model) {
 		List<TireFitmentForm> tireFitmentForms = tireFitmentSearchService.searchFitmentByCategoryAndVehicleModel(categoryId,
 				vehicleModelId, true);
@@ -44,9 +42,17 @@ public class TireSearchByVehicleController {
 		return "vehicleOriginalFitments";
 	}
 
-	@RequestMapping("/original/category/{categoryId}/vehiclesubmodel/{vehicleSubModelId}")
+	@RequestMapping("/tirefitment/original/category/{categoryId}/vehiclesubmodel/{vehicleSubModelId}")
 	public String listOriginalFitmentsForVehicleSubModel(@PathVariable Long categoryId, @PathVariable Long vehicleSubModelId) {
 		return null;
+	}
+
+	@RequestMapping("/product/category/tire/dimension/{section}/{aspectRatio}/{diameter}")
+	public String listOriginalFitmentProducts(@PathVariable String section, @PathVariable String aspectRatio,
+			@PathVariable String diameter, Model model) {
+		List<Product> products = tireFitmentSearchService.searchTiresByDimensions(section, aspectRatio, diameter);
+		model.addAttribute("products", products);
+		return "tireList";
 	}
 
 }

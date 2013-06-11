@@ -75,4 +75,9 @@ public class DimensionPropertyServiceImpl implements DimensionPropertyService {
 		return dimensionProperty;
 	}
 
+	@Override
+	public DimensionProperty getDimensionPropertyByName(String dimensionPropertyName) {
+		return dimensionPropertyDAO.getDimensionPropertyByName(dimensionPropertyName);
+	}
+
 }

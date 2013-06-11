@@ -26,4 +26,6 @@ public interface DimensionPropertyService {
 
 	public DimensionProperty createDimensionProperty(String dimensionPropertyName, Media logoImage);
 
+	public DimensionProperty getDimensionPropertyByName(String dimensionPropertyName);
+
 }

@@ -81,5 +81,13 @@
 			where dimensionProperty.id = :dimensionPropertyId
 		]]></query>
 	</named-query>
+
+	<named-query name="getDimensionPropertyByName">
+		<query><![CDATA[
+			select dimensionProperty 
+			from DimensionProperty dimensionProperty
+			where dimensionProperty.name = :dimensionPropertyName
+		]]></query>
+	</named-query>
 	
 </entity-mappings>

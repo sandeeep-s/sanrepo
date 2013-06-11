@@ -7,5 +7,6 @@ import com.eshop.catalog.model.DimensionProperty;
 public interface DimensionPropertyDAO extends GenericDAO<DimensionProperty, Long> {
 
 	public DimensionProperty getDimensionPropertyInitialized(Long dimensionPropertyId);
-	
+
+	public DimensionProperty getDimensionPropertyByName(String dimensionPropertyName);
 }

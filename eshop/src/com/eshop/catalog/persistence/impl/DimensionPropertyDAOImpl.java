@@ -25,4 +25,13 @@ public class DimensionPropertyDAOImpl extends GenericDAOImpl<DimensionProperty, 
 		return dimensionProperty;
 	}
 
+	@Override
+	public DimensionProperty getDimensionPropertyByName(String dimensionPropertyName) {
+		Query query = getEntityManager().createNamedQuery("getDimensionPropertyByName");
+		query.setParameter("dimensionPropertyName", dimensionPropertyName);
+		query.setMaxResults(1);
+		DimensionProperty dimensionProperty = (DimensionProperty) query.getSingleResult();
+		return dimensionProperty;
+	}
+
 }

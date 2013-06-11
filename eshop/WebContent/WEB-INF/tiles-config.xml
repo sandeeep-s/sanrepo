@@ -517,4 +517,9 @@
 		<put-attribute name="body" value="/views/productSearch/searchByVehicle/originalEquipments.jsp" />
 	</definition>
 
+	<definition name="tireList" extends="hometemplate">
+		<put-attribute name="title" value="Tire List" />
+		<put-attribute name="body" value="/views/productSearch/searchByVehicle/tireList.jsp" />
+	</definition>
+
 </tiles-definitions>       

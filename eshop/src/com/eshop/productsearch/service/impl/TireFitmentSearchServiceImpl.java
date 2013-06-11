@@ -6,31 +6,40 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
+import com.eshop.catalog.admin.service.DimensionPropertyService;
 import com.eshop.catalog.model.Dimension;
+import com.eshop.catalog.model.DimensionProperty;
+import com.eshop.catalog.model.Product;
 import com.eshop.productsearch.form.TireFitmentComponentForm;
 import com.eshop.productsearch.form.TireFitmentForm;
+import com.eshop.productsearch.service.ProductSearchService;
 import com.eshop.productsearch.service.TireFitmentSearchService;
 import com.eshop.productsearch.service.VehicleFitmentSearchService;
 import com.eshop.vehiclefitment.model.FitmentComponent;
 import com.eshop.vehiclefitment.model.VehicleFitment;
 
 @Service
-@Transactional(propagation=Propagation.REQUIRED)
+@Transactional(propagation = Propagation.REQUIRED)
 public class TireFitmentSearchServiceImpl implements TireFitmentSearchService {
 
 	@Inject
 	private VehicleFitmentSearchService vehicleFitmentSearchService;
 
+	@Inject
+	private ProductSearchService productSearchService;
+
+	@Inject
+	private DimensionPropertyService dimensionPropertyService;
+
 	@Override
 	public List<TireFitmentForm> searchFitmentByCategoryAndVehicleModel(Long categoryId, Long vehicleModelId, Boolean isOriginalEquipment) {
 
 		//find original vehicle fitment objects for the vehicle model
-		List<VehicleFitment> vehicleFitments = vehicleFitmentSearchService.searchFitmentByCategoryAndVehicleModel(categoryId, vehicleModelId, isOriginalEquipment);
+		List<VehicleFitment> vehicleFitments = vehicleFitmentSearchService.searchFitmentByCategoryAndVehicleModel(categoryId,
+				vehicleModelId, isOriginalEquipment);
 
 		//Convert vehicle fitments into displayable fitment info.
 		List<TireFitmentForm> tireFitmentForms = createTireFitmentFormsFromVehicleFitment(vehicleFitments);
@@ -86,6 +95,32 @@ public class TireFitmentSearchServiceImpl implements TireFitmentSearchService {
 			Boolean isOriginalEquipment) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<Product> searchTiresByDimensions(String section, String aspectRatio, String diameter) {
+		List<Dimension> dimensions = new ArrayList<Dimension>();
+
+		Dimension dimension = new Dimension();
+		DimensionProperty dimensionProperty = dimensionPropertyService.getDimensionPropertyByName("Section");
+		dimension.setDimensionProperty(dimensionProperty);
+		dimension.setDimensionValue(section);
+		dimensions.add(dimension);
+
+		Dimension dimension1 = new Dimension();
+		DimensionProperty dimensionProperty1 = dimensionPropertyService.getDimensionPropertyByName("AspectRatio");
+		dimension1.setDimensionProperty(dimensionProperty1);
+		dimension1.setDimensionValue(aspectRatio);
+		dimensions.add(dimension1);
+
+		Dimension dimension2 = new Dimension();
+		DimensionProperty dimensionProperty2 = dimensionPropertyService.getDimensionPropertyByName("Diameter");
+		dimension2.setDimensionProperty(dimensionProperty2);
+		dimension2.setDimensionValue(diameter);
+		dimensions.add(dimension2);
+
+		List<Product> products = productSearchService.searchProductsByCategoryAndDimensions(new Long(1), dimensions);
+		return products;
 	}
 
 }
