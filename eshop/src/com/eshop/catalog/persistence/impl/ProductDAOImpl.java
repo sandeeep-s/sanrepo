@@ -1,9 +1,17 @@
 package com.eshop.catalog.persistence.impl;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import javax.persistence.criteria.Subquery;
 
 import org.hibernate.Hibernate;
 import org.slf4j.Logger;
@@ -12,9 +20,12 @@ import org.springframework.stereotype.Repository;
 
 import com.eshop.base.persistence.impl.GenericDAOImpl;
 import com.eshop.catalog.model.Dimension;
+import com.eshop.catalog.model.DimensionProperty;
 import com.eshop.catalog.model.Product;
+import com.eshop.catalog.model.ProductSpec;
 import com.eshop.catalog.model.TechSpec;
 import com.eshop.catalog.persistence.ProductDAO;
+import com.sun.org.apache.xpath.internal.Expression;
 
 @Repository("productDAO")
 public class ProductDAOImpl extends GenericDAOImpl<Product, Long> implements ProductDAO {
@@ -27,36 +38,28 @@ public class ProductDAOImpl extends GenericDAOImpl<Product, Long> implements Pro
 
 	public List<Product> findProductsByDimension(List<Dimension> dimensions) {
 		
-		StringBuilder queryBuilder = new StringBuilder();
-		queryBuilder.append("select product");
-		queryBuilder.append(" ");
-		queryBuilder.append("from Product product join product.productSpec productSpec join productSpec.dimensions dimensions");
-		queryBuilder.append(" ");
-		queryBuilder.append("where dimensions.dimensionProperty.name = :dimensionPropertyName0 and dimensions.dimensionValue = :dimensionValue0");
-		queryBuilder.append(" ");
-		for (int i = 1; i < dimensions.size(); i++){
-			queryBuilder.append(" ");
-			queryBuilder.append("and exists (");
-			queryBuilder.append(" ");
-			queryBuilder.append("select product"+i);
-			queryBuilder.append(" ");
-			queryBuilder.append("from Product product"+i+" join product"+i+".productSpec productSpec"+i+" join productSpec"+i+".dimensions dimensions"+i+"");
-			queryBuilder.append(" ");
-			queryBuilder.append("where dimensions"+i+".dimensionProperty.name = :dimensionPropertyName"+i+" and dimensions"+i+".dimensionValue = :dimensionValue"+i+" and product = product"+i);
-		}
-
-		for (int i = 1; i < dimensions.size(); i++){
-			queryBuilder.append(" ");
-			queryBuilder.append(")");
-		}
-
-		String queryString = queryBuilder.toString();
-		logger.debug("findProductsByDimension queryString="+queryString);
-
-		Query query = getEntityManager().createQuery(queryString);
+		List<Dimension> dimensionListCopy = new ArrayList<Dimension>();
+		dimensionListCopy.addAll(dimensions);
+		
+		CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
+		CriteriaQuery<Product> cq = cb.createQuery(Product.class);
+		Root<Product> product = cq.from(Product.class);
+		cq.select(product);
+		Join<Product, ProductSpec> productSpecJoin =  product.join("productSpec");
+		Join<ProductSpec, Dimension> dimensionJoin = productSpecJoin.join("dimensions");
+		Predicate dimensionNameCondition = cb.equal(dimensionJoin.get("dimensionProperty").get("name"), cb.parameter(String.class, "dimensionPropertyName0"));
+		Predicate dimensionValueCondition = cb.equal(dimensionJoin.get("dimensionValue"), cb.parameter(String.class, "dimensionValue0"));
+		Predicate dimensionCondition = cb.and(dimensionNameCondition, dimensionValueCondition);
+		
+		dimensionListCopy.remove(0);
+		Subquery<Product> sq = cq.subquery(Product.class);
+		sq = addDimensionExistsSubQueryRecursively(dimensionListCopy, 1, sq, cb);
+		cq.where(cb.and(dimensionCondition, cb.exists(sq)));
+		
+		Query query = getEntityManager().createQuery(cq);
+		
 		for (int i = 0; i < dimensions.size(); i++){
 			Dimension dimension = dimensions.get(i);
-			logger.debug("dimension.getDimensionProperty()="+dimension.getDimensionProperty());
 			query.setParameter("dimensionPropertyName"+i, dimension.getDimensionProperty().getName());
 			query.setParameter("dimensionValue"+i, dimension.getDimensionValue());
 		}
@@ -65,6 +68,29 @@ public class ProductDAOImpl extends GenericDAOImpl<Product, Long> implements Pro
 		return products;
 	}
 
+	public Subquery<Product> addDimensionExistsSubQueryRecursively(List<Dimension> dimensions, int index , Subquery<Product> sq, CriteriaBuilder cb){
+		Root<Product> product = sq.from(Product.class);
+		sq.select(product);
+		Join<Product, ProductSpec> productSpecJoin =  product.join("productSpec");
+		Join<ProductSpec, Dimension> dimensionJoin = productSpecJoin.join("dimensions");
+		Predicate dimensionNameCondition = cb.equal(dimensionJoin.get("dimensionProperty").get("name"), cb.parameter(String.class, "dimensionPropertyName"+index));
+		Predicate dimensionValueCondition = cb.equal(dimensionJoin.get("dimensionValue"), cb.parameter(String.class, "dimensionValue"+index));
+		Predicate dimensionCondition = cb.and(dimensionNameCondition, dimensionValueCondition);
+
+		dimensions.remove(0);
+		if (dimensions.isEmpty()){
+			sq.where(dimensionCondition);
+			return sq;
+		}
+		
+		Subquery<Product> sqChild = sq.subquery(Product.class);
+		index++;
+		sqChild = addDimensionExistsSubQueryRecursively(dimensions, index, sqChild, cb);
+		
+		sq.where(cb.and(dimensionCondition, cb.exists(sqChild)));
+		return sq;
+	}
+	
 	public List<Product> getProductByTechSpec(Map<String, String> techSpecMap) {
 		return null;
 	}
