@@ -38,6 +38,8 @@ public class TireSearchByVehicleController {
 	public String listOriginalFitmentsForVehicleModel(@PathVariable Long categoryId, @PathVariable Long vehicleModelId, Model model) {
 		List<TireFitmentForm> tireFitmentForms = tireFitmentSearchService.searchFitmentByCategoryAndVehicleModel(categoryId,
 				vehicleModelId, true);
+		model.addAttribute("categoryId", categoryId);
+		model.addAttribute("vehicleModelId", vehicleModelId);
 		model.addAttribute("tireFitmentForms", tireFitmentForms);
 		return "vehicleOriginalFitments";
 	}
@@ -48,11 +50,20 @@ public class TireSearchByVehicleController {
 	}
 
 	@RequestMapping("/product/category/tire/dimension/{section}/{aspectRatio}/{diameter}")
-	public String listOriginalFitmentProducts(@PathVariable String section, @PathVariable String aspectRatio,
+	public String listProductsMatchingOriginalBySize(@PathVariable String section, @PathVariable String aspectRatio,
 			@PathVariable String diameter, Model model) {
 		List<Product> products = tireFitmentSearchService.searchTiresByDimensions(section, aspectRatio, diameter);
 		model.addAttribute("products", products);
 		return "tireList";
 	}
 
+	
+	@RequestMapping("/product/original/category/tire/dimension/{section}/{aspectRatio}/{diameter}")
+	public String listOriginalEquipment(@PathVariable String section, @PathVariable String aspectRatio,
+			@PathVariable String diameter, Model model){
+
+		return "tireList";
+
+	}
+	
 }

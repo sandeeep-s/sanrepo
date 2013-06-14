@@ -17,4 +17,7 @@ public interface TireFitmentSearchService {
 			Boolean isOriginalEquipment);
 
 	public List<Product> searchTiresByDimensions(String section, String aspectRatio, String diameter);
+
+	public List<Product> searchOriginalTiresByDimensions(String section, String aspectRatio, String diameter, Long vehicleModelId);
+
 }

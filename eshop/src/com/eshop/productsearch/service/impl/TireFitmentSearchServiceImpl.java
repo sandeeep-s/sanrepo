@@ -97,8 +97,7 @@ public class TireFitmentSearchServiceImpl implements TireFitmentSearchService {
 		return null;
 	}
 
-	@Override
-	public List<Product> searchTiresByDimensions(String section, String aspectRatio, String diameter) {
+	private List<Dimension> createDimensionList(String section, String aspectRatio, String diameter){
 		List<Dimension> dimensions = new ArrayList<Dimension>();
 
 		Dimension dimension = new Dimension();
@@ -118,9 +117,29 @@ public class TireFitmentSearchServiceImpl implements TireFitmentSearchService {
 		dimension2.setDimensionProperty(dimensionProperty2);
 		dimension2.setDimensionValue(diameter);
 		dimensions.add(dimension2);
+		
+		return dimensions;
+	}
+	
+	@Override
+	public List<Product> searchTiresByDimensions(String section, String aspectRatio, String diameter) {
 
+		List<Dimension> dimensions = createDimensionList(section, aspectRatio, diameter);
 		List<Product> products = productSearchService.searchProductsByCategoryAndDimensions(new Long(1), dimensions);
 		return products;
 	}
 
+	@Override
+	public List<Product> searchOriginalTiresByDimensions(String section, String aspectRatio, String diameter, Long vehicleModelId) {
+		List<Dimension> dimensions = createDimensionList(section, aspectRatio, diameter);
+		//find original vehicle fitment objects for the vehicle model
+		List<VehicleFitment> vehicleFitments = vehicleFitmentSearchService.searchFitmentByCategoryAndVehicleModel(1L, vehicleModelId, true);
+		List<Product> products = extractProductsFromFitments(vehicleFitments);
+		return null;
+	}
+
+	private List<Product> extractProductsFromFitments(List<VehicleFitment> vehicleFitments){
+		return null;
+	}
+	
 }

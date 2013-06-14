@@ -17,6 +17,7 @@
 			<td>${fitmentComponentForm.position}</td>
 			<td>${fitmentComponentForm.section}/${fitmentComponentForm.aspectRatio}-${fitmentComponentForm.diameter}</td>
 			<td><a href="<c:url value='/product/category/tire/dimension/${fitmentComponentForm.section}/${fitmentComponentForm.aspectRatio}/${fitmentComponentForm.diameter}'/>"><s:message code="view.products.matching.size" /></a></td>
+			<td><a href="<c:url value='/product/category/tire/dimension/${fitmentComponentForm.section}/${fitmentComponentForm.aspectRatio}/${fitmentComponentForm.diameter}/${vehicleModelId}'/>"><s:message code="view.original.equipment" /></a></td>
 			
 		</tr>	
 	</c:forEach>

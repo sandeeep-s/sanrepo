@@ -2,10 +2,6 @@
 <entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd" version="1.0">
 
-	<named-query name="getPatternsForBrand">
-		<query><![CDATA[select pattern from Pattern pattern where pattern.brand.id = :brandId]]></query>
-	</named-query>
-	
 	<named-query name="getProductsForPatterns">
 		<query><![CDATA[
 			select product 
@@ -43,32 +39,6 @@
 			from ProductSpec productSpec 
 			join fetch productSpec.dimensions dimensions
 			where productSpec.id = :productSpecId
-		]]></query>
-	</named-query>
-	
-	<named-query name="getTechSpecPropertyInitialized">
-		<query><![CDATA[
-			select techSpecProperty 
-			from TechSpecProperty techSpecProperty
-			join fetch techSpecProperty.category category
-			where techSpecProperty.id = :techSpecPropertyId
-		]]></query>
-	</named-query>
-
-	<named-query name="getDimensionPropertyInitialized">
-		<query><![CDATA[
-			select dimensionProperty 
-			from DimensionProperty dimensionProperty
-			join fetch dimensionProperty.category category
-			where dimensionProperty.id = :dimensionPropertyId
-		]]></query>
-	</named-query>
-
-	<named-query name="getDimensionPropertyByName">
-		<query><![CDATA[
-			select dimensionProperty 
-			from DimensionProperty dimensionProperty
-			where dimensionProperty.name = :dimensionPropertyName
 		]]></query>
 	</named-query>
 	
