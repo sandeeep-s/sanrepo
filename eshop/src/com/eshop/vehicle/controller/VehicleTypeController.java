@@ -18,6 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.eshop.common.service.MediaService;
+import com.eshop.vehicle.form.VehicleMakeForm;
+import com.eshop.vehicle.form.VehicleTypeForm;
+import com.eshop.vehicle.form.modelmapper.FormModelMapper;
+import com.eshop.vehicle.model.VehicleMake;
 import com.eshop.vehicle.model.VehicleType;
 import com.eshop.vehicle.service.VehicleTypeService;
 
@@ -36,6 +40,10 @@ public class VehicleTypeController {
 	@Inject
 	@Named("mediaService")
 	private MediaService mediaService;
+
+	@Inject
+	@Named("vehicleTypeFormMapper")
+	private FormModelMapper<VehicleTypeForm, VehicleType> formModelMapper;
 
 	public VehicleTypeService getVehicleTypeService() {
 		return vehicleTypeService;
@@ -62,7 +70,7 @@ public class VehicleTypeController {
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String displayAddVehicleTypeForm(Model model) {
-		model.addAttribute("vehicleType", new VehicleType());
+		model.addAttribute("vehicleType", new VehicleTypeForm());
 		return "addVehicleType";
 	}
 
@@ -73,16 +81,18 @@ public class VehicleTypeController {
 			model.addAttribute("vehicleTypeId", id);
 			return "vehicleTypeNotFound";
 		}
-		model.addAttribute("vehicleType", vehicleType);
+		VehicleTypeForm vehicleTypeForm = formModelMapper.mapModelToForm(vehicleType);
+		model.addAttribute("vehicleType", vehicleTypeForm);
 		return "editVehicleType";
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String addVehicleType(@Valid VehicleType vehicleType, BindingResult result, Model model, HttpServletRequest request) {
+	public String addVehicleType(@Valid VehicleTypeForm vehicleTypeForm, BindingResult result, Model model, HttpServletRequest request) {
 		if (result.hasErrors()) {
 			return "addVehicleType";
 		}
 
+		VehicleType vehicleType = formModelMapper.mapFormToNewModel(vehicleTypeForm);
 		vehicleType = vehicleTypeService.addVehicleType(vehicleType);
 		model.addAttribute("vehicleType", vehicleType);
 		return "addVehicleTypeSuccess";
@@ -100,12 +110,13 @@ public class VehicleTypeController {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public String updateVehicleType(@Valid VehicleType vehicleType, BindingResult result, Model model, HttpServletRequest request) {
+	public String updateVehicleType(@Valid VehicleTypeForm vehicleTypeForm, BindingResult result, Model model, HttpServletRequest request) {
 
 		if (result.hasErrors()) {
 			return "editVehicleType";
 		}
 
+		VehicleType vehicleType = formModelMapper.mapFormToExistingModel(vehicleTypeForm);
 		vehicleType = vehicleTypeService.updateVehicleType(vehicleType);
 		model.addAttribute("vehicleType", vehicleType);
 		return "editVehicleTypeSuccess";

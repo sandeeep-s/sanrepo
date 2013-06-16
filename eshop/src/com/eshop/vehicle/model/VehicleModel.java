@@ -1,31 +1,23 @@
 package com.eshop.vehicle.model;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
-
 import javax.persistence.Cacheable;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OrderColumn;
 import javax.persistence.Table;
-import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.eshop.base.model.EntityBase;
 import com.eshop.common.model.Media;
 
 /**
@@ -36,12 +28,8 @@ import com.eshop.common.model.Media;
 @Entity
 @Table(name = "vehicle_model")
 @Cacheable
-@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
-public class VehicleModel implements Serializable {
-
-	private Long id;
-
-	private int version;
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+public class VehicleModel extends EntityBase {
 
 	private String name;
 
@@ -53,23 +41,16 @@ public class VehicleModel implements Serializable {
 
 	private VehicleMake vehicleMake;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE)
-	public Long getId() {
-		return id;
+	public VehicleModel() {
+
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	@Version
-	public int getVersion() {
-		return version;
-	}
-
-	public void setVersion(int version) {
-		this.version = version;
+	public VehicleModel(String name, Integer modelYear, List<Media> images, VehicleType vehicleType, VehicleMake vehicleMake) {
+		this.name = name;
+		this.modelYear = modelYear;
+		this.images = images;
+		this.vehicleType = vehicleType;
+		this.vehicleMake = vehicleMake;
 	}
 
 	@NotEmpty
@@ -78,7 +59,7 @@ public class VehicleModel implements Serializable {
 		return name;
 	}
 
-	public void setName(String name) {
+	private void setName(String name) {
 		this.name = name;
 	}
 
@@ -88,13 +69,13 @@ public class VehicleModel implements Serializable {
 		return modelYear;
 	}
 
-	public void setModelYear(Integer manufacturingYear) {
+	private void setModelYear(Integer manufacturingYear) {
 		this.modelYear = manufacturingYear;
 	}
 
-	@ElementCollection(fetch=FetchType.LAZY)
+	@ElementCollection(fetch = FetchType.LAZY)
 	@CollectionTable(name = "vehicle_model_media", joinColumns = @JoinColumn(name = "vehicle_model_id"))
-	@OrderColumn(name="sort_order")
+	@OrderColumn(name = "sort_order")
 	public List<Media> getImages() {
 		return images;
 	}
@@ -116,7 +97,7 @@ public class VehicleModel implements Serializable {
 		return vehicleType;
 	}
 
-	public void setVehicleType(VehicleType vehicleType) {
+	private void setVehicleType(VehicleType vehicleType) {
 		this.vehicleType = vehicleType;
 	}
 
@@ -133,7 +114,7 @@ public class VehicleModel implements Serializable {
 		return vehicleMake;
 	}
 
-	public void setVehicleMake(VehicleMake vehicleMake) {
+	private void setVehicleMake(VehicleMake vehicleMake) {
 		this.vehicleMake = vehicleMake;
 	}
 
@@ -151,6 +132,7 @@ public class VehicleModel implements Serializable {
 	 * Always use getters to compare properties of other object. This is to make sure the code works even if proxies are passed instead
 	 * of real objects.
 	 */
+	@Override
 	public boolean equals(Object other) {
 		if (!(other instanceof VehicleModel)) {
 			return false;
@@ -163,6 +145,7 @@ public class VehicleModel implements Serializable {
 
 	}
 
+	@Override
 	public int hashCode() {
 		return name.hashCode() + modelYear.hashCode();
 	}

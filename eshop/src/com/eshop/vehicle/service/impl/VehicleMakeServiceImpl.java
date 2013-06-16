@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.eshop.common.model.Media;
 import com.eshop.vehicle.model.VehicleMake;
 import com.eshop.vehicle.persistence.VehicleMakeDAO;
 import com.eshop.vehicle.service.VehicleMakeService;
@@ -41,7 +40,7 @@ public class VehicleMakeServiceImpl implements VehicleMakeService {
 	 */
 	@Override
 	public VehicleMake addVehicleMake(VehicleMake vehicleMake) {
-		return vehicleMakeDAO.makePersistent(vehicleMake);
+		return vehicleMakeDAO.save(vehicleMake);
 	}
 
 	@Override
@@ -55,7 +54,7 @@ public class VehicleMakeServiceImpl implements VehicleMakeService {
 	 */
 	@Override
 	public VehicleMake updateVehicleMake(VehicleMake vehicleMake) {
-		return vehicleMakeDAO.updateVehicleMake(vehicleMake);
+		return vehicleMakeDAO.update(vehicleMake);
 	}
 
 	@Override

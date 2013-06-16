@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -19,6 +20,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.eshop.vehicle.form.VehicleModelForm;
+import com.eshop.vehicle.form.modelmapper.FormModelMapper;
 import com.eshop.vehicle.model.VehicleMake;
 import com.eshop.vehicle.model.VehicleModel;
 import com.eshop.vehicle.model.VehicleType;
@@ -44,6 +47,10 @@ public class VehicleModelController {
 
 	@Inject
 	private VehicleReferenceDataService vehicleReferenceDataService;
+
+	@Inject
+	@Named("vehicleModelFormMapper")
+	private FormModelMapper<VehicleModelForm, VehicleModel> formModelMapper;
 
 	public VehicleModelService getVehicleModelService() {
 		return vehicleModelService;
@@ -97,8 +104,9 @@ public class VehicleModelController {
 	public String displayAddVehicleModelForm(Model model) {
 
 		VehicleModel vehicleModel = vehicleModelService.createVehicleModelCommandObject();
+		VehicleModelForm vehicleModelForm = formModelMapper.mapModelToForm(vehicleModel);
 
-		model.addAttribute("vehicleModel", vehicleModel);
+		model.addAttribute("vehicleModel", vehicleModelForm);
 
 		addRefDataRequestAttributes(model);
 
@@ -111,7 +119,9 @@ public class VehicleModelController {
 		try {
 			VehicleModel vehicleModel = vehicleModelService.getVehicleModelById(id);
 
-			model.addAttribute("vehicleModel", vehicleModel);
+			VehicleModelForm vehicleModelForm = formModelMapper.mapModelToForm(vehicleModel);
+
+			model.addAttribute("vehicleModel", vehicleModelForm);
 
 			addRefDataRequestAttributes(model);
 
@@ -124,12 +134,14 @@ public class VehicleModelController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String addVehicleModel(@Valid VehicleModel vehicleModel, BindingResult bindingResult, Model model, HttpServletRequest request) {
+	public String addVehicleModel(@Valid VehicleModelForm vehicleModelForm, BindingResult bindingResult, Model model,
+			HttpServletRequest request) {
 		if (bindingResult.hasErrors()) {
 			return "addVehicleModel";
 		}
 
-		vehicleModelService.addVehicleModel(vehicleModel);
+		VehicleModel vehicleModel = formModelMapper.mapFormToNewModel(vehicleModelForm);
+		vehicleModel = vehicleModelService.addVehicleModel(vehicleModel);
 
 		model.addAttribute("vehicleModel", vehicleModel);
 		return "addVehicleModelSuccess";
@@ -150,19 +162,19 @@ public class VehicleModelController {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public String updateVehicleModel(@Valid VehicleModel vehicleModel, BindingResult bindingResult, Model model) {
+	public String updateVehicleModel(@Valid VehicleModelForm vehicleModelForm, BindingResult bindingResult, Model model) {
 
 		if (bindingResult.hasErrors()) {
 			return "editVehicleModel";
 		}
-		
-		VehicleModel updatedVehicleModel = null;
+
+		VehicleModel vehicleModel = formModelMapper.mapFormToExistingModel(vehicleModelForm);
 		try {
-			updatedVehicleModel = vehicleModelService.updateVehicleModel(vehicleModel);
+			vehicleModel = vehicleModelService.updateVehicleModel(vehicleModel);
 		} catch (OptimisticLockingFailureException e) {
 			bindingResult.addError(new ObjectError("vehicleModel", "vehicle.model.edited.by.other.user"));
 		}
-		model.addAttribute("vehicleModel", updatedVehicleModel);
+		model.addAttribute("vehicleModel", vehicleModel);
 		return "editVehicleModelSuccess";
 	}
 

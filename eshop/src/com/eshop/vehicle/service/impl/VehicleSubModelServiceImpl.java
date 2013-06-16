@@ -32,25 +32,9 @@ public class VehicleSubModelServiceImpl implements VehicleSubModelService {
 	@Named("vehicleSubModelCommandFactory")
 	private VehicleSubModelFactory vehicleSubModelFactory;
 
-	public VehicleSubModelDAO getVehicleSubModelDAO() {
-		return vehicleSubModelDAO;
-	}
-
-	public void setVehicleSubModelDAO(VehicleSubModelDAO vehicleSubModelDAO) {
-		this.vehicleSubModelDAO = vehicleSubModelDAO;
-	}
-
-	public VehicleSubModelFactory getVehicleSubModelFactory() {
-		return vehicleSubModelFactory;
-	}
-
-	public void setVehicleSubModelFactory(VehicleSubModelFactory vehicleSubModelFactory) {
-		this.vehicleSubModelFactory = vehicleSubModelFactory;
-	}
-
 	@Override
 	public VehicleSubModel addVehicleSubModel(VehicleSubModel vehicleSubModel) {
-		return vehicleSubModelDAO.makePersistent(vehicleSubModel);
+		return vehicleSubModelDAO.save(vehicleSubModel);
 	}
 
 	@Override

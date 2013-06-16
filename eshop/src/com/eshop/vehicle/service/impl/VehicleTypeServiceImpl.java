@@ -19,17 +19,9 @@ public class VehicleTypeServiceImpl implements VehicleTypeService {
 	@Inject
 	private VehicleTypeDAO vehicleTypeDAO;
 
-	public VehicleTypeDAO getVehicleTypeDAO() {
-		return vehicleTypeDAO;
-	}
-
-	public void setVehicleTypeDAO(VehicleTypeDAO vehicleTypeDAO) {
-		this.vehicleTypeDAO = vehicleTypeDAO;
-	}
-
 	@Override
 	public VehicleType addVehicleType(VehicleType vehicleType) {
-		return vehicleTypeDAO.makePersistent(vehicleType);
+		return vehicleTypeDAO.save(vehicleType);
 	}
 
 	@Override

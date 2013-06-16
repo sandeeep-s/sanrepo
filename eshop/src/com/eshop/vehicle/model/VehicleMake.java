@@ -1,22 +1,14 @@
 package com.eshop.vehicle.model;
 
-import java.io.Serializable;
-
-import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Version;
 import javax.validation.Valid;
 
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.validator.constraints.NotBlank;
 
+import com.eshop.base.model.EntityBase;
 import com.eshop.common.model.Media;
 
 /**
@@ -26,45 +18,29 @@ import com.eshop.common.model.Media;
  */
 @Entity
 @Table(name = "vehicle_make")
-@Cacheable
-@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
-public class VehicleMake implements Serializable {
-
-	private Long id;
-
-	private int version;
+public class VehicleMake extends EntityBase {
 
 	private String name;
 
 	private Media logoImage;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE)
-	public Long getId() {
-		return id;
+	public VehicleMake() {
+
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	@Version
-	public int getVersion() {
-		return version;
-	}
-
-	public void setVersion(int version) {
-		this.version = version;
+	public VehicleMake(String aName, Media aLogoImage) {
+		this.name = aName;
+		this.logoImage = aLogoImage;
 	}
 
 	@NotBlank
-	@Column( unique = true, length = 250, nullable=false)
+	@Column(unique = true, length = 250, nullable = false)
 	public String getName() {
 		return name;
 	}
 
 	//Name should be immutable. Hence private.
-	public void setName(String name) {
+	private void setName(String name) {
 		this.name = name;
 	}
 

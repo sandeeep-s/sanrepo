@@ -1,26 +1,20 @@
 package com.eshop.vehicle.model;
 
-import java.io.Serializable;
 import java.util.List;
-import java.util.Set;
-
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OrderColumn;
 import javax.persistence.Table;
-import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import com.eshop.base.model.EntityBase;
 import com.eshop.common.model.Media;
 
 /**
@@ -30,11 +24,7 @@ import com.eshop.common.model.Media;
  */
 @Entity
 @Table(name = "vehicle_submodel")
-public class VehicleSubModel implements Serializable {
-
-	private Long id;
-
-	private int version;
+public class VehicleSubModel extends EntityBase {
 
 	private VehicleModel vehicleModel;
 
@@ -42,23 +32,14 @@ public class VehicleSubModel implements Serializable {
 
 	private List<Media> images;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE)
-	public Long getId() {
-		return id;
+	public VehicleSubModel() {
+
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	@Version
-	public int getVersion() {
-		return version;
-	}
-
-	public void setVersion(int version) {
-		this.version = version;
+	public VehicleSubModel(VehicleModel vehicleModel, String name, List<Media> images) {
+		this.vehicleModel = vehicleModel;
+		this.name = name;
+		this.images = images;
 	}
 
 	/**
@@ -75,7 +56,7 @@ public class VehicleSubModel implements Serializable {
 		return vehicleModel;
 	}
 
-	public void setVehicleModel(VehicleModel vehicleModel) {
+	private void setVehicleModel(VehicleModel vehicleModel) {
 		this.vehicleModel = vehicleModel;
 	}
 
@@ -85,13 +66,13 @@ public class VehicleSubModel implements Serializable {
 		return name;
 	}
 
-	public void setName(String name) {
+	private void setName(String name) {
 		this.name = name;
 	}
 
 	@ElementCollection
 	@CollectionTable(name = "vehicle_submodel_media", joinColumns = @JoinColumn(name = "vehicle_submodel_id"))
-	@OrderColumn(name="sort_order")
+	@OrderColumn(name = "sort_order")
 	public List<Media> getImages() {
 		return images;
 	}
@@ -115,6 +96,7 @@ public class VehicleSubModel implements Serializable {
 	 * of real objects.
 	 */
 
+	@Override
 	public boolean equals(Object other) {
 		if (!(other instanceof VehicleSubModel)) {
 			return false;
@@ -126,6 +108,7 @@ public class VehicleSubModel implements Serializable {
 		return this.name.equals(that.getName()) && this.vehicleModel.equals(that.getVehicleModel());
 	}
 
+	@Override
 	public int hashCode() {
 		return name.hashCode() + vehicleModel.hashCode();
 	}

@@ -3,8 +3,6 @@ package com.eshop.vehicle.factory.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Named;
-
 import org.springframework.stereotype.Component;
 
 import com.eshop.common.model.Media;

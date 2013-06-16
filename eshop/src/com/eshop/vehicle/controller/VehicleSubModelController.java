@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.eshop.vehicle.form.VehicleSubModelForm;
+import com.eshop.vehicle.form.modelmapper.FormModelMapper;
 import com.eshop.vehicle.model.VehicleMake;
 import com.eshop.vehicle.model.VehicleModel;
 import com.eshop.vehicle.model.VehicleSubModel;
@@ -37,6 +39,10 @@ public class VehicleSubModelController {
 
 	@Inject
 	private VehicleModelService vehicleModelService;
+	
+	@Inject
+	@Named("vehicleSubModelFormMapper")
+	private FormModelMapper<VehicleSubModelForm, VehicleSubModel> formModelMapper;
 
 	@Inject
 	@Named("vehicleMakeService")
@@ -76,7 +82,8 @@ public class VehicleSubModelController {
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String displayAddVehicleSubModelForm(Model model) {
 		VehicleSubModel vehicleSubModel = vehicleSubModelService.createVehicleSubModel();
-		model.addAttribute("vehicleSubModel", vehicleSubModel);
+		VehicleSubModelForm vehicleSubModelForm = formModelMapper.mapModelToForm(vehicleSubModel);
+		model.addAttribute("vehicleSubModel", vehicleSubModelForm);
 
 		Set<VehicleMake> vehicleMakes = vehicleMakeService.getAllVehicleMakes();
 		model.addAttribute("vehicleMakes", vehicleMakes);
@@ -90,7 +97,9 @@ public class VehicleSubModelController {
 	public String displayEditVehicleSubModelForm(@PathVariable Long id, Model model) {
 		try {
 			VehicleSubModel vehicleSubModel = vehicleSubModelService.getVehicleSubModelById(id);
-			model.addAttribute("vehicleSubModel", vehicleSubModel);
+			VehicleSubModelForm vehicleSubModelForm = formModelMapper.mapModelToForm(vehicleSubModel);
+			
+			model.addAttribute("vehicleSubModel", vehicleSubModelForm);
 
 			Set<VehicleModel> vehicleModels = vehicleModelService.getAllVehicleModels();
 			model.addAttribute("vehicleModels", vehicleModels);
@@ -105,12 +114,13 @@ public class VehicleSubModelController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String addVehicleSubModel(@Valid VehicleSubModel vehicleSubModel, BindingResult bindingResult, Model model,
+	public String addVehicleSubModel(@Valid VehicleSubModelForm vehicleSubModelForm, BindingResult bindingResult, Model model,
 			HttpServletRequest request) {
 		if (bindingResult.hasErrors()) {
 			return "addVehicleSubModel";
 		}
 
+		VehicleSubModel vehicleSubModel = formModelMapper.mapFormToNewModel(vehicleSubModelForm);
 		vehicleSubModelService.addVehicleSubModel(vehicleSubModel);
 
 		model.addAttribute("vehicleSubModel", vehicleSubModel);
@@ -132,11 +142,13 @@ public class VehicleSubModelController {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public String updateVehicleSubModel(@Valid VehicleSubModel vehicleSubModel, BindingResult bindingResult, Model model) {
+	public String updateVehicleSubModel(@Valid VehicleSubModelForm vehicleSubModelForm, BindingResult bindingResult, Model model) {
 		if (bindingResult.hasErrors()) {
 			return "editVehicleSubModel";
 		}
 
+		VehicleSubModel vehicleSubModel = formModelMapper.mapFormToExistingModel(vehicleSubModelForm);
+		
 		VehicleSubModel updatedVehicleSubModel = null;
 		try {
 			updatedVehicleSubModel = vehicleSubModelService.updateVehicleSubModel(vehicleSubModel);

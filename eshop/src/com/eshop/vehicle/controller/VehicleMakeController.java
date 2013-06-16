@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import com.eshop.common.service.MediaService;
+import com.eshop.vehicle.form.VehicleMakeForm;
+import com.eshop.vehicle.form.modelmapper.FormModelMapper;
 import com.eshop.vehicle.model.VehicleMake;
 import com.eshop.vehicle.service.VehicleMakeService;
 
@@ -30,12 +32,14 @@ import com.eshop.vehicle.service.VehicleMakeService;
 public class VehicleMakeController {
 
 	@Inject
-	@Named("vehicleMakeService")
 	private VehicleMakeService vehicleMakeService;
 
 	@Inject
-	@Named("mediaService")
 	private MediaService mediaService;
+	
+	@Inject
+	@Named("vehicleMakeFormMapper")
+	private FormModelMapper<VehicleMakeForm, VehicleMake> formModelMapper;
 
 	public VehicleMakeService getVehicleMakeService() {
 		return vehicleMakeService;
@@ -62,7 +66,7 @@ public class VehicleMakeController {
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String displayAddVehicleMakeForm(Model model) {
-		model.addAttribute("vehicleMake", new VehicleMake());
+		model.addAttribute("vehicleMake", new VehicleMakeForm());
 		return "addVehicleMake";
 	}
 
@@ -73,18 +77,23 @@ public class VehicleMakeController {
 			model.addAttribute("vehicleMakeId", id);
 			return "vehicleMakeNotFound";
 		}
-		model.addAttribute("vehicleMake", vehicleMake);
+		
+		VehicleMakeForm vehicleMakeForm = formModelMapper.mapModelToForm(vehicleMake);
+		model.addAttribute("vehicleMake", vehicleMakeForm);
 
 		return "editVehicleMake";
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String addVehicleMake(@Valid VehicleMake vehicleMake, BindingResult result, Model model, HttpServletRequest request) {
+	public String addVehicleMake(@Valid VehicleMakeForm vehicleMakeForm, BindingResult result, Model model, HttpServletRequest request) {
 		if (result.hasErrors()) {
 			return "addVehicleMake";
 		}
 
+		VehicleMake vehicleMake = formModelMapper.mapFormToNewModel(vehicleMakeForm);
+		
 		vehicleMake = vehicleMakeService.addVehicleMake(vehicleMake);
+		
 		model.addAttribute("vehicleMake", vehicleMake);
 		return "addVehicleMakeSuccess";
 	}
@@ -102,12 +111,13 @@ public class VehicleMakeController {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public String updateVehicleMake(@Valid VehicleMake vehicleMake, BindingResult result, Model model, HttpServletRequest request) {
+	public String updateVehicleMake(@Valid VehicleMakeForm vehicleMakeForm, BindingResult result, Model model, HttpServletRequest request) {
 
 		if (result.hasErrors()) {
 			return "editVehicleMake";
 		}
 
+		VehicleMake vehicleMake = formModelMapper.mapFormToExistingModel(vehicleMakeForm);
 		vehicleMake = vehicleMakeService.updateVehicleMake(vehicleMake);
 		model.addAttribute("vehicleMake", vehicleMake);
 		return "editVehicleMakeSuccess";

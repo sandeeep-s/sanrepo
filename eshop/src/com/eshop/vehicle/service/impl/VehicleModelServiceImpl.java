@@ -34,25 +34,9 @@ public class VehicleModelServiceImpl implements VehicleModelService {
 	@Named("vehicleModelCommandFactory")
 	private VehicleModelFactory vehicleModelFactory;
 
-	public VehicleModelDAO getVehicleModelDAO() {
-		return vehicleModelDAO;
-	}
-
-	public void setVehicleModelDAO(VehicleModelDAO vehicleModelDAO) {
-		this.vehicleModelDAO = vehicleModelDAO;
-	}
-
-	public VehicleModelFactory getVehicleModelFactory() {
-		return vehicleModelFactory;
-	}
-
-	public void setVehicleModelFactory(VehicleModelFactory vehicleModelFactory) {
-		this.vehicleModelFactory = vehicleModelFactory;
-	}
-
 	@Override
 	public VehicleModel addVehicleModel(VehicleModel vehicleModel) {
-		return vehicleModelDAO.makePersistent(vehicleModel);
+		return vehicleModelDAO.save(vehicleModel);
 	}
 
 	@Override

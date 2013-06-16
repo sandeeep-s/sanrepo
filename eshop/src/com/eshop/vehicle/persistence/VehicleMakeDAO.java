@@ -16,5 +16,5 @@ public interface VehicleMakeDAO extends GenericDAO<VehicleMake, Long> {
 	
 	public List<Integer> getModelYearsForMake(Long vehicleMakeId);
 	
-	public VehicleMake updateVehicleMake(VehicleMake detachedVehicleMake);	
+	public VehicleMake update(VehicleMake detachedInstance);	
 }

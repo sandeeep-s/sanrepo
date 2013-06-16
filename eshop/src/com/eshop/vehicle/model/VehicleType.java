@@ -1,19 +1,14 @@
 package com.eshop.vehicle.model;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Version;
 import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.eshop.base.model.EntityBase;
 import com.eshop.common.model.Media;
 
 /**
@@ -23,33 +18,19 @@ import com.eshop.common.model.Media;
  */
 @Entity
 @Table(name = "vehicle_type")
-public class VehicleType implements Serializable {
-
-	private Long id;
-
-	private int version;
+public class VehicleType extends EntityBase {
 
 	private String name;
 
 	private Media image;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE)
-	public Long getId() {
-		return id;
+	public VehicleType() {
+
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	@Version
-	public int getVersion() {
-		return version;
-	}
-
-	public void setVersion(int version) {
-		this.version = version;
+	public VehicleType(String name, Media image) {
+		this.name = name;
+		this.image = image;
 	}
 
 	@NotEmpty

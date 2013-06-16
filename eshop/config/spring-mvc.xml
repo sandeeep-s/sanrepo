@@ -16,14 +16,14 @@
 				<bean class="com.eshop.vehicle.converter.VehicleMakeConverter" />
 				<bean class="com.eshop.vehicle.converter.VehicleTypeConverter" />
 				<bean class="com.eshop.vehicle.converter.VehicleModelConverter" />
-				<bean class="com.eshop.catalog.admin.converter.BrandConverter" />
+<!-- 				<bean class="com.eshop.catalog.admin.converter.BrandConverter" />
 				<bean class="com.eshop.catalog.admin.converter.CategoryConverter" />
 				<bean class="com.eshop.catalog.admin.converter.PatternConverter" />
 				<bean class="com.eshop.catalog.admin.converter.TechSpecPropertyConverter" />
 				<bean class="com.eshop.catalog.admin.converter.DimensionPropertyConverter" />
 				<bean class="com.eshop.catalog.admin.converter.ProductConverter" />
 				<bean class="com.eshop.catalog.admin.converter.CategorizedProductConverter" />
-			</set>
+ -->			</set>
 		</property>
 	</bean>
 
