@@ -1,4 +1,4 @@
-package com.eshop.base.common;
+package com.eshop.common;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;

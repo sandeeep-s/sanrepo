@@ -21,8 +21,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.eshop.base.form.modelmapper.FormModelMapper;
-import com.eshop.catalog.admin.service.ProductService;
 import com.eshop.catalog.model.Product;
+import com.eshop.catalog.service.ProductService;
 import com.eshop.vehicle.model.VehicleModel;
 import com.eshop.vehicle.service.VehicleModelService;
 import com.eshop.vehiclefitment.form.VehicleFitmentForm;
