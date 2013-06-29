@@ -1,18 +1,12 @@
 package com.eshop.catalog.model;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
-import javax.persistence.Version;
+import com.eshop.base.model.EntityBase;
 
 /**
  * @author ssd1kor
@@ -21,11 +15,7 @@ import javax.persistence.Version;
  */
 @Entity
 @Table(name = "tech_spec_property")
-public class TechSpecProperty implements Serializable {
-
-	private Long id;
-
-	private int version;
+public class TechSpecProperty extends EntityBase {
 
 	private String name;
 
@@ -35,23 +25,15 @@ public class TechSpecProperty implements Serializable {
 
 	private Category category;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE)
-	public Long getId() {
-		return id;
+	public TechSpecProperty() {
+
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	@Version
-	public int getVersion() {
-		return version;
-	}
-
-	public void setVersion(int version) {
-		this.version = version;
+	public TechSpecProperty(String name, String unit, String description, Category category) {
+		this.name = name;
+		this.unit = unit;
+		this.description = description;
+		this.category = category;
 	}
 
 	@Column(nullable = false, unique = true, length = 250)
@@ -59,7 +41,7 @@ public class TechSpecProperty implements Serializable {
 		return name;
 	}
 
-	public void setName(String name) {
+	private void setName(String name) {
 		this.name = name;
 	}
 
@@ -68,7 +50,7 @@ public class TechSpecProperty implements Serializable {
 		return unit;
 	}
 
-	public void setUnit(String unit) {
+	private void setUnit(String unit) {
 		this.unit = unit;
 	}
 
@@ -88,13 +70,13 @@ public class TechSpecProperty implements Serializable {
 	 * FetchType.EAGER is the default for ManyToOne association in JPA.
 	 * @return
 	 */
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "category_id", nullable = false)
 	public Category getCategory() {
 		return category;
 	}
 
-	public void setCategory(Category category) {
+	private void setCategory(Category category) {
 		this.category = category;
 	}
 
@@ -113,6 +95,7 @@ public class TechSpecProperty implements Serializable {
 	 * of real objects.
 	 */
 
+	@Override
 	public boolean equals(Object other) {
 		if (!(other instanceof TechSpecProperty)) {
 			return false;
@@ -124,10 +107,12 @@ public class TechSpecProperty implements Serializable {
 		return this.name.equals(that.getName()) && this.category.equals(that.getCategory());
 	}
 
+	@Override
 	public int hashCode() {
 		return name.hashCode() + category.hashCode();
 	}
 
+	@Override
 	public String toString() {
 		return name;
 	}

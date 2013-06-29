@@ -3,6 +3,7 @@ package com.eshop.vehicle.form.modelmapper;
 import javax.inject.Inject;
 import org.springframework.stereotype.Component;
 
+import com.eshop.base.form.modelmapper.FormModelMapper;
 import com.eshop.vehicle.form.VehicleMakeForm;
 import com.eshop.vehicle.model.VehicleMake;
 import com.eshop.vehicle.persistence.VehicleMakeDAO;

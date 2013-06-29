@@ -1,23 +1,15 @@
 package com.eshop.catalog.model;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Version;
-
+import com.eshop.base.model.EntityBase;
 import com.eshop.common.model.Media;
 
 /**
@@ -27,11 +19,7 @@ import com.eshop.common.model.Media;
  */
 @Entity
 @Table(name = "category")
-public class Category implements Serializable {
-
-	private Long id;
-
-	private int version;
+public class Category extends EntityBase {
 
 	private String name;
 
@@ -45,23 +33,17 @@ public class Category implements Serializable {
 
 	private List<CategorizedProduct> categorizedProducts;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE)
-	public Long getId() {
-		return id;
+	public Category() {
+
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	@Version
-	public int getVersion() {
-		return version;
-	}
-
-	public void setVersion(int version) {
-		this.version = version;
+	public Category(String name, String description, Media image, Category parentCategory,
+			List<CategorizedProduct> categorizedProducts) {
+		this.name = name;
+		this.description = description;
+		this.image = image;
+		this.parentCategory = parentCategory;
+		this.categorizedProducts = categorizedProducts;
 	}
 
 	@Column(nullable = false, unique = true, length = 250)
@@ -69,7 +51,7 @@ public class Category implements Serializable {
 		return name;
 	}
 
-	public void setName(String name) {
+	private void setName(String name) {
 		this.name = name;
 	}
 
@@ -118,7 +100,7 @@ public class Category implements Serializable {
 		return children;
 	}
 
-	public void setChildren(List<Category> children) {
+	private void setChildren(List<Category> children) {
 		this.children = children;
 	}
 
@@ -171,7 +153,8 @@ public class Category implements Serializable {
 		return name.hashCode();
 	}
 
-	public String toString(){
+	@Override
+	public String toString() {
 		return name;
 	}
 

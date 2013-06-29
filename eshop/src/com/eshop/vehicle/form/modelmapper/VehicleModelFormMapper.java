@@ -4,6 +4,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Component;
 
+import com.eshop.base.form.modelmapper.FormModelMapper;
 import com.eshop.vehicle.form.VehicleModelForm;
 import com.eshop.vehicle.model.VehicleModel;
 import com.eshop.vehicle.persistence.VehicleModelDAO;

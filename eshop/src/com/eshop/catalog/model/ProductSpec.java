@@ -1,31 +1,20 @@
 package com.eshop.catalog.model;
 
-import java.io.Serializable;
 import java.util.List;
-import java.util.Map;
-
 import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapKeyJoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-import javax.persistence.Version;
+import com.eshop.base.model.EntityBase;
 
 @Entity
 @Table(name = "product_spec")
-public class ProductSpec implements Serializable {
-
-	private Long id;
-
-	private int version;
+public class ProductSpec extends EntityBase {
 
 	private Product product;
 
@@ -35,23 +24,16 @@ public class ProductSpec implements Serializable {
 
 	private List<Dimension> dimensions;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE)
-	public Long getId() {
-		return id;
+	public ProductSpec(){
+		
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	@Version
-	public int getVersion() {
-		return version;
-	}
-
-	public void setVersion(int version) {
-		this.version = version;
+	public ProductSpec(Product product, Pattern pattern, List<TechSpec> techSpecs, List<Dimension> dimensions){
+		this.product = product;
+		this.pattern = pattern;
+		this.techSpecs = techSpecs;
+		this.dimensions = dimensions;
+		
 	}
 
 	@OneToOne(fetch=FetchType.LAZY)
@@ -60,7 +42,7 @@ public class ProductSpec implements Serializable {
 		return product;
 	}
 
-	public void setProduct(Product product) {
+	void setProduct(Product product) {
 		this.product = product;
 	}
 
@@ -77,7 +59,7 @@ public class ProductSpec implements Serializable {
 		return pattern;
 	}
 
-	public void setPattern(Pattern pattern) {
+	private void setPattern(Pattern pattern) {
 		this.pattern = pattern;
 	}
 

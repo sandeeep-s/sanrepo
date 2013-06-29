@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.eshop.base.form.modelmapper.FormModelMapper;
 import com.eshop.vehicle.form.VehicleSubModelForm;
-import com.eshop.vehicle.form.modelmapper.FormModelMapper;
 import com.eshop.vehicle.model.VehicleMake;
 import com.eshop.vehicle.model.VehicleModel;
 import com.eshop.vehicle.model.VehicleSubModel;

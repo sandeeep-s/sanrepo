@@ -43,7 +43,7 @@ public class VehicleFitmentServiceImpl implements VehicleFitmentService {
 	 */
 	@Override
 	public VehicleFitment addVehicleFitment(VehicleFitment vehicleFitment) {
-		return vehicleFitmentDAO.makePersistent(vehicleFitment);
+		return vehicleFitmentDAO.save(vehicleFitment);
 	}
 
 	@Override

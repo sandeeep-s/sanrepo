@@ -1,26 +1,16 @@
 package com.eshop.catalog.model;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Version;
+import com.eshop.base.model.EntityBase;
 
 @Entity
-@Table(name="dimension_property")
-public class DimensionProperty implements Serializable {
-
-	private Long id;
-
-	private int version;
+@Table(name = "dimension_property")
+public class DimensionProperty extends EntityBase {
 
 	private String name;
 
@@ -30,23 +20,15 @@ public class DimensionProperty implements Serializable {
 
 	private Category category;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE)
-	public Long getId() {
-		return id;
+	public DimensionProperty() {
+
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	@Version
-	public int getVersion() {
-		return version;
-	}
-
-	public void setVersion(int version) {
-		this.version = version;
+	public DimensionProperty(String name, String unit, String description, Category category) {
+		this.name = name;
+		this.unit = unit;
+		this.description = description;
+		this.category = category;
 	}
 
 	@Column(nullable = false, unique = true, length = 250)
@@ -54,7 +36,7 @@ public class DimensionProperty implements Serializable {
 		return name;
 	}
 
-	public void setName(String name) {
+	private void setName(String name) {
 		this.name = name;
 	}
 
@@ -63,7 +45,7 @@ public class DimensionProperty implements Serializable {
 		return unit;
 	}
 
-	public void setUnit(String unit) {
+	private void setUnit(String unit) {
 		this.unit = unit;
 	}
 
@@ -89,7 +71,7 @@ public class DimensionProperty implements Serializable {
 		return category;
 	}
 
-	public void setCategory(Category category) {
+	private void setCategory(Category category) {
 		this.category = category;
 	}
 
@@ -108,6 +90,7 @@ public class DimensionProperty implements Serializable {
 	 * of real objects.
 	 */
 
+	@Override
 	public boolean equals(Object other) {
 		if (!(other instanceof DimensionProperty)) {
 			return false;
@@ -119,12 +102,14 @@ public class DimensionProperty implements Serializable {
 		return this.name.equals(that.getName()) && this.category.equals(that.getCategory());
 	}
 
+	@Override
 	public int hashCode() {
 		return name.hashCode() + category.hashCode();
 	}
 
-	public String toString(){
+	@Override
+	public String toString() {
 		return name;
 	}
-	
+
 }//end Dimensions

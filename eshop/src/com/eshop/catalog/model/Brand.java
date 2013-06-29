@@ -1,17 +1,14 @@
 package com.eshop.catalog.model;
 
-import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Version;
 import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.NotBlank;
+
+import com.eshop.base.model.EntityBase;
 import com.eshop.common.model.Media;
 
 /**
@@ -20,12 +17,8 @@ import com.eshop.common.model.Media;
  * @created 29-Sep-2012 8:48:07 PM
  */
 @Entity
-@Table(name="brand")
-public class Brand implements Serializable {
-
-	private Long id;
-	
-	private int version;
+@Table(name = "brand")
+public class Brand extends EntityBase {
 
 	private String name;
 
@@ -33,23 +26,14 @@ public class Brand implements Serializable {
 
 	private Media logoImage;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE)
-	public Long getId() {
-		return id;
+	public Brand() {
+
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	@Version
-	public int getVersion() {
-		return version;
-	}
-
-	public void setVersion(int version) {
-		this.version = version;
+	public Brand(String name, String description, Media logoImage) {
+		this.name = name;
+		this.description = description;
+		this.logoImage = logoImage;
 	}
 
 	@NotBlank
@@ -58,7 +42,7 @@ public class Brand implements Serializable {
 		return name;
 	}
 
-	public void setName(String name) {
+	private void setName(String name) {
 		this.name = name;
 	}
 
@@ -81,7 +65,6 @@ public class Brand implements Serializable {
 	public void setLogoImage(Media logoImage) {
 		this.logoImage = logoImage;
 	}
-
 
 	/**
 	 * If this object is used as detached object, it can be outside guaranteed scope identity of persistence context.

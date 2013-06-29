@@ -1,11 +1,11 @@
 package com.eshop.vehicle.form;
 
-import java.io.Serializable;
 import java.util.List;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.eshop.base.form.BaseForm;
 import com.eshop.common.model.Media;
 import com.eshop.vehicle.model.VehicleMake;
 import com.eshop.vehicle.model.VehicleType;
@@ -15,11 +15,7 @@ import com.eshop.vehicle.model.VehicleType;
  * @version 1.0
  * @created 26-Sep-2012 6:40:55 PM
  */
-public class VehicleModelForm implements Serializable {
-
-	private Long id;
-
-	private Integer version;
+public class VehicleModelForm extends BaseForm {
 
 	private String name;
 
@@ -30,22 +26,6 @@ public class VehicleModelForm implements Serializable {
 	private VehicleType vehicleType;
 
 	private VehicleMake vehicleMake;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Integer getVersion() {
-		return version;
-	}
-
-	public void setVersion(Integer version) {
-		this.version = version;
-	}
 
 	@NotEmpty
 	public String getName() {

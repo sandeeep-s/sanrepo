@@ -1,7 +1,5 @@
 package com.eshop.catalog.model;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CollectionTable;
@@ -9,15 +7,11 @@ import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OrderColumn;
 import javax.persistence.Table;
-import javax.persistence.Version;
-
+import com.eshop.base.model.EntityBase;
 import com.eshop.common.model.Media;
 
 /**
@@ -27,11 +21,7 @@ import com.eshop.common.model.Media;
  */
 @Entity
 @Table(name = "pattern")
-public class Pattern implements Serializable {
-
-	private Long id;
-
-	private int version;
+public class Pattern extends EntityBase {
 
 	private String name;
 
@@ -45,23 +35,17 @@ public class Pattern implements Serializable {
 
 	private List<Media> images;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE)
-	public Long getId() {
-		return id;
+	public Pattern() {
+
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	@Version
-	public int getVersion() {
-		return version;
-	}
-
-	public void setVersion(int version) {
-		this.version = version;
+	public Pattern(String name, Brand brand, String description, String warranty, String importantNotes, List<Media> images) {
+		this.name = name;
+		this.brand = brand;
+		this.description = description;
+		this.warranty = warranty;
+		this.importantNotes = importantNotes;
+		this.images = images;
 	}
 
 	@Column(nullable = false, unique = true, length = 250)
@@ -69,7 +53,7 @@ public class Pattern implements Serializable {
 		return name;
 	}
 
-	public void setName(String name) {
+	private void setName(String name) {
 		this.name = name;
 	}
 
@@ -113,13 +97,13 @@ public class Pattern implements Serializable {
 		return brand;
 	}
 
-	public void setBrand(Brand brand) {
+	private void setBrand(Brand brand) {
 		this.brand = brand;
 	}
 
-	@ElementCollection(fetch=FetchType.EAGER)
+	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "pattern_media", joinColumns = @JoinColumn(name = "pattern_id"))
-	@OrderColumn(name="sort_order")
+	@OrderColumn(name = "sort_order")
 	public List<Media> getImages() {
 		return images;
 	}
@@ -142,6 +126,7 @@ public class Pattern implements Serializable {
 	 * Always use getters to compare properties of other object. This is to make sure the code works even if proxies are passed instead
 	 * of real objects.
 	 */
+	@Override
 	public boolean equals(Object other) {
 		if (!(other instanceof Pattern)) {
 			return false;
@@ -150,13 +135,15 @@ public class Pattern implements Serializable {
 			return true;
 		}
 		final Pattern that = (Pattern) other;
-		return this.name.equals(that.getName()) ;
+		return this.name.equals(that.getName());
 	}
 
+	@Override
 	public int hashCode() {
 		return name.hashCode();
 	}
 
+	@Override
 	public String toString() {
 		return name;
 	}
