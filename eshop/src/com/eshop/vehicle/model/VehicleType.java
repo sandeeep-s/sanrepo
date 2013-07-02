@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.Valid;
 
+import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.eshop.base.model.EntityBase;
@@ -33,7 +34,7 @@ public class VehicleType extends EntityBase {
 		this.image = image;
 	}
 
-	@NotEmpty
+	@NotBlank
 	@Column(nullable = false, unique = true, length = 250)
 	public String getName() {
 		return name;

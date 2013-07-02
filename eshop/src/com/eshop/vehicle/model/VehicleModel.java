@@ -11,10 +11,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OrderColumn;
 import javax.persistence.Table;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.eshop.base.model.EntityBase;
@@ -53,7 +58,7 @@ public class VehicleModel extends EntityBase {
 		this.vehicleMake = vehicleMake;
 	}
 
-	@NotEmpty
+	@NotBlank
 	@Column(unique = true, nullable = false, length = 250)
 	public String getName() {
 		return name;
@@ -64,6 +69,8 @@ public class VehicleModel extends EntityBase {
 	}
 
 	@NotNull
+	@Min(1950)
+	@Max(2050)
 	@Column(nullable = false)
 	public Integer getModelYear() {
 		return modelYear;
@@ -73,6 +80,7 @@ public class VehicleModel extends EntityBase {
 		this.modelYear = manufacturingYear;
 	}
 
+	@NotEmpty
 	@ElementCollection(fetch = FetchType.LAZY)
 	@CollectionTable(name = "vehicle_model_media", joinColumns = @JoinColumn(name = "vehicle_model_id"))
 	@OrderColumn(name = "sort_order")
@@ -91,6 +99,7 @@ public class VehicleModel extends EntityBase {
 	 * FetchType.EAGER is the default for ManyToOne association in JPA.
 	 * @return
 	 */
+	@NotNull
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "vehicle_type_id", nullable = false)
 	public VehicleType getVehicleType() {
@@ -108,6 +117,7 @@ public class VehicleModel extends EntityBase {
 	 * FetchType.EAGER is the default for ManyToOne association in JPA.
 	 * @return
 	 */
+	@NotNull
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "vehicle_make_id", nullable = false)
 	public VehicleMake getVehicleMake() {

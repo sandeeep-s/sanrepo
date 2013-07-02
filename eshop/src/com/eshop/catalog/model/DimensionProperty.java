@@ -6,6 +6,10 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotBlank;
+
 import com.eshop.base.model.EntityBase;
 
 @Entity
@@ -31,6 +35,7 @@ public class DimensionProperty extends EntityBase {
 		this.category = category;
 	}
 
+	@NotBlank
 	@Column(nullable = false, unique = true, length = 250)
 	public String getName() {
 		return name;
@@ -40,6 +45,7 @@ public class DimensionProperty extends EntityBase {
 		this.name = name;
 	}
 
+	@NotBlank
 	@Column(nullable = false, length = 50)
 	public String getUnit() {
 		return unit;
@@ -49,6 +55,7 @@ public class DimensionProperty extends EntityBase {
 		this.unit = unit;
 	}
 
+	@NotBlank
 	@Column(nullable = false, length = 750)
 	public String getDescription() {
 		return description;
@@ -65,6 +72,7 @@ public class DimensionProperty extends EntityBase {
 	 * FetchType.EAGER is the default for ManyToOne association in JPA.
 	 * @return
 	 */
+	@NotNull
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "category_id", nullable = false)
 	public Category getCategory() {

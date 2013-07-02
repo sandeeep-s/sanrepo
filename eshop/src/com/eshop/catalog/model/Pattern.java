@@ -11,6 +11,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OrderColumn;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
+
 import com.eshop.base.model.EntityBase;
 import com.eshop.common.model.Media;
 
@@ -48,6 +53,7 @@ public class Pattern extends EntityBase {
 		this.images = images;
 	}
 
+	@NotBlank
 	@Column(nullable = false, unique = true, length = 250)
 	public String getName() {
 		return name;
@@ -57,6 +63,7 @@ public class Pattern extends EntityBase {
 		this.name = name;
 	}
 
+	@NotBlank
 	@Column(nullable = false, length = 750)
 	public String getDescription() {
 		return description;
@@ -91,6 +98,7 @@ public class Pattern extends EntityBase {
 	 * FetchType.EAGER is the default for ManyToOne association in JPA.
 	 * @return
 	 */
+	@NotNull	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "brand_id", nullable = false)
 	public Brand getBrand() {
@@ -101,6 +109,7 @@ public class Pattern extends EntityBase {
 		this.brand = brand;
 	}
 
+	@NotEmpty
 	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "pattern_media", joinColumns = @JoinColumn(name = "pattern_id"))
 	@OrderColumn(name = "sort_order")

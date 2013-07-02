@@ -1,7 +1,11 @@
 package com.eshop.vehicle.form;
 
 import java.util.List;
+
+import javax.validation.Valid;
+
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import com.eshop.base.form.BaseForm;
 import com.eshop.common.model.Media;
@@ -37,6 +41,8 @@ public class VehicleSubModelForm extends BaseForm {
 		this.name = name;
 	}
 
+	@NotEmpty
+	@Valid
 	public List<Media> getImages() {
 		return images;
 	}

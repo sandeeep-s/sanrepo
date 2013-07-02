@@ -10,9 +10,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OrderColumn;
 import javax.persistence.Table;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import com.eshop.base.model.EntityBase;
 import com.eshop.common.model.Media;
@@ -70,6 +72,8 @@ public class VehicleSubModel extends EntityBase {
 		this.name = name;
 	}
 
+	@NotEmpty
+	@Valid
 	@ElementCollection
 	@CollectionTable(name = "vehicle_submodel_media", joinColumns = @JoinColumn(name = "vehicle_submodel_id"))
 	@OrderColumn(name = "sort_order")

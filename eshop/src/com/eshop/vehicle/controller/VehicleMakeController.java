@@ -14,6 +14,7 @@ import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -86,8 +87,9 @@ public class VehicleMakeController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String addVehicleMake(@Valid VehicleMakeForm vehicleMakeForm, BindingResult result, Model model, HttpServletRequest request) {
-		if (result.hasErrors()) {
+	public String addVehicleMake(@Valid @ModelAttribute("vehicleMake") VehicleMakeForm vehicleMakeForm, BindingResult bindingResult, Model model, HttpServletRequest request) {
+		if (bindingResult.hasErrors()) {
+			model.addAttribute("vehicleMake", vehicleMakeForm);
 			return "addVehicleMake";
 		}
 
@@ -112,7 +114,7 @@ public class VehicleMakeController {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public String updateVehicleMake(@Valid VehicleMakeForm vehicleMakeForm, BindingResult result, Model model, HttpServletRequest request) {
+	public String updateVehicleMake(@Valid @ModelAttribute("vehicleMake") VehicleMakeForm vehicleMakeForm, BindingResult result, Model model, HttpServletRequest request) {
 
 		if (result.hasErrors()) {
 			return "editVehicleMake";

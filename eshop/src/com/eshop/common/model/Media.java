@@ -7,11 +7,8 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
+import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * @author ssd1kor
@@ -22,7 +19,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class Media implements Serializable {
 
 	private MediaType mediaType;
-
+	
 	private String mediaFileName;
 
 	private String mediaName;
@@ -40,6 +37,7 @@ public class Media implements Serializable {
 		this.mediaThumbnailFileName = mediaThumbnailFileName;
 	}
 
+	@NotNull
 	@Column(nullable = false)
 	public MediaType getMediaType() {
 		return mediaType;

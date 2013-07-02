@@ -1,5 +1,9 @@
 package com.eshop.catalog.form;
 
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotBlank;
+
 import com.eshop.base.form.BaseForm;
 import com.eshop.catalog.model.Category;
 
@@ -24,6 +28,7 @@ public class DimensionPropertyForm extends BaseForm {
 		this.category = category;
 	}
 
+	@NotBlank
 	public String getName() {
 		return name;
 	}
@@ -32,6 +37,7 @@ public class DimensionPropertyForm extends BaseForm {
 		this.name = name;
 	}
 
+	@NotBlank
 	public String getUnit() {
 		return unit;
 	}
@@ -40,6 +46,7 @@ public class DimensionPropertyForm extends BaseForm {
 		this.unit = unit;
 	}
 
+	@NotBlank
 	public String getDescription() {
 		return description;
 	}
@@ -48,6 +55,7 @@ public class DimensionPropertyForm extends BaseForm {
 		this.description = description;
 	}
 
+	@NotNull
 	public Category getCategory() {
 		return category;
 	}

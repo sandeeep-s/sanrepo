@@ -2,6 +2,7 @@ package com.eshop.vehicle.form;
 
 import javax.validation.Valid;
 
+import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.eshop.base.form.BaseForm;
@@ -18,7 +19,7 @@ public class VehicleTypeForm extends BaseForm {
 
 	private Media image;
 
-	@NotEmpty
+	@NotBlank
 	public String getName() {
 		return name;
 	}

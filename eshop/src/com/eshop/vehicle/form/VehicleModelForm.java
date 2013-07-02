@@ -1,8 +1,13 @@
 package com.eshop.vehicle.form;
 
 import java.util.List;
+
+import javax.validation.Valid;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.eshop.base.form.BaseForm;
@@ -27,7 +32,7 @@ public class VehicleModelForm extends BaseForm {
 
 	private VehicleMake vehicleMake;
 
-	@NotEmpty
+	@NotBlank
 	public String getName() {
 		return name;
 	}
@@ -37,6 +42,8 @@ public class VehicleModelForm extends BaseForm {
 	}
 
 	@NotNull
+	@Min(1950)
+	@Max(2050)
 	public Integer getModelYear() {
 		return modelYear;
 	}
@@ -45,6 +52,8 @@ public class VehicleModelForm extends BaseForm {
 		this.modelYear = manufacturingYear;
 	}
 
+	@NotEmpty
+	@Valid
 	public List<Media> getImages() {
 		return images;
 	}
@@ -53,6 +62,7 @@ public class VehicleModelForm extends BaseForm {
 		this.images = images;
 	}
 
+	@NotNull
 	public VehicleType getVehicleType() {
 		return vehicleType;
 	}
@@ -61,6 +71,7 @@ public class VehicleModelForm extends BaseForm {
 		this.vehicleType = vehicleType;
 	}
 
+	@NotNull
 	public VehicleMake getVehicleMake() {
 		return vehicleMake;
 	}

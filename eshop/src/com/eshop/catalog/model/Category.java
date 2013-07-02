@@ -9,6 +9,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotBlank;
+
 import com.eshop.base.model.EntityBase;
 import com.eshop.common.model.Media;
 
@@ -46,6 +51,7 @@ public class Category extends EntityBase {
 		this.categorizedProducts = categorizedProducts;
 	}
 
+	@NotBlank
 	@Column(nullable = false, unique = true, length = 250)
 	public String getName() {
 		return name;
@@ -55,6 +61,7 @@ public class Category extends EntityBase {
 		this.name = name;
 	}
 
+	@NotBlank
 	@Column(nullable = false, length = 750)
 	public String getDescription() {
 		return description;
@@ -64,6 +71,8 @@ public class Category extends EntityBase {
 		this.description = description;
 	}
 
+	@Valid
+	@NotNull
 	@Embedded
 	public Media getImage() {
 		return image;

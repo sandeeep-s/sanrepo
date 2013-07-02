@@ -5,9 +5,9 @@ import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.Valid;
+import javax.validation.constraints.Past;
 
 import org.hibernate.validator.constraints.NotBlank;
-
 import com.eshop.base.model.EntityBase;
 import com.eshop.common.model.Media;
 

@@ -3,11 +3,11 @@
 <suite name="Failed suite [Default suite]">
   <test name="Default test(failed)">
     <classes>
-      <class name="com.eshop.test.ListContainsAllTest">
+      <class name="AnnotationTest">
         <methods>
-          <include name="testListEqualsString"/>
+          <include name="testAnnotationInheritence"/>
         </methods>
-      </class> <!-- com.eshop.test.ListContainsAllTest -->
+      </class> <!-- AnnotationTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

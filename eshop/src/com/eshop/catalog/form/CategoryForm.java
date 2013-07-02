@@ -1,8 +1,11 @@
 package com.eshop.catalog.form;
 
-import java.util.List;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotBlank;
+
 import com.eshop.base.form.BaseForm;
-import com.eshop.catalog.model.CategorizedProduct;
 import com.eshop.catalog.model.Category;
 import com.eshop.common.model.Media;
 
@@ -21,22 +24,18 @@ public class CategoryForm extends BaseForm {
 
 	public Category parentCategory;
 
-	public List<Category> children;
-
-	public List<CategorizedProduct> categorizedProducts;
-
 	public CategoryForm() {
 
 	}
 
-	public CategoryForm(String name, String description, Media image, Category parentCategory, List<CategorizedProduct> categorizedProducts) {
+	public CategoryForm(String name, String description, Media image, Category parentCategory) {
 		this.name = name;
 		this.description = description;
 		this.image = image;
 		this.parentCategory = parentCategory;
-		this.categorizedProducts = categorizedProducts;
 	}
 
+	@NotBlank
 	public String getName() {
 		return name;
 	}
@@ -45,6 +44,7 @@ public class CategoryForm extends BaseForm {
 		this.name = name;
 	}
 
+	@NotBlank
 	public String getDescription() {
 		return description;
 	}
@@ -53,6 +53,8 @@ public class CategoryForm extends BaseForm {
 		this.description = description;
 	}
 
+	@Valid
+	@NotNull
 	public Media getImage() {
 		return image;
 	}
@@ -67,22 +69,6 @@ public class CategoryForm extends BaseForm {
 
 	public void setParentCategory(Category parentCategory) {
 		this.parentCategory = parentCategory;
-	}
-
-	public List<Category> getChildren() {
-		return children;
-	}
-
-	public void setChildren(List<Category> children) {
-		this.children = children;
-	}
-
-	public List<CategorizedProduct> getCategorizedProducts() {
-		return categorizedProducts;
-	}
-
-	public void setCategorizedProducts(List<CategorizedProduct> categorizedProducts) {
-		this.categorizedProducts = categorizedProducts;
 	}
 
 	@Override
