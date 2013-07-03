@@ -10,6 +10,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.Valid;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 import com.eshop.base.model.EntityBase;
 
 @Entity
@@ -63,6 +67,8 @@ public class ProductSpec extends EntityBase {
 		this.pattern = pattern;
 	}
 
+	@NotEmpty
+	@Valid
 	@ElementCollection
 	@CollectionTable(name="product_tech_spec", joinColumns=@JoinColumn(name="product_spec_id"), uniqueConstraints = @UniqueConstraint(columnNames={"product_spec_id", "tech_spec_property_id"}))
 	public List<TechSpec> getTechSpecs() {
@@ -73,6 +79,8 @@ public class ProductSpec extends EntityBase {
 		this.techSpecs = techSpecs;
 	}
 
+	@NotEmpty
+	@Valid
 	@ElementCollection
 	@CollectionTable(name="product_dimension", joinColumns=@JoinColumn(name="product_spec_id"), uniqueConstraints = @UniqueConstraint(columnNames={"product_spec_id", "dimension_property_id"}))
 	public List<Dimension> getDimensions() {

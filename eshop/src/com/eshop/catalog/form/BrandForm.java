@@ -1,6 +1,7 @@
 package com.eshop.catalog.form;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -49,6 +50,7 @@ public class BrandForm extends BaseForm {
 	}
 
 	@Valid
+	@NotNull
 	public Media getLogoImage() {
 		return logoImage;
 	}

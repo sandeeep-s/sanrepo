@@ -13,6 +13,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.OrderColumn;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotBlank;
+
 import com.eshop.base.model.EntityBase;
 import com.eshop.common.model.Media;
 
@@ -61,6 +65,7 @@ public class Product extends EntityBase {
 	 * FetchType.EAGER is the default for ManyToOne association in JPA.
 	 * @return
 	 */
+	@NotNull
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "brand_id", nullable = false)
 	public Brand getBrand() {
@@ -71,6 +76,7 @@ public class Product extends EntityBase {
 		this.brand = brand;
 	}
 
+	@NotBlank
 	@Column(nullable = false, unique = true, length = 250)
 	public String getName() {
 		return name;

@@ -2,6 +2,11 @@ package com.eshop.catalog.form;
 
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
+
 import com.eshop.base.form.BaseForm;
 import com.eshop.catalog.model.Brand;
 import com.eshop.common.model.Media;
@@ -38,6 +43,7 @@ public class PatternForm extends BaseForm {
 		this.images = images;
 	}
 
+	@NotBlank
 	public String getName() {
 		return name;
 	}
@@ -46,6 +52,7 @@ public class PatternForm extends BaseForm {
 		this.name = name;
 	}
 
+	@NotBlank
 	public String getDescription() {
 		return description;
 	}
@@ -70,6 +77,7 @@ public class PatternForm extends BaseForm {
 		this.importantNotes = importantNotes;
 	}
 
+	@NotNull
 	public Brand getBrand() {
 		return brand;
 	}
@@ -78,6 +86,7 @@ public class PatternForm extends BaseForm {
 		this.brand = brand;
 	}
 
+	@NotEmpty
 	public List<Media> getImages() {
 		return images;
 	}
