@@ -3,7 +3,7 @@
 <h1 align="center">
 	<s:message code="vehicle.make.add" />
 </h1>
-<sf:form action="/eshop/vehiclemake" method="POST" modelAttribute="vehicleMake">
+<sf:form action="/eshop/vehiclemake" method="POST" modelAttribute="vehicleMake" enctype="multipart/form-data">
 	<label><s:message code="vehicle.make.name" /> : </label>
 	<sf:input path="name" />
 	<sf:errors path="name" />
@@ -24,6 +24,10 @@
 	<label><s:message code="image.thumbnailFileName" /> : </label>
 	<sf:input path="logoImage.mediaThumbnailFileName" />
 	<sf:errors path="logoImage.mediaThumbnailFileName" />
+	<br />
+	<br />
+	<label><s:message code="image.file" /> : </label>
+	<input type="file" name="logoImageFile"/>
 	<br />
 	<br />
 	<input type="submit" value="<s:message code='vehicle.make.add'/>">

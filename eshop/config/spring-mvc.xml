@@ -8,28 +8,28 @@
 						http://www.springframework.org/schema/context 
 				        http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
-	<mvc:annotation-driven conversion-service="conversionService" validator="validator"/>
+	<mvc:annotation-driven conversion-service="conversionService" validator="validator" />
 
-    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
-    	<property name="validationMessageSource" ref="messageSource"/>
-    </bean>
-	
-	<mvc:resources location="/resources/" mapping="/resources/**"/>
-	
+	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+		<property name="validationMessageSource" ref="messageSource" />
+	</bean>
+
+	<mvc:resources location="/resources/" mapping="/resources/**" />
+
 	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
 		<property name="converters">
 			<set>
 				<bean class="com.eshop.vehicle.converter.VehicleMakeConverter" />
 				<bean class="com.eshop.vehicle.converter.VehicleTypeConverter" />
 				<bean class="com.eshop.vehicle.converter.VehicleModelConverter" />
- 				<bean class="com.eshop.catalog.converter.BrandConverter" />
+				<bean class="com.eshop.catalog.converter.BrandConverter" />
 				<bean class="com.eshop.catalog.converter.CategoryConverter" />
 				<bean class="com.eshop.catalog.converter.PatternConverter" />
 				<bean class="com.eshop.catalog.converter.TechSpecPropertyConverter" />
 				<bean class="com.eshop.catalog.converter.DimensionPropertyConverter" />
 				<bean class="com.eshop.catalog.converter.ProductConverter" />
 				<bean class="com.eshop.catalog.converter.CategorizedProductConverter" />
- 			</set>
+			</set>
 		</property>
 	</bean>
 
@@ -45,6 +45,10 @@
 		<property name="definitions">
 			<list>
 				<value>/WEB-INF/tiles-config.xml</value>
+				<value>/WEB-INF/vehicle-tiles-config.xml</value>
+				<value>/WEB-INF/catalog-tiles-config.xml</value>
+				<value>/WEB-INF/vehicle-fitment-tiles-config.xml</value>
+				
 			</list>
 		</property>
 	</bean>
@@ -66,8 +70,10 @@
 				<value>classpath:VehicleFitmentValidationMessages</value>
 				<value>classpath:Messages</value>
 			</list>
-		</property>		
+		</property>
 		<property name="defaultEncoding" value="UTF-8" />
 	</bean>
 
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+	
 </beans>

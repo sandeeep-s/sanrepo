@@ -3,6 +3,8 @@
  */
 package com.eshop.vehicle.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
@@ -11,6 +13,7 @@ import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,6 +21,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.eshop.base.form.modelmapper.FormModelMapper;
 import com.eshop.common.service.MediaService;
@@ -38,7 +43,7 @@ public class VehicleMakeController {
 
 	@Inject
 	private MediaService mediaService;
-	
+
 	@Inject
 	@Named("vehicleMakeFormMapper")
 	private FormModelMapper<VehicleMakeForm, VehicleMake> formModelMapper;
@@ -75,11 +80,11 @@ public class VehicleMakeController {
 	@RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
 	public String displayEditVehicleMakeForm(@PathVariable Long id, Model model, HttpServletRequest request) {
 		VehicleMake vehicleMake = vehicleMakeService.getVehicleMakeById(id);
-		if (null == vehicleMake){
+		if (null == vehicleMake) {
 			model.addAttribute("vehicleMakeId", id);
 			return "vehicleMakeNotFound";
 		}
-		
+
 		VehicleMakeForm vehicleMakeForm = formModelMapper.mapModelToForm(vehicleMake);
 		model.addAttribute("vehicleMake", vehicleMakeForm);
 
@@ -87,24 +92,38 @@ public class VehicleMakeController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String addVehicleMake(@Valid @ModelAttribute("vehicleMake") VehicleMakeForm vehicleMakeForm, BindingResult bindingResult, Model model, HttpServletRequest request) {
+	public String addVehicleMake(@Valid @ModelAttribute("vehicleMake") VehicleMakeForm vehicleMakeForm,
+			@RequestParam(value = "logoImageFile", required = false) MultipartFile logoImageFile, BindingResult bindingResult, Model model,
+			HttpServletRequest request) {
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("vehicleMake", vehicleMakeForm);
 			return "addVehicleMake";
 		}
 
 		VehicleMake vehicleMake = formModelMapper.mapFormToNewModel(vehicleMakeForm);
-		
+
 		vehicleMake = vehicleMakeService.addVehicleMake(vehicleMake);
+
+		saveImage(vehicleMake.getId()+".jpg", logoImageFile);
 		
 		model.addAttribute("vehicleMake", vehicleMake);
 		return "addVehicleMakeSuccess";
 	}
 
+	private void saveImage(String filename, MultipartFile image) {
+		try {
+			String webRootPath = "D:/Common/Sandeep/GIT/eshop/WebContent";
+			File file = new File(webRootPath + "/resources/" + filename);
+			FileUtils.writeByteArrayToFile(file, image.getBytes());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String getVehicleMake(@PathVariable Long id, Model model) {
 		VehicleMake vehicleMake = vehicleMakeService.getVehicleMakeById(id);
-		if (null == vehicleMake){
+		if (null == vehicleMake) {
 			model.addAttribute("vehicleMakeId", id);
 			return "vehicleMakeNotFound";
 		}
@@ -114,7 +133,8 @@ public class VehicleMakeController {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public String updateVehicleMake(@Valid @ModelAttribute("vehicleMake") VehicleMakeForm vehicleMakeForm, BindingResult result, Model model, HttpServletRequest request) {
+	public String updateVehicleMake(@Valid @ModelAttribute("vehicleMake") VehicleMakeForm vehicleMakeForm, BindingResult result,
+			Model model, HttpServletRequest request) {
 
 		if (result.hasErrors()) {
 			return "editVehicleMake";
