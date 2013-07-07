@@ -7,6 +7,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.eshop.base.form.BaseForm;
+import com.eshop.common.form.MediaForm;
 import com.eshop.common.model.Media;
 import com.sun.istack.internal.NotNull;
 
@@ -19,9 +20,9 @@ public class VehicleMakeForm extends BaseForm {
 
 	private String name;
 
-	private Media logoImage;
+	private MediaForm logoImage;
 
-	@NotBlank(message="{name.cannot.be.blank}")
+	@NotBlank(message = "{name.cannot.be.blank}")
 	public String getName() {
 		return name;
 	}
@@ -32,11 +33,11 @@ public class VehicleMakeForm extends BaseForm {
 	}
 
 	@Valid
-	public Media getLogoImage() {
+	public MediaForm getLogoImage() {
 		return logoImage;
 	}
 
-	public void setLogoImage(Media logoImage) {
+	public void setLogoImage(MediaForm logoImage) {
 		this.logoImage = logoImage;
 	}
 

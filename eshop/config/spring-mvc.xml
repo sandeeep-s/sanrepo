@@ -44,10 +44,10 @@
 	<bean class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
 		<property name="definitions">
 			<list>
-				<value>/WEB-INF/tiles-config.xml</value>
-				<value>/WEB-INF/vehicle-tiles-config.xml</value>
-				<value>/WEB-INF/catalog-tiles-config.xml</value>
-				<value>/WEB-INF/vehicle-fitment-tiles-config.xml</value>
+				<value>/WEB-INF/tiles-definitions/tiles-config.xml</value>
+				<value>/WEB-INF/tiles-definitions/vehicle-tiles-config.xml</value>
+				<value>/WEB-INF/tiles-definitions/catalog-tiles-config.xml</value>
+				<value>/WEB-INF/tiles-definitions/vehicle-fitment-tiles-config.xml</value>
 				
 			</list>
 		</property>

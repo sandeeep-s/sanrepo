@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.eshop.base.form.modelmapper.FormModelMapper;
 import com.eshop.common.service.MediaService;
@@ -92,9 +93,8 @@ public class VehicleMakeController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String addVehicleMake(@Valid @ModelAttribute("vehicleMake") VehicleMakeForm vehicleMakeForm,
-			@RequestParam(value = "logoImageFile", required = false) MultipartFile logoImageFile, BindingResult bindingResult, Model model,
-			HttpServletRequest request) {
+	public String addVehicleMake(@Valid @ModelAttribute("vehicleMake") VehicleMakeForm vehicleMakeForm, BindingResult bindingResult,
+			Model model, HttpServletRequest request) {
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("vehicleMake", vehicleMakeForm);
 			return "addVehicleMake";
@@ -104,8 +104,16 @@ public class VehicleMakeController {
 
 		vehicleMake = vehicleMakeService.addVehicleMake(vehicleMake);
 
-		saveImage(vehicleMake.getId()+".jpg", logoImageFile);
-		
+		//TODO Make Upload file part of the form
+		saveImage(vehicleMake.getId() + ".jpg", vehicleMakeForm.getLogoImage().getMediaFile());
+
+		model.addAttribute("vehicleMake", vehicleMake);
+		return "redirect:vehiclemake/"+vehicleMake.getId()+"/added";
+	}
+
+	@RequestMapping(value = "/{id}/added", method = RequestMethod.GET)
+	public String displayVehicleMakeAddSuccess(@PathVariable Long id, Model model) {
+		VehicleMake vehicleMake = vehicleMakeService.getVehicleMakeById(id);
 		model.addAttribute("vehicleMake", vehicleMake);
 		return "addVehicleMakeSuccess";
 	}
